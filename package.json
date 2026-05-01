@@ -1,0 +1,20 @@
+{
+  "name": "sts2-stats",
+  "version": "1.0.0",
+  "description": "Slay the Spire 2 run data analysis and visualization",
+  "main": "src/analyze/index.ts",
+  "scripts": {
+    "analyze": "npx ts-node src/analyze/index.ts",
+    "extract": "npx ts-node src/analyze/extractRunData.ts",
+    "reports": "npx ts-node src/analyze/reports.ts",
+    "dashboard": "npx ts-node src/analyze/generateDashboard_v2.ts"
+  },
+  "keywords": ["slay-the-spire", "analytics", "data-analysis"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  }
+}
