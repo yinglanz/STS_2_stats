@@ -35,17 +35,17 @@
 "Acrobatics + Finisher",5,5,100.0
 "Acrobatics + Expertise",3,3,100.0
 "Deflect + Finisher",3,3,100.0
-"Bodyguard + Putrefy",3,3,100.0
-"Putrefy + Unleash",3,3,100.0
-"Defy + Putrefy",3,3,100.0
-"Defy + Drain Power",6,6,100.0
-"Hang + Negative Pulse",6,6,100.0
-"Negative Pulse + No Escape",6,6,100.0
 "Believe In You + Negative Pulse",6,6,100.0
-"Negative Pulse + Parse",6,6,100.0
-"Negative Pulse + Putrefy",9,9,100.0
 "Hang + Sleight Of Flesh",3,3,100.0
 "Sleight Of Flesh + Times Up",3,3,100.0
 "Sleight Of Flesh + Sleight Of Flesh",3,3,100.0
 "Believe In You + Sleight Of Flesh",3,3,100.0
 "Parse + Sleight Of Flesh",3,3,100.0
+"Putrefy + Sleight Of Flesh",3,3,100.0
+"Drain Power + Sleight Of Flesh",4,4,100.0
+"Anger + Gang Up",5,5,100.0
+"Gang Up + Maul",6,6,100.0
+"Anger + Shrug It Off",5,5,100.0
+"Shrug It Off + Thrash",3,3,100.0
+"Maul + Shrug It Off",6,6,100.0
+"Maul + Thunderclap",6,6,100.0

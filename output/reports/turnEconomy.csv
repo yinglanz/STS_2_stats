@@ -1,83 +1,83 @@
 "encounter","totalFights","wins","losses","winRate","avgDamagePerFight"
-"Sludge Spinner (Weak)",63,63,0,100.0,3.08
-"Seapunk (Weak)",63,63,0,100.0,3.27
-"Corpse Slugs (Weak)",63,63,0,100.0,6.40
-"Two Tailed Rats (Monster)",21,21,0,100.0,7.95
-"Corpse Slugs (Monster)",19,19,0,100.0,8.32
-"Tunneler (Weak)",67,67,0,100.0,8.19
-"Bowlbugs (Weak)",51,51,0,100.0,12.10
-"Turret Operator (Weak)",38,38,0,100.0,5.58
-"Devoted Sculptor (Weak)",42,42,0,100.0,5.98
-"Slimed Berserker (Monster)",12,12,0,100.0,5.58
-"Mecha Knight (Elite)",31,31,0,100.0,17.52
-"Owl Magistrate (Monster)",10,10,0,100.0,7.60
-"Slimes (Weak)",66,66,0,100.0,3.20
-"Fossil Stalker (Monster)",15,15,0,100.0,7.33
-"Gremlin Merc (Monster)",24,24,0,100.0,9.00
-"Toadpoles (Monster)",14,14,0,100.0,4.07
-"Thieving Hopper (Weak)",62,62,0,100.0,11.05
-"Exoskeletons (Weak)",51,51,0,100.0,6.43
-"Bowlbugs (Monster)",13,13,0,100.0,12.77
-"Globe Head (Monster)",9,9,0,100.0,7.56
-"The Lost And Forgotten (Monster)",11,11,0,100.0,15.18
-"Knights (Elite)",25,25,0,100.0,16.32
-"Fuzzy Wurm Crawler (Weak)",68,68,0,100.0,1.06
-"Flyconid (Monster)",15,15,0,100.0,9.13
-"Cubex Construct (Monster)",22,22,0,100.0,4.45
+"Sludge Spinner (Weak)",65,65,0,100.0,3.29
+"Seapunk (Weak)",67,67,0,100.0,3.22
+"Corpse Slugs (Weak)",66,66,0,100.0,6.95
+"Two Tailed Rats (Monster)",22,22,0,100.0,8.23
+"Corpse Slugs (Monster)",20,20,0,100.0,9.20
+"Tunneler (Weak)",71,71,0,100.0,9.01
+"Bowlbugs (Weak)",51,51,0,100.0,13.41
+"Turret Operator (Weak)",40,40,0,100.0,5.65
+"Devoted Sculptor (Weak)",44,44,0,100.0,4.75
+"Slimed Berserker (Monster)",13,13,0,100.0,6.23
+"Mecha Knight (Elite)",33,33,0,100.0,18.64
+"Owl Magistrate (Monster)",10,10,0,100.0,7.50
+"Slimes (Weak)",69,69,0,100.0,3.19
+"Fossil Stalker (Monster)",18,18,0,100.0,8.50
+"Gremlin Merc (Monster)",25,25,0,100.0,9.72
+"Toadpoles (Monster)",14,14,0,100.0,2.64
+"Thieving Hopper (Weak)",65,65,0,100.0,11.17
+"Exoskeletons (Weak)",52,52,0,100.0,6.31
+"Bowlbugs (Monster)",14,14,0,100.0,13.14
+"Globe Head (Monster)",10,10,0,100.0,6.40
+"The Lost And Forgotten (Monster)",12,12,0,100.0,14.92
+"Fuzzy Wurm Crawler (Weak)",71,71,0,100.0,1.21
+"Flyconid (Monster)",17,17,0,100.0,8.12
+"Cubex Construct (Monster)",24,24,0,100.0,3.96
 "Mawler (Monster)",12,12,0,100.0,4.25
-"Fogmog (Monster)",21,21,0,100.0,6.67
-"Shrinker Beetle (Weak)",67,67,0,100.0,1.34
-"Nibbits (Monster)",16,16,0,100.0,13.88
-"Vine Shambler (Monster)",19,19,0,100.0,8.84
-"Inklets (Monster)",16,16,0,100.0,9.06
-"Byrdonis (Elite)",38,38,0,100.0,16.26
-"Haunted Ship (Monster)",12,12,0,100.0,8.58
-"Scrolls Of Biting (Weak)",39,39,0,100.0,4.44
-"Slithering Strangler (Monster)",24,24,0,100.0,12.13
-"Punch Construct (Monster)",16,16,0,100.0,3.38
-"Sewer Clam (Monster)",21,21,0,100.0,3.38
-"Scrolls Of Biting (Monster)",9,9,0,100.0,3.44
+"Fogmog (Monster)",22,22,0,100.0,7.68
+"Shrinker Beetle (Weak)",69,69,0,100.0,1.28
+"Nibbits (Monster)",17,17,0,100.0,13.76
+"Vine Shambler (Monster)",20,20,0,100.0,8.95
+"Inklets (Monster)",16,16,0,100.0,9.81
+"Byrdonis (Elite)",41,41,0,100.0,16.41
+"Haunted Ship (Monster)",12,12,0,100.0,8.42
+"Scrolls Of Biting (Weak)",42,42,0,100.0,4.50
+"Slithering Strangler (Monster)",25,25,0,100.0,11.64
+"Punch Construct (Monster)",17,17,0,100.0,3.53
+"Sewer Clam (Monster)",21,21,0,100.0,3.67
+"Scrolls Of Biting (Monster)",9,9,0,100.0,4.56
 "Mytes (Monster)",20,20,0,100.0,12.85
 "Axebots (Monster)",8,8,0,100.0,6.88
 "Frog Knight (Monster)",6,6,0,100.0,6.83
-"Seapunk (Monster)",7,7,0,100.0,16.14
-"Nibbits (Weak)",62,61,1,98.4,3.31
-"Toadpoles (Weak)",61,60,1,98.4,3.48
-"Chompers (Monster)",24,23,1,95.8,14.63
-"Cultists (Monster)",24,23,1,95.8,8.75
+"Seapunk (Monster)",8,8,0,100.0,14.88
+"Nibbits (Weak)",65,64,1,98.5,3.31
+"Toadpoles (Weak)",63,62,1,98.4,4.00
+"Knights (Elite)",27,26,1,96.3,19.81
+"Chompers (Monster)",25,24,1,96.0,14.28
+"Cultists (Monster)",24,23,1,95.8,7.92
+"Hunter Killer (Monster)",23,22,1,95.7,15.22
 "Snapping Jaxfruit (Monster)",22,21,1,95.5,14.36
-"Hunter Killer (Monster)",21,20,1,95.2,15.71
 "Exoskeletons (Monster)",20,19,1,95.0,9.20
-"Skulking Colony (Elite)",39,37,2,94.9,18.08
-"Living Fog (Monster)",19,18,1,94.7,9.42
-"Decimillipede (Elite)",57,54,3,94.7,20.81
-"Louse Progenitor (Monster)",18,17,1,94.4,9.56
-"Fabricator (Monster)",15,14,1,93.3,3.60
-"Phrog Parasite (Elite)",44,41,3,93.2,14.41
-"Tunneler (Monster)",14,13,1,92.9,5.86
-"Terror Eel (Elite)",41,38,3,92.7,21.37
+"Skulking Colony (Elite)",40,38,2,95.0,19.00
+"Decimillipede (Elite)",59,56,3,94.9,20.25
+"Living Fog (Monster)",19,18,1,94.7,9.05
+"Louse Progenitor (Monster)",18,17,1,94.4,10.33
+"Phrog Parasite (Elite)",46,43,3,93.5,14.50
+"Fabricator (Monster)",15,14,1,93.3,4.40
+"Terror Eel (Elite)",44,41,3,93.2,22.43
+"Tunneler (Monster)",14,13,1,92.9,6.71
+"Slimes (Monster)",14,13,1,92.9,8.64
 "The Obscura (Monster)",26,24,2,92.3,15.88
-"Slimes (Monster)",13,12,1,92.3,8.92
-"Soul Nexus (Elite)",33,30,3,90.9,18.24
-"Infested Prisms (Elite)",62,56,6,90.3,21.95
-"Construct Menagerie (Monster)",10,9,1,90.0,14.10
+"Soul Nexus (Elite)",35,32,3,91.4,17.57
+"Construct Menagerie (Monster)",11,10,1,90.9,15.64
+"Infested Prisms (Elite)",64,58,6,90.6,21.72
 "Ruby Raiders (Monster)",19,17,2,89.5,11.05
-"Phantasmal Gardeners (Elite)",46,41,5,89.1,20.91
-"Ovicopter (Monster)",18,16,2,88.9,6.06
-"Entomancer (Elite)",67,59,8,88.1,16.30
-"Soul Fysh (Boss)",25,22,3,88.0,26.08
-"Slumbering Beetle (Monster)",23,20,3,87.0,17.91
-"Waterfall Giant (Boss)",22,19,3,86.4,28.41
-"Queen (Boss)",22,19,3,86.4,27.18
+"Ovicopter (Monster)",18,16,2,88.9,7.33
+"Entomancer (Elite)",70,62,8,88.6,17.00
+"Soul Fysh (Boss)",26,23,3,88.5,27.58
+"Slumbering Beetle (Monster)",24,21,3,87.5,18.42
+"Phantasmal Gardeners (Elite)",48,42,6,87.5,19.63
+"Queen (Boss)",23,20,3,87.0,29.09
+"Waterfall Giant (Boss)",22,19,3,86.4,32.86
 "Overgrowth Crawlers",14,12,2,85.7,8.43
-"Spiny Toad (Monster)",19,16,3,84.2,12.95
-"Doormaker (Boss)",18,15,3,83.3,35.00
-"Vantom (Boss)",23,19,4,82.6,29.57
+"Spiny Toad (Monster)",20,17,3,85.0,13.55
+"Vantom (Boss)",24,20,4,83.3,27.42
 "Bygone Effigy (Elite)",44,36,8,81.8,27.70
-"Kaiser Crab (Boss)",25,20,5,80.0,34.52
-"Ceremonial Beast (Boss)",27,21,6,77.8,31.59
-"The Kin (Boss)",30,23,7,76.7,26.60
-"The Insatiable (Boss)",28,21,7,75.0,24.61
-"Test Subject (Boss)",20,13,7,65.0,46.55
-"Knowledge Demon (Boss)",36,22,14,61.1,40.00
-"Lagavulin Matriarch (Boss)",30,18,12,60.0,31.13
+"Kaiser Crab (Boss)",27,22,5,81.5,34.44
+"Doormaker (Boss)",19,15,4,78.9,36.11
+"The Kin (Boss)",30,23,7,76.7,26.37
+"The Insatiable (Boss)",29,22,7,75.9,26.69
+"Ceremonial Beast (Boss)",30,22,8,73.3,32.17
+"Test Subject (Boss)",22,15,7,68.2,45.50
+"Knowledge Demon (Boss)",37,23,14,62.2,40.00
+"Lagavulin Matriarch (Boss)",32,19,13,59.4,30.78

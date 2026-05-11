@@ -63,6 +63,7 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
   }
 
   const myPlayer = run.players.find(p => p.id === YOUR_STEAM_ID) ?? run.players[0];
+  const myPlayerIndex = run.players.indexOf(myPlayer);
   const character = myPlayer?.character || "UNKNOWN";
   const won = (run.killed_by_encounter ?? "") === "NONE.NONE" && (run.killed_by_event ?? "") === "NONE.NONE";
 
@@ -299,8 +300,8 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
         mapPoint.map_point_type === "elite" ||
         mapPoint.map_point_type === "boss"
       ) {
-        // Get player stats for this encounter (use first player)
-        const playerStats = mapPoint.player_stats[0];
+        // Get YOUR player stats for this encounter (use your player's index)
+        const playerStats = mapPoint.player_stats[myPlayerIndex];
         const damageTaken = playerStats?.damage_taken || 0;
         const currentHp = playerStats?.current_hp || 0;
 
@@ -339,14 +340,16 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
     const lastFloor = run.map_point_history[run.map_point_history.length - 1];
     if (lastFloor.length > 0) {
       const lastMapPoint = lastFloor[lastFloor.length - 1];
-      if (lastMapPoint.player_stats.length > 0) {
-        const finalStats = lastMapPoint.player_stats[0];
+      if (lastMapPoint.player_stats.length > myPlayerIndex) {
+        const finalStats = lastMapPoint.player_stats[myPlayerIndex];
         totalGoldEarned = finalStats.gold_gained || 0;
         totalGoldSpent = finalStats.gold_spent || 0;
-        totalDamageTaken = finalStats.damage_taken || 0;
       }
     }
   }
+
+  // Calculate total damage as sum of all encounter damage
+  totalDamageTaken = encounters.reduce((sum, enc) => sum + (enc.damageTaken || 0), 0);
 
   // Build metrics
   const buildMetrics: BuildMetrics = {
@@ -365,6 +368,13 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
   // Final deck card IDs and relic IDs as plain string arrays
   const finalDeckCards: string[] = (myPlayer?.deck || []).map((c: any) => c.id || c);
   const finalRelicIds: string[] = (myPlayer?.relics || []).map((r: any) => r.id || r);
+
+  // Deck with floor + upgrade metadata (for Advanced ELO model)
+  const finalDeckCardsMeta = (myPlayer?.deck || []).map((c: any) => ({
+    id: c.id || c,
+    floor: c.floor_added_to_deck || 0,
+    upgraded: (c.current_upgrade_level ?? 0) > 0,
+  }));
 
   return {
     id: runId,
@@ -394,6 +404,7 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
       .map(p => ({ id: p.id, c: p.character })),
     k: run.killed_by_encounter !== 'NONE.NONE' ? run.killed_by_encounter : run.killed_by_event,
     cards: finalDeckCards,
+    cardsMeta: finalDeckCardsMeta,
     relics: finalRelicIds,
     potions,
     encs: encounters.map(e => ({

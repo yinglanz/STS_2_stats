@@ -134,7 +134,8 @@ export interface ExtractedRun {
   skippedCards: string[]; // card IDs offered in skipped reward screens
   alc?: Array<{ id: number; c: string }>; // allies (multiplayer)
   k?: string;           // killedBy
-  cards: string[];      // final deck card IDs
+  cards: string[];      // final deck card IDs (plain, for backward compat)
+  cardsMeta: Array<{ id: string; floor: number; upgraded: boolean }>; // deck with floor + upgrade info
   relics: string[];     // final relic IDs
   potions: Array<{
     id: string; o: number; pk: boolean; b: boolean;
@@ -156,6 +157,15 @@ export interface ELORecord {
   gamesPlayed: number;
   wins: number;
 }
+
+/** Extended ELO record produced by the Advanced (Glicko-2) model */
+export interface AdvancedELORecord extends ELORecord {
+  rd: number;     // Glicko-2 Rating Deviation — uncertainty (lower = more certain)
+  sigma: number;  // Glicko-2 Volatility
+}
+
+/** character → ascension → cardId → AdvancedELORecord */
+export type AdvancedELOState = Record<string, Record<number, Record<string, AdvancedELORecord>>>;
 
 /** Nested map: character → ascension → cardId → ELORecord */
 export type ELOState = Record<string, Record<number, Record<string, ELORecord>>>;

@@ -1,83 +1,83 @@
 "act","encounter","encountered","survived","survivalRate"
-"Act 1","Sludge Spinner (Weak)",63,63,100.0
-"Act 1","Seapunk (Weak)",63,63,100.0
-"Act 1","Corpse Slugs (Weak)",63,63,100.0
-"Act 1","Two Tailed Rats (Monster)",21,21,100.0
-"Act 1","Corpse Slugs (Monster)",19,19,100.0
-"Act 1","Slimes (Weak)",66,66,100.0
-"Act 1","Fossil Stalker (Monster)",15,15,100.0
-"Act 1","Gremlin Merc (Monster)",24,24,100.0
+"Act 1","Sludge Spinner (Weak)",65,65,100.0
+"Act 1","Seapunk (Weak)",67,67,100.0
+"Act 1","Corpse Slugs (Weak)",66,66,100.0
+"Act 1","Two Tailed Rats (Monster)",22,22,100.0
+"Act 1","Corpse Slugs (Monster)",20,20,100.0
+"Act 1","Slimes (Weak)",69,69,100.0
+"Act 1","Fossil Stalker (Monster)",18,18,100.0
+"Act 1","Gremlin Merc (Monster)",25,25,100.0
 "Act 1","Toadpoles (Monster)",14,14,100.0
-"Act 1","Fuzzy Wurm Crawler (Weak)",68,68,100.0
-"Act 1","Flyconid (Monster)",15,15,100.0
-"Act 1","Cubex Construct (Monster)",22,22,100.0
+"Act 1","Fuzzy Wurm Crawler (Weak)",71,71,100.0
+"Act 1","Flyconid (Monster)",17,17,100.0
+"Act 1","Cubex Construct (Monster)",24,24,100.0
 "Act 1","Mawler (Monster)",12,12,100.0
-"Act 1","Fogmog (Monster)",21,21,100.0
-"Act 1","Shrinker Beetle (Weak)",67,67,100.0
-"Act 1","Nibbits (Monster)",16,16,100.0
-"Act 1","Vine Shambler (Monster)",19,19,100.0
+"Act 1","Fogmog (Monster)",22,22,100.0
+"Act 1","Shrinker Beetle (Weak)",69,69,100.0
+"Act 1","Nibbits (Monster)",17,17,100.0
+"Act 1","Vine Shambler (Monster)",20,20,100.0
 "Act 1","Inklets (Monster)",16,16,100.0
-"Act 1","Byrdonis (Elite)",38,38,100.0
+"Act 1","Byrdonis (Elite)",41,41,100.0
 "Act 1","Haunted Ship (Monster)",12,12,100.0
-"Act 1","Slithering Strangler (Monster)",24,24,100.0
-"Act 1","Punch Construct (Monster)",16,16,100.0
+"Act 1","Slithering Strangler (Monster)",25,25,100.0
+"Act 1","Punch Construct (Monster)",17,17,100.0
 "Act 1","Sewer Clam (Monster)",21,21,100.0
-"Act 1","Seapunk (Monster)",7,7,100.0
-"Act 1","Nibbits (Weak)",62,61,98.4
-"Act 1","Toadpoles (Weak)",61,60,98.4
+"Act 1","Seapunk (Monster)",8,8,100.0
+"Act 1","Nibbits (Weak)",65,64,98.5
+"Act 1","Toadpoles (Weak)",63,62,98.4
 "Act 1","Cultists (Monster)",24,23,95.8
 "Act 1","Snapping Jaxfruit (Monster)",22,21,95.5
-"Act 1","Skulking Colony (Elite)",39,37,94.9
+"Act 1","Skulking Colony (Elite)",40,38,95.0
 "Act 1","Living Fog (Monster)",19,18,94.7
-"Act 1","Phrog Parasite (Elite)",44,41,93.2
-"Act 1","Terror Eel (Elite)",41,38,92.7
-"Act 1","Slimes (Monster)",13,12,92.3
+"Act 1","Phrog Parasite (Elite)",46,43,93.5
+"Act 1","Terror Eel (Elite)",44,41,93.2
+"Act 1","Slimes (Monster)",14,13,92.9
 "Act 1","Ruby Raiders (Monster)",19,17,89.5
-"Act 1","Phantasmal Gardeners (Elite)",46,41,89.1
-"Act 1","Soul Fysh (Boss)",25,22,88.0
+"Act 1","Soul Fysh (Boss)",26,23,88.5
+"Act 1","Phantasmal Gardeners (Elite)",48,42,87.5
 "Act 1","Waterfall Giant (Boss)",22,19,86.4
 "Act 1","Overgrowth Crawlers",14,12,85.7
-"Act 1","Vantom (Boss)",23,19,82.6
+"Act 1","Vantom (Boss)",24,20,83.3
 "Act 1","Bygone Effigy (Elite)",44,36,81.8
-"Act 1","Ceremonial Beast (Boss)",27,21,77.8
 "Act 1","The Kin (Boss)",30,23,76.7
-"Act 1","Lagavulin Matriarch (Boss)",30,18,60.0
-"Act 2","Tunneler (Weak)",67,67,100.0
+"Act 1","Ceremonial Beast (Boss)",30,22,73.3
+"Act 1","Lagavulin Matriarch (Boss)",32,19,59.4
+"Act 2","Tunneler (Weak)",71,71,100.0
 "Act 2","Bowlbugs (Weak)",51,51,100.0
-"Act 2","Thieving Hopper (Weak)",62,62,100.0
-"Act 2","Exoskeletons (Weak)",51,51,100.0
-"Act 2","Bowlbugs (Monster)",13,13,100.0
+"Act 2","Thieving Hopper (Weak)",65,65,100.0
+"Act 2","Exoskeletons (Weak)",52,52,100.0
+"Act 2","Bowlbugs (Monster)",14,14,100.0
 "Act 2","Mytes (Monster)",20,20,100.0
-"Act 2","Chompers (Monster)",24,23,95.8
-"Act 2","Hunter Killer (Monster)",21,20,95.2
+"Act 2","Chompers (Monster)",25,24,96.0
+"Act 2","Hunter Killer (Monster)",23,22,95.7
 "Act 2","Exoskeletons (Monster)",20,19,95.0
-"Act 2","Decimillipede (Elite)",57,54,94.7
+"Act 2","Decimillipede (Elite)",59,56,94.9
 "Act 2","Louse Progenitor (Monster)",18,17,94.4
 "Act 2","Tunneler (Monster)",14,13,92.9
 "Act 2","The Obscura (Monster)",26,24,92.3
-"Act 2","Infested Prisms (Elite)",62,56,90.3
+"Act 2","Infested Prisms (Elite)",64,58,90.6
 "Act 2","Ovicopter (Monster)",18,16,88.9
-"Act 2","Entomancer (Elite)",67,59,88.1
-"Act 2","Slumbering Beetle (Monster)",23,20,87.0
-"Act 2","Spiny Toad (Monster)",19,16,84.2
-"Act 2","Kaiser Crab (Boss)",25,20,80.0
-"Act 2","The Insatiable (Boss)",28,21,75.0
-"Act 2","Knowledge Demon (Boss)",36,22,61.1
-"Act 3","Turret Operator (Weak)",38,38,100.0
-"Act 3","Devoted Sculptor (Weak)",42,42,100.0
-"Act 3","Slimed Berserker (Monster)",12,12,100.0
-"Act 3","Mecha Knight (Elite)",31,31,100.0
+"Act 2","Entomancer (Elite)",70,62,88.6
+"Act 2","Slumbering Beetle (Monster)",24,21,87.5
+"Act 2","Spiny Toad (Monster)",20,17,85.0
+"Act 2","Kaiser Crab (Boss)",27,22,81.5
+"Act 2","The Insatiable (Boss)",29,22,75.9
+"Act 2","Knowledge Demon (Boss)",37,23,62.2
+"Act 3","Turret Operator (Weak)",40,40,100.0
+"Act 3","Devoted Sculptor (Weak)",44,44,100.0
+"Act 3","Slimed Berserker (Monster)",13,13,100.0
+"Act 3","Mecha Knight (Elite)",33,33,100.0
 "Act 3","Owl Magistrate (Monster)",10,10,100.0
-"Act 3","Globe Head (Monster)",9,9,100.0
-"Act 3","The Lost And Forgotten (Monster)",11,11,100.0
-"Act 3","Knights (Elite)",25,25,100.0
-"Act 3","Scrolls Of Biting (Weak)",39,39,100.0
+"Act 3","Globe Head (Monster)",10,10,100.0
+"Act 3","The Lost And Forgotten (Monster)",12,12,100.0
+"Act 3","Scrolls Of Biting (Weak)",42,42,100.0
 "Act 3","Scrolls Of Biting (Monster)",9,9,100.0
 "Act 3","Axebots (Monster)",8,8,100.0
 "Act 3","Frog Knight (Monster)",6,6,100.0
+"Act 3","Knights (Elite)",27,26,96.3
 "Act 3","Fabricator (Monster)",15,14,93.3
-"Act 3","Soul Nexus (Elite)",33,30,90.9
-"Act 3","Construct Menagerie (Monster)",10,9,90.0
-"Act 3","Queen (Boss)",22,19,86.4
-"Act 3","Doormaker (Boss)",18,15,83.3
-"Act 3","Test Subject (Boss)",20,13,65.0
+"Act 3","Soul Nexus (Elite)",35,32,91.4
+"Act 3","Construct Menagerie (Monster)",11,10,90.9
+"Act 3","Queen (Boss)",23,20,87.0
+"Act 3","Doormaker (Boss)",19,15,78.9
+"Act 3","Test Subject (Boss)",22,15,68.2

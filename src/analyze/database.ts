@@ -338,6 +338,11 @@ export function loadAllRunsFromDb(db: Database.Database): ExtractedRun[] {
     ...(row.alc ? { alc: JSON.parse(row.alc) } : {}),
     ...(row.k ? { k: row.k } : {}),
     cards: (cardsByRun.get(row.id) ?? []).map((c: any) => c.card_id as string),
+    cardsMeta: (cardsByRun.get(row.id) ?? []).map((c: any) => ({
+      id: c.card_id as string,
+      floor: 0, // floor-per-card not stored in DB; use 0 as fallback
+      upgraded: c.upgraded === 1,
+    })),
     relics: (relicsByRun.get(row.id) ?? []).map((r: any) => r.relic_id),
     encs: (encsByRun.get(row.id) ?? []).map((e: any) => ({
       id: e.enc_id,

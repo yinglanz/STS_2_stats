@@ -6,7 +6,7 @@ A comprehensive analytics platform for Slay the Spire 2 (STS2) run data, built w
 
 This project automatically ingests `.run` files from your STS2 save folder and provides:
 
-- **Interactive Dashboard** with 13 tabs across 6 groups (Run, Deck, Combat, Map, Analysis, Utility)
+- **Interactive Dashboard** with 15 tabs across 6 groups (Overview, Deck, Combat, Map, Analysis, Utility)
 - **Automatic Data Processing**: Extracts, normalizes, and stores run data in SQLite
 - **Live File Watching**: Auto-ingests new runs as you play
 - **Advanced Analytics**: ELO ratings, Kalman filtering, per-act card tracking, floor stats, ancient blessing ELO
@@ -70,7 +70,7 @@ npm run watch      # Start file watcher for auto-ingestion
 
 ### Tabs (15 Total, grouped)
 
-**Run:** 📊 Overview · 📈 Ascension · 📋 Runs
+**Overview:** 📊 Overview · 📈 Ascension · 📋 Runs
 
 **Deck:** 🃏 Cards · ✨ Relics · 🧪 Potions · 🔗 Synergies
 
@@ -84,17 +84,18 @@ npm run watch      # Start file watcher for auto-ingestion
 
 ### Global Filters (apply across all tabs)
 
-- **Character**: Single-character select (Ironclad, Silent, Defect, Necrobinder, Regent)
-- **Min Ascension**: Slider (0–10) for minimum difficulty threshold
+- **Character**: Single-character select (Ironclad, Silent, Defect, Necrobinder, Regent, or All)
+- **Min Ascension**: Slider (0–10) — shows runs at this level or higher
 - **Outcome**: Wins / Losses / All
-- **Mode**: 1P / 2P / 3P / 4P / Any Multiplayer / All
+- **Mode**: 1P (Solo) / 2P / 3P / 4P / Any Multiplayer / All
+- **Version**: Filter by game build version (e.g. v0.98.3)
 
 ## What Gets Tracked
 
 ### Per Run
 
 - Character (extracted by Steam ID — correct in multiplayer), Ascension, Result
-- Seed, Duration, Total damage taken, Floor reached
+- Seed, Duration, Total damage taken (sum across all encounters), Act reached
 - Cards picked per act (a1c / a2c / a3c), final deck, relics, potions
 - Multiplayer mode and ally characters
 
@@ -109,6 +110,7 @@ npm run watch      # Start file watcher for auto-ingestion
 - ✅ Starter relics automatically excluded per character
 - ✅ Curse cards (`CARD.CURSE_`) and Status cards filtered
 - ✅ Character extracted by Steam ID (not array index) — correct in multiplayer
+- ✅ Damage taken is your player's damage only (by player index), summed across all encounters
 - ✅ Run files validated before extraction (players + map_point_history required)
 
 ### ELO Ratings
@@ -187,5 +189,5 @@ c:\code\STS_2_stats\
 
 ---
 
-**Last Updated**: May 1, 2026
+**Last Updated**: May 10, 2026
 **Status**: Active Development

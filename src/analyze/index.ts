@@ -9,9 +9,12 @@ import { generateAllReports } from "./reports";
 import { generateDashboardHtml } from "./generateDashboard_v2";
 import { calculateELOFromRuns } from "./eloCalculator";
 import { calculateRelicELOFromRuns } from "./relicEloCalculator";
+import { calculateELOFromRuns as calculateAdvancedELOFromRuns } from "./elo";
 import { generateFloorAnalytics } from "./floorAnalytics";
 import { generateAncientAnalytics } from "./ancientAnalytics";
 import { openDb, insertAllRuns, getRunCount } from "./database";
+import { ExtractedRun as PipelineRun } from "./types";
+import type { ExtractedRun as AdvancedRun } from "./elo";
 import fs from "fs";
 import path from "path";
 
@@ -89,6 +92,28 @@ async function runPipeline() {
     );
     console.log(`✓ Rated ${totalEloCards} card×character×ascension entries`);
     console.log(`✓ Saved ELO ratings to output/elo_ratings.json\n`);
+
+    // Advanced ELO (Glicko-2 + act-weighted + floor weighting + synergy matrix)
+    const advancedRuns: AdvancedRun[] = extractedRuns.map((r: PipelineRun) => ({
+      c: r.c,
+      a: r.a,
+      w: r.w,
+      dmg: r.dmg,
+      t: r.t,
+      totalFloors: r.fl,
+      cards: (r.cardsMeta || []).map(cm => ({ id: cm.id, floor: cm.floor, upgraded: cm.upgraded })),
+      encs: r.encs.map(e => ({
+        id: e.id,
+        act: e.a,
+        floor: e.fn,
+        type: e.tp === 3 ? 'boss' : e.tp === 2 ? 'elite' : 'monster' as 'boss' | 'elite' | 'monster',
+      })),
+      relics: r.relics,
+    }));
+    const { state: advancedEloState } = calculateAdvancedELOFromRuns(advancedRuns);
+    const advancedEloPath = path.join(outputPath, "elo_ratings_advanced.json");
+    fs.writeFileSync(advancedEloPath, JSON.stringify(advancedEloState, null, 2));
+    console.log(`✓ Saved Advanced ELO ratings to output/elo_ratings_advanced.json\n`);
 
     // Relic ELO
     const relicEloState = calculateRelicELOFromRuns(extractedRuns);

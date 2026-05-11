@@ -50,43 +50,29 @@ Maintain consistent, high-quality AI-generated code.
 
 ---
 
-**Last Updated**: April 2026
+**Last Updated**: May 10, 2026
 
 ## Recent Changes
+
+### Damage and Act Fixes (May 10, 2026)
+
+- **Total Damage Taken**: Now correctly summed across all combat encounters in the run (was reading a single cumulative field from the last floor point)
+- **Player Index Fix**: In multiplayer runs, damage and encounter stats now use your player's index rather than always using `player_stats[0]`
+- **Act Reached**: Now derived from `run.encs` (max act across all encounters) instead of parsing the unreliable `acts` string
+
+### Help Tab Rewrite (May 10, 2026)
+
+- All 15 tabs documented with accurate column/metric definitions
+- Filters, multiplayer behaviour, and tips sections updated
+- Export tab documented (was missing)
 
 ### Repo-Wide Markdown Lint Fix (April 30, 2026)
 
 - **Full audit completed**: Zero lint errors across all `.md` files
   - Files fixed: CHANGELOG.md, README_AI.md, SETUP.md, .ai/architecture.md, .ai/rules.md, .ai/prompts.md
   - Rules resolved: MD022, MD024, MD031, MD032, MD036, MD040, MD060
-  - .ai/prompts.md fully rewritten with language specifiers on all code blocks
 
-### STS2 History Folder Path Update (April 29, 2026)
+### Config Centralisation (April 2026)
 
-- **Updated History Source Path**: Changed from local `history/` folder to actual STS2 save location
-  - New path: `C:\Users\you\AppData\Roaming\SlayTheSpire2\steam\0000000000000000\profile1\saves\history`
-  - Files: Updated in `extractRunData.ts`, `src/server/index.ts`, and `src/server/watcher.ts`
-  - This allows direct ingestion from the actual STS2 game save folder without manual copying
-
-### Multiplayer Mode Reporting Fix (April 29, 2026)
-
-- **Fixed Export Table Mode Display**: Mode badges now correctly show 1P/2P/3P/4P
-  - Root cause: Export table was accessing `r.m` (number) instead of `r.mode` (string)
-  - Fix: Updated `drawExportTable()` to use the mapped `r.mode` property
-  - Verification: Database contains 155 single-player runs + 33 multiplayer runs
-
-### Dashboard Filtering (April 28, 2026)
-
-- **Starter Relic Filtering**: Added automatic filtering of starting relics by character
-  - Ironclad: Burning Blood
-  - Silent: Ring of the Snake
-  - Defect: Cracked Core
-  - Necrobinder: Bound Phylactery
-  - Regent: Divine Right
-  - Implementation: `src/analyze/extractRunData.ts` (STARTER_RELICS constant)
-
-- **Optimized Filter Logic**: Refactored dashboard filter performance
-  - Changed from single `.filter()` with nested conditions to sequential filtering
-  - Filters applied in selectivity order (character → ascension → outcome → mode)
-  - Reduces dataset early for faster filtering on large run counts
-  - Implementation: `src/analyze/generateDashboard_v2.ts` (applyFilters function)
+- `YOUR_STEAM_ID` and `HISTORY_PATH` moved to `src/config.ts` — single file to edit for a new user
+- All modules (`extractRunData.ts`, `server/index.ts`, `server/watcher.ts`) import from `src/config.ts`

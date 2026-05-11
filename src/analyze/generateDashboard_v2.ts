@@ -24,6 +24,7 @@ interface DashboardData {
   deckTargets: any[];
   runs: ExtractedRun[];
   eloState: any;
+  eloAdvancedState: any;
   relicEloState: any;
   floorStats: any[];
   ancientStats: any[];
@@ -129,6 +130,11 @@ function loadDashboardData(): DashboardData {
     deckTargets: loadCsv("deckSizeTargets.csv"),
     runs: extractedRuns,
     eloState: JSON.parse(fs.readFileSync(eloPath, "utf-8")),
+    eloAdvancedState: (() => {
+      const p = path.join(OUTPUT_PATH, "elo_ratings_advanced.json");
+      if (!fs.existsSync(p)) { console.warn("Missing elo_ratings_advanced.json — run npm run analyze"); return null; }
+      return JSON.parse(fs.readFileSync(p, "utf-8"));
+    })(),
     relicEloState: (() => {
       const p = path.join(OUTPUT_PATH, "relic_elo_ratings.json");
       if (!fs.existsSync(p)) { console.warn("Missing relic_elo_ratings.json — run npm run analyze"); return {}; }
@@ -930,13 +936,20 @@ function generateDashboard(data: DashboardData): string {
 
         <div id="elo" class="tab-content">
             <div class="chart-container">
-                <h2>ELO Rating vs Win Rate</h2>
-                <p class="note">📊 Bubble size = games played. Dashed line = 50% win rate. Cards bottom-right are strong but unlucky; top-left are weak but lucky.</p>
+                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:8px;">
+                    <h2 style="margin:0">ELO Rating vs Win Rate</h2>
+                    <div style="display:flex;gap:4px;background:#0d1117;border:1px solid #2a2a4a;border-radius:6px;padding:3px;">
+                        <button id="eloMethodClassic" onclick="setEloMethod('classic')" style="padding:5px 14px;border:none;border-radius:4px;cursor:pointer;font-size:13px;background:#c9a84c;color:#0d1117;font-weight:600;">Classic</button>
+                        <button id="eloMethodAdvanced" onclick="setEloMethod('advanced')" style="padding:5px 14px;border:none;border-radius:4px;cursor:pointer;font-size:13px;background:transparent;color:#888;">Advanced</button>
+                    </div>
+                    <span id="eloMethodDesc" style="color:#888;font-size:12px;">Damage-weighted result, dynamic K-factor</span>
+                </div>
+                <p class="note">📊 Bubble size = games played. Dashed line = 50% win rate. Cards bottom-right are strong but unlucky; top-left are weak but lucky. <span id="eloAdvancedNote" style="display:none">Advanced mode: error bars = ±2×RD (Glicko-2 confidence interval).</span></p>
                 <div class="chart small-chart" id="chartEloScatter"></div>
             </div>
             <div class="chart-container">
                 <h2>ELO Card Ratings with Per-Act Win Rates</h2>
-                <p class="note">🏆 Win% columns show how often runs were won when this card was first picked in that act. Min 3 ELO games required. Act columns require ≥2 picks.</p>
+                <p class="note">🏆 Win% columns show how often runs were won when this card was first picked in that act. Min 3 ELO games required. Act columns require ≥2 picks. <span id="eloAdvancedTableNote" style="display:none">Advanced: ELO ± column shows Glicko-2 confidence interval width (2×RD).</span></p>
                 <div class="table-container">
                     <table id="tableElo"></table>
                 </div>
@@ -947,97 +960,180 @@ function generateDashboard(data: DashboardData): string {
             <div style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
                 <h2>📖 Dashboard Help &amp; Definitions</h2>
 
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">📊 Global Filters</h3>
-                <p><strong>Character:</strong> Filter runs by the character you played (Ironclad, Silent, Defect, Necrobinder, Regent).</p>
-                <p><strong>Min Ascension:</strong> Show only runs at this ascension level or higher (0–10). "5+" shows all Asc 5–10 combined.</p>
-                <p><strong>Outcome:</strong> Filter by Wins, Losses, or All runs.</p>
-                <p><strong>Mode:</strong> Filter by player count — 1P (solo), 2P, 3P, 4P, or All.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🗂️ Tab Groups</h3>
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 20px;">🔧 Global Filters (Top of Dashboard)</h3>
+                <p>All filters apply to every tab at once. Adjust them at the top of the page to focus your analysis.</p>
                 <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
-                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:4px 8px;">Group</th><th style="text-align:left;padding:4px 8px;">Tabs</th><th style="text-align:left;padding:4px 8px;">Purpose</th></tr>
-                  <tr><td style="padding:4px 8px;">Run</td><td style="padding:4px 8px;">Overview · Ascension · Runs</td><td style="padding:4px 8px;">Run-level summaries and history</td></tr>
-                  <tr><td style="padding:4px 8px;">Deck</td><td style="padding:4px 8px;">Cards · Relics · Potions · Synergies</td><td style="padding:4px 8px;">What you drafted and how it performed</td></tr>
-                  <tr><td style="padding:4px 8px;">Combat</td><td style="padding:4px 8px;">Encounters · Heatmap · Builds</td><td style="padding:4px 8px;">Fight outcomes, pick patterns, archetypes</td></tr>
-                  <tr><td style="padding:4px 8px;">Map</td><td style="padding:4px 8px;">Floors · Ancients</td><td style="padding:4px 8px;">Per-floor stats and act-start blessings</td></tr>
-                  <tr><td style="padding:4px 8px;">Analysis</td><td style="padding:4px 8px;">ELO</td><td style="padding:4px 8px;">Card strength rankings by character</td></tr>
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Filter</th><th style="text-align:left;padding:6px 8px;">What it does</th></tr>
+                  <tr><td style="padding:6px 8px;"><strong>Character</strong></td><td style="padding:6px 8px;">Restrict all data to runs where you played that character (Ironclad, Silent, Defect, Necrobinder, Regent, or All).</td></tr>
+                  <tr><td style="padding:6px 8px;"><strong>Min Ascension</strong></td><td style="padding:6px 8px;">Slider from 0–10. Only runs at this ascension level <em>or higher</em> are included. E.g. setting 5 shows Asc 5, 6, 7, 8, 9, 10 combined.</td></tr>
+                  <tr><td style="padding:6px 8px;"><strong>Outcome</strong></td><td style="padding:6px 8px;">Show only Wins, only Losses, or All runs.</td></tr>
+                  <tr><td style="padding:6px 8px;"><strong>Mode</strong></td><td style="padding:6px 8px;">Filter by player count — 1P (solo), 2P, 3P, 4P, or All. All stats are always based on your own character's data, regardless of mode.</td></tr>
                 </table>
 
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">📊 Overview</h3>
-                <p>Win rate by ascension level and character. Deck size targets based on winning runs.</p>
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">📊 Run Group</h3>
+                <p>Overview of your runs and difficulty progression.</p>
 
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">📈 Ascension</h3>
-                <p><strong>Difficulty Curve:</strong> Win rate as ascension increases — shows which levels are hardest.</p>
-                <p><strong>Per-Ascension Table:</strong> Runs, wins, avg deck size, avg relics, and deadliest encounter per level.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">📋 Runs</h3>
-                <p>Individual run history table. Shows date, character, ascension, outcome, deck size, relics, damage taken, and allies (multiplayer).</p>
-                <p>Includes a cumulative win-rate trend chart with Kalman-smoothed line.</p>
-                <p><strong>Allies:</strong> In multiplayer runs, shows the characters your teammates played.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🃏 Cards</h3>
-                <p><strong>Pick Rate:</strong> How often this card appeared in your final deck (%).</p>
-                <p><strong>Skip Rate:</strong> How often you were offered this card but didn't take it.</p>
-                <p><strong>Win %:</strong> Win rate of runs where you ended up with this card.</p>
-                <p><strong>Deck %:</strong> Average share of your final deck this card represented.</p>
-                <p><strong>Per-Act Win %:</strong> Win rate when the card was first picked in Act 1, 2, or 3.</p>
-                <p><strong>Starter cards</strong> (Strike, Defend, character starters), Curses, and Status cards are excluded.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">✨ Relics</h3>
-                <p><strong>Pick Rate:</strong> How often this relic appeared in your final loadout.</p>
-                <p><strong>Win %:</strong> Win rate of runs where you had this relic.</p>
-                <p><strong>ELO:</strong> Relic strength estimate, rated vs a 1500 baseline by run outcomes.</p>
-                <p><strong>Starting relics</strong> (Burning Blood, Ring of the Snake, Cracked Core, Bound Phylactery, Divine Right) are excluded.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🧪 Potions</h3>
-                <p><strong>Offered / Picked / Used / Discarded:</strong> Lifecycle counts per potion type across all runs.</p>
-                <p>Shows which potions you find most useful (high used/picked ratio).</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🔗 Synergies</h3>
-                <p>Card and relic pairs that appear together in winning decks. Bubble size = frequency. Look for combos with high win rates and multiple occurrences.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">⚔️ Encounters</h3>
-                <p><strong>Survivor Rate:</strong> % of times you defeated this enemy.</p>
-                <p><strong>Avg Damage:</strong> Average HP lost per fight against this enemy.</p>
-                <p><strong>Times Ended Run:</strong> How many times this enemy was the final fight of a losing run.</p>
-                <p><strong>Act Breakdown:</strong> Survival rates split by act (1, 2, 3).</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🔥 Heatmap</h3>
-                <p>Card picks per act, visualised as a Character × Ascension heatmap. Color: Red = low win rate → Character color → Green = high win rate. Numbers show win rate % per cell.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🎭 Builds</h3>
-                <p>Build archetypes grouped by character × ascension. Shows the most common cards and relics in winning runs at each difficulty.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🗺️ Floors</h3>
-                <p>Per-floor statistics aggregated by Floor Type × Act Name × Act Index × Version.</p>
-                <p><strong>Floor Types:</strong> Weak (easy fight), Normal (standard fight), Elite, Boss, Event, Rest, Shop, Treasure, Ancient.</p>
-                <p><strong>Act:</strong> The act name (Overgrowth, Underdocks, Hive, Glory…) — useful for comparing acts across different versions.</p>
-                <p><strong>Act Index:</strong> Position in the run (1 = first act, 2 = second, 3 = third).</p>
-                <p><strong>Death%:</strong> % of runs that ended on this floor. Color: Red ≥ 10%, Gold ≥ 3%.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🌟 Ancients</h3>
-                <p>Blessings offered by ancients at the start of each act (Neow in Act 1, act-specific ancients in Acts 2 &amp; 3).</p>
-                <p><strong>ELO:</strong> Blessing strength rated by run outcomes. Only updates when the blessing was chosen.</p>
-                <p><strong>Pick%:</strong> How often you chose this blessing when it was offered.</p>
-                <p><strong>Win%:</strong> Win rate of runs where you took this blessing.</p>
-                <p>Filter by Act (1/2/3) or by specific ancient to compare blessings within a pool.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🏆 ELO</h3>
-                <p>Card ELO ratings by character. Dynamic K-factor (48 → 32 → 24 over time), ascension-scaled, and damage-weighted result scoring.</p>
-                <p><strong>Peak ELO:</strong> Highest rating ever reached — indicates upside even if recent form has dropped.</p>
-                <p><strong>Act Win%:</strong> Win rate specifically when this card was first picked in Act 1, 2, or 3.</p>
-                <p><strong>Skipped:</strong> How many times this card was offered but not taken (red highlight = frequently skipped).</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">❓ Multiplayer</h3>
-                <p>2P/3P/4P runs include allies. The Allies column in Runs shows which characters your teammates played. All stats reflect only your own character's performance.</p>
-
-                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">💡 Tips</h3>
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">📊 Overview</h4>
+                <p>High-level summary of your runs under the current filters.</p>
                 <ul style="margin-left: 20px;">
-                  <li>Click any table column header to sort; click again to reverse.</li>
-                  <li>Use Min Ascension slider to see aggregated stats across a difficulty range (e.g. Asc 5+).</li>
-                  <li>ELO stabilises with more data — cross-check with Win% and Pick Rate for newer cards.</li>
-                  <li>Floors tab + Act filter is useful for comparing how dangerous Act 2 is vs Act 3 at the same floor type.</li>
-                  <li>Ancients tab Act filter lets you compare blessing quality across the three ancient pools independently.</li>
+                  <li><strong>Win Rate by Ascension:</strong> Line chart showing how your win rate changes across difficulty levels 0–10.</li>
+                  <li><strong>Win Rate by Character:</strong> Bar chart showing overall win rate for each character.</li>
+                  <li><strong>Deck Size Targets:</strong> The average final deck size in winning runs — a guide for how many cards to aim for at each ascension.</li>
+                </ul>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">📈 Ascension</h4>
+                <p>Drills into difficulty progression from Ascension 0 to 10.</p>
+                <ul style="margin-left: 20px;">
+                  <li><strong>Difficulty Curve:</strong> Win rate line chart per ascension level — spots which levels are hardest.</li>
+                  <li><strong>Per-Ascension Table:</strong> Runs played, wins, avg deck size, avg relics, and the deadliest enemy at each level.</li>
+                </ul>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">📋 Runs</h4>
+                <p>A full history of every run that matches the current filters, plus a cumulative win-rate chart below showing your rolling win rate over time with a Kalman-smoothed trend line.</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Column</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">Date</td><td style="padding:6px 8px;">Local date the run started.</td></tr>
+                  <tr><td style="padding:6px 8px;">Character</td><td style="padding:6px 8px;">The character you played.</td></tr>
+                  <tr><td style="padding:6px 8px;">Asc</td><td style="padding:6px 8px;">Ascension level (0–10).</td></tr>
+                  <tr><td style="padding:6px 8px;">Outcome</td><td style="padding:6px 8px;">Win (green) or Loss (red).</td></tr>
+                  <tr><td style="padding:6px 8px;">Killed By</td><td style="padding:6px 8px;">Enemy or event that ended the run. "-" for wins.</td></tr>
+                  <tr><td style="padding:6px 8px;">Cards</td><td style="padding:6px 8px;">Final deck size.</td></tr>
+                  <tr><td style="padding:6px 8px;">Relics</td><td style="padding:6px 8px;">Number of relics in your final loadout.</td></tr>
+                  <tr><td style="padding:6px 8px;">Total Damage Taken</td><td style="padding:6px 8px;">Sum of all HP lost across every combat encounter in the run <em style="color:#aaa;">(includes all fights, not just losses)</em>.</td></tr>
+                  <tr><td style="padding:6px 8px;">Act Reached</td><td style="padding:6px 8px;">Highest act (1, 2, or 3) you reached — derived from your last recorded combat <em style="color:#aaa;">(not map floor #, but act #)</em>.</td></tr>
+                  <tr><td style="padding:6px 8px;">Duration</td><td style="padding:6px 8px;">Total real-time length of the run.</td></tr>
+                  <tr><td style="padding:6px 8px;">Players</td><td style="padding:6px 8px;">1P = solo, 2P/3P/4P = multiplayer.</td></tr>
+                  <tr><td style="padding:6px 8px;">Allies</td><td style="padding:6px 8px;">Multiplayer only — characters your teammates played.</td></tr>
+                </table>
+
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🃏 Deck Group</h3>
+                <p>Analysis of the cards, relics, and potions that make up your deck.</p>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">🃏 Cards</h4>
+                <p>Analytics for every non-starter card you've been offered. Starter cards (Strike, Defend, Bash, Neutralize, Zap, etc.), Curses, and Status cards are excluded — they aren't player choices.</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Metric</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">Pick Rate</td><td style="padding:6px 8px;">% of runs where this card ended up in your final deck.</td></tr>
+                  <tr><td style="padding:6px 8px;">Skip Rate</td><td style="padding:6px 8px;">% of times you were offered this card and did not take it.</td></tr>
+                  <tr><td style="padding:6px 8px;">Win %</td><td style="padding:6px 8px;">Win rate of all runs that included this card in the final deck.</td></tr>
+                  <tr><td style="padding:6px 8px;">Deck %</td><td style="padding:6px 8px;">On average, what fraction of your final deck was this card (including duplicates). <em style="color:#aaa;">(e.g. if 3 copies in 30-card deck = 10%)</em></td></tr>
+                  <tr><td style="padding:6px 8px;">Act 1/2/3 Win %</td><td style="padding:6px 8px;">Win rate specifically when this card was first picked in that act.</td></tr>
+                </table>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">✨ Relics</h4>
+                <p>Analytics for every non-starter relic. Starting relics (Burning Blood, Ring of the Snake, Cracked Core, Bound Phylactery, Divine Right) are excluded.</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Metric</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">Pick Rate</td><td style="padding:6px 8px;">% of runs where this relic was in your final loadout.</td></tr>
+                  <tr><td style="padding:6px 8px;">Win %</td><td style="padding:6px 8px;">Win rate of all runs where you had this relic.</td></tr>
+                  <tr><td style="padding:6px 8px;">ELO</td><td style="padding:6px 8px;">Relic strength estimate versus a 1500 baseline, updated by run outcomes whenever this relic was present.</td></tr>
+                </table>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">🧪 Potions</h4>
+                <p>Lifecycle counts for every potion type across all filtered runs. A high Used/Picked ratio indicates a potion you reliably consume rather than carry and discard.</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Metric</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">Offered</td><td style="padding:6px 8px;">Total times this potion appeared as a reward option.</td></tr>
+                  <tr><td style="padding:6px 8px;">Picked</td><td style="padding:6px 8px;">Times you chose it from a reward screen.</td></tr>
+                  <tr><td style="padding:6px 8px;">Used</td><td style="padding:6px 8px;">Times you actually consumed it in combat.</td></tr>
+                  <tr><td style="padding:6px 8px;">Discarded</td><td style="padding:6px 8px;">Times you dropped it to free a slot.</td></tr>
+                </table>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">🔗 Synergies</h4>
+                <p>Shows card-to-card and relic-to-relic pairings that frequently appear together in winning runs. The bubble chart plots:</p>
+                <ul style="margin-left: 20px;">
+                  <li><strong>X-axis:</strong> How often the pair appears together (frequency).</li>
+                  <li><strong>Y-axis:</strong> Win rate when that pair is present (performance).</li>
+                  <li><strong>Bubble size:</strong> Number of games with the pair — larger bubbles = more data.</li>
+                </ul>
+                <p>Focus on combos with <em>both</em> high frequency and high win rate. Small bubbles in the top-left are "hidden gems" — rare but strong synergies worth trying.</p>
+
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">⚔️ Combat Group</h3>
+                <p>Analysis of encounters, performance patterns, and successful builds.</p>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">⚔️ Encounters</h4>
+                <p>Stats for every enemy type you've faced, including which acts they appear in.</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Metric</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">Survivor Rate</td><td style="padding:6px 8px;">% of fights against this enemy where you survived (HP &gt; 0 after combat).</td></tr>
+                  <tr><td style="padding:6px 8px;">Avg Damage</td><td style="padding:6px 8px;">Average HP lost in a single fight against this enemy.</td></tr>
+                  <tr><td style="padding:6px 8px;">Times Ended Run</td><td style="padding:6px 8px;">How many times this enemy was your last fight in a losing run — your personal nemesis.</td></tr>
+                  <tr><td style="padding:6px 8px;">Act Breakdown</td><td style="padding:6px 8px;">Survival rates split by which act the fight occurred in — see if you struggle more early or late.</td></tr>
+                </table>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">🔥 Heatmap</h4>
+                <p>A Character × Ascension grid showing your win rate per cell. Color scale adapts per character: Red (low win rate) → that character's primary color → Green (high win rate). Win rate % is printed inside each cell for easy reference. Useful for spotting which character/ascension combos are your strongest and which need work.</p>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">🎭 Builds</h4>
+                <p>Extracts and displays the most common card and relic combinations found in your <em>winning</em> runs, grouped by character and ascension. This shows you the archetypal "winning recipes" at each difficulty level — useful as a reference for deckbuilding decisions during a run. Cards are sorted by frequency, so you see your most reliable picks first.</p>
+
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🗺️ Map Group</h3>
+                <p>Analysis of map encounters and act-start blessings.</p>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">🗺️ Floors</h4>
+                <p>Per-floor danger statistics. Each row represents a floor type in a specific act.</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Column</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">Floor Type</td><td style="padding:6px 8px;">Weak (easy monster), Normal (standard monster), Elite, Boss, Event, Rest, Shop, Treasure, or Ancient.</td></tr>
+                  <tr><td style="padding:6px 8px;">Act</td><td style="padding:6px 8px;">The named act (e.g. Overgrowth, Hive, Glory) — useful for comparing acts across game versions.</td></tr>
+                  <tr><td style="padding:6px 8px;">Act Index</td><td style="padding:6px 8px;">Position in the run: 1 = first act, 2 = second, 3 = third. <em style="color:#aaa;">(numbers not floor numbers)</em></td></tr>
+                  <tr><td style="padding:6px 8px;">Death %</td><td style="padding:6px 8px;">% of runs that ended on this floor type <em style="color:#aaa;">(your last floor before losing)</em>. Highlighted gold ≥ 3%, red ≥ 10%.</td></tr>
+                </table>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">🌟 Ancients</h4>
+                <p>Blessings offered by the ancient at the start of each act (Neow for Act 1, different ancients for Acts 2 &amp; 3). Only shows stats for blessings you actually chose — skipped blessings don't affect their metrics.</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Metric</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">ELO</td><td style="padding:6px 8px;">Blessing strength estimate. Updated only when you chose this blessing.</td></tr>
+                  <tr><td style="padding:6px 8px;">Pick %</td><td style="padding:6px 8px;">How often you chose this blessing when it was in the offered pool.</td></tr>
+                  <tr><td style="padding:6px 8px;">Win %</td><td style="padding:6px 8px;">Win rate of runs where you took this blessing.</td></tr>
+                </table>
+                <p><em>Tip:</em> Use the Act filter (1/2/3) to compare blessing quality within each individual ancient's pool.</p>
+
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">🏆 ELO Ratings</h3>
+                <p>Card strength rankings per character. Data is ordered by current ELO rating. The ELO system uses a dynamic K-factor (starts at 48, drops to 32 then 24 as more data accumulates), scaled by ascension difficulty, and adjusted based on how cleanly you won (damage taken).</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+                  <tr style="color:#c9a84c;"><th style="text-align:left;padding:6px 8px;">Column</th><th style="text-align:left;padding:6px 8px;">Meaning</th></tr>
+                  <tr><td style="padding:6px 8px;">ELO</td><td style="padding:6px 8px;">Current strength rating. 1500 = baseline average.</td></tr>
+                  <tr><td style="padding:6px 8px;">±CI</td><td style="padding:6px 8px;">Confidence interval around the ELO <em style="color:#aaa;">(how sure we are of this rating)</em> — shows uncertainty. Wider intervals = fewer games played. Displayed as ± 2 × Rating Deviation (RD).</td></tr>
+                  <tr><td style="padding:6px 8px;">Peak ELO</td><td style="padding:6px 8px;">Highest rating this card has ever reached <em style="color:#aaa;">(historical high water mark)</em> — indicates potential even if recent runs brought it down.</td></tr>
+                  <tr><td style="padding:6px 8px;">Win %</td><td style="padding:6px 8px;">Overall win rate across all runs this card appeared in.</td></tr>
+                  <tr><td style="padding:6px 8px;">Act 1/2/3 Win %</td><td style="padding:6px 8px;">Win rate specifically when this card was first picked in that act.</td></tr>
+                  <tr><td style="padding:6px 8px;">Skipped</td><td style="padding:6px 8px;">Count of times you were offered this card but did not take it <em style="color:#aaa;">(offer count, not %)</em>. Red highlight = frequently skipped.</td></tr>
+                </table>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">ELO Method Selector</h4>
+                <p>The ELO tab includes a toggle between two rating models:</p>
+                <ul style="margin-left: 20px;">
+                  <li><strong>Classic ELO:</strong> Simple damage-weighted model. Wins with low damage get higher ratings; losses with many encounters get credit for progressing far. Works well for quick assessment.</li>
+                  <li><strong>Advanced ELO (Glicko-2):</strong> More sophisticated model that also tracks:</li>
+                  <ul style="margin-left: 40px;">
+                    <li>Act-weighted scoring (dying to Act 3 Boss counts more than early loss).</li>
+                    <li>Floor weighting (cards picked late in run get more credit for wins).</li>
+                    <li>Confidence intervals (RD value shows certainty — tighter for heavily-played cards).</li>
+                    <li>Synergy effects (card ratings adjust based on deck context).</li>
+                  </ul>
+                </ul>
+                <p>Use Classic for a quick look, Advanced for detailed analysis with confidence bounds.</p>
+
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">📥 Export</h3>
+                <p>Download the currently filtered runs as a CSV file. The table preview shows all rows that will be exported. Columns match the Runs tab: Date, Character, Ascension, Outcome, Killed By, Cards, Relics, Total Damage Taken, Act Reached, Duration, Players, Allies. Click any column header to sort before downloading.</p>
+
+                <h3 style="border-bottom: 2px solid #c9a84c; padding-bottom: 10px; margin-top: 30px;">ℹ️ General</h3>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">👥 Multiplayer Runs</h4>
+                <p>In 2P/3P/4P runs, all stats (damage taken, cards, relics, win/loss) reflect <em>your own</em> character only — not your allies'. The Allies column in the Runs tab shows which characters your teammates played. This ensures fair comparison between solo and multiplayer runs.</p>
+
+                <h4 style="color: #c9a84c; margin-top: 15px; margin-bottom: 8px;">💡 Quick Tips</h4>
+                <ul style="margin-left: 20px;">
+                  <li>Click any table column header to sort; click again to reverse the sort direction.</li>
+                  <li>Set Min Ascension to 5 to see aggregated stats across all higher difficulties at once.</li>
+                  <li>ELO stabilises with more runs — cross-check with Win % and Pick Rate for cards with fewer than 10 appearances.</li>
+                  <li>Use the Floors tab with the Act filter to compare how dangerous the same floor type is across different acts.</li>
+                  <li>Use the Ancients tab Act filter to compare blessing quality within each individual ancient's pool.</li>
+                  <li>Total Damage Taken is the sum of damage taken in every combat encounter across the entire run.</li>
+                  <li>Act Reached is calculated from your last recorded combat — a run that died to an event before any fight may show "-".</li>
+                  <li>The Kalman smoothed trend line in the Runs tab shows your true skill progression over time, filtering out lucky/unlucky streaks.</li>
                 </ul>
             </div>
         </div>
@@ -2334,13 +2430,13 @@ function generateDashboard(data: DashboardData): string {
         }
 
         function getActReached(run) {
-            try {
-                const acts = JSON.parse(run.acts || '[]');
-                if (acts.length === 0) return '-';
-                const last = acts[acts.length - 1];
-                const match = last.match(/(\d+)$/);
-                return match ? Number(match[1]) : acts.length;
-            } catch (e) { return '-'; }
+            // Calculate act reached from encounter data (more reliable than parsing acts string)
+            if (!run.encs || run.encs.length === 0) {
+                return run.w ? '3' : '-';  // Won = Act 3, no encounters = unknown
+            }
+            // Find the maximum act from all encounters
+            const maxAct = Math.max(...run.encs.map(e => e.a || 0));
+            return maxAct > 0 ? String(maxAct) : '-';
         }
 
         // ── Potions Chart ──
@@ -2557,23 +2653,26 @@ function generateDashboard(data: DashboardData): string {
             return m;
         }
 
-        function drawEloTable() {
-            const eloState = DATA.eloState;
-            if (!eloState) return;
+        // ── ELO method selector ───────────────────────────────────────────
+        let currentEloMethod = 'classic';
+        function setEloMethod(method) {
+            currentEloMethod = method;
+            const isAdv = method === 'advanced';
+            document.getElementById('eloMethodClassic').style.background = isAdv ? 'transparent' : '#c9a84c';
+            document.getElementById('eloMethodClassic').style.color = isAdv ? '#888' : '#0d1117';
+            document.getElementById('eloMethodAdvanced').style.background = isAdv ? '#c9a84c' : 'transparent';
+            document.getElementById('eloMethodAdvanced').style.color = isAdv ? '#0d1117' : '#888';
+            document.getElementById('eloMethodDesc').textContent = isAdv
+                ? 'Act-weighted result, floor weighting, Glicko-2 confidence intervals'
+                : 'Damage-weighted result, dynamic K-factor';
+            document.getElementById('eloAdvancedNote').style.display = isAdv ? 'inline' : 'none';
+            document.getElementById('eloAdvancedTableNote').style.display = isAdv ? 'inline' : 'none';
+            drawEloTable();
+            drawEloScatter();
+        }
 
-            const character = document.getElementById('characterFilter')?.value;
-            const actMap = buildActWinMap();
-
-            // Build skip lookup: cardName → skippedCount (from live filteredRuns)
-            const skipMap = new Map();
-            filteredRuns.forEach(run => {
-                (run.skippedCards || []).forEach(id => {
-                    const name = nameMapper.getCardName(id);
-                    skipMap.set(name, (skipMap.get(name) || 0) + 1);
-                });
-            });
-
-            // Aggregate across all ascensions: key = "cardName|charName"
+        /** Aggregate eloState (classic or advanced) into a map keyed "cardName|charName" */
+        function aggregateEloState(eloState, character) {
             const agg = new Map();
             for (const char of Object.keys(eloState)) {
                 const cName = nameMapper.getCharacterName(char);
@@ -2583,16 +2682,43 @@ function generateDashboard(data: DashboardData): string {
                         const r = rec;
                         const cardName = nameMapper.getCardName(cardId);
                         const key = cardName + '|' + cName;
-                        if (!agg.has(key)) agg.set(key, { card: cardName, character: cName, ratingSum: 0, peakMax: 0, games: 0, wins: 0 });
+                        if (!agg.has(key)) agg.set(key, {
+                            card: cardName, character: cName,
+                            ratingSum: 0, peakMax: 0, games: 0, wins: 0,
+                            rdWeightedSum: 0, // for weighted-average RD in advanced mode
+                        });
                         const a = agg.get(key);
-                        // weighted rating accumulation; we'll divide by total games later
                         a.ratingSum += r.rating * r.gamesPlayed;
                         a.peakMax = Math.max(a.peakMax, r.peakRating);
                         a.games += r.gamesPlayed;
                         a.wins += r.wins;
+                        if (r.rd !== undefined) a.rdWeightedSum += r.rd * r.gamesPlayed;
                     }
                 }
             }
+            return agg;
+        }
+
+        function drawEloTable() {
+            const isAdvanced = currentEloMethod === 'advanced';
+            const eloState = isAdvanced ? DATA.eloAdvancedState : DATA.eloState;
+            if (!eloState) {
+                document.getElementById('tableElo').innerHTML = \`<tr><td colspan="11" style="color:#e05252">Advanced ELO data not available — run <code>npm run analyze</code> to generate it.</td></tr>\`;
+                return;
+            }
+
+            const character = document.getElementById('characterFilter')?.value;
+            const actMap = buildActWinMap();
+
+            const skipMap = new Map();
+            filteredRuns.forEach(run => {
+                (run.skippedCards || []).forEach(id => {
+                    const name = nameMapper.getCardName(id);
+                    skipMap.set(name, (skipMap.get(name) || 0) + 1);
+                });
+            });
+
+            const agg = aggregateEloState(eloState, character);
 
             const records = [];
             agg.forEach(a => {
@@ -2600,10 +2726,12 @@ function generateDashboard(data: DashboardData): string {
                 const cardName = a.card;
                 const acts = actMap.get(cardName) || [{w:0,t:0},{w:0,t:0},{w:0,t:0}];
                 const actWr = acts.map(act => act.t >= 2 ? ((act.w / act.t) * 100).toFixed(1) : null);
+                const avgRating = a.ratingSum / a.games;
+                const avgRd = isAdvanced && a.games > 0 ? a.rdWeightedSum / a.games : null;
                 records.push({
                     card: cardName,
                     character: a.character,
-                    rating: (a.ratingSum / a.games).toFixed(0),
+                    rating: avgRating.toFixed(0),
                     peak: a.peakMax.toFixed(0),
                     games: a.games,
                     winRate: ((a.wins / a.games) * 100).toFixed(1),
@@ -2611,6 +2739,10 @@ function generateDashboard(data: DashboardData): string {
                     a1wr: actWr[0], a1n: acts[0].t,
                     a2wr: actWr[1], a2n: acts[1].t,
                     a3wr: actWr[2], a3n: acts[2].t,
+                    // Advanced only
+                    ci: avgRd !== null ? (avgRd * 2).toFixed(0) : null,
+                    lo: avgRd !== null ? (avgRating - 2 * avgRd).toFixed(0) : null,
+                    hi: avgRd !== null ? (avgRating + 2 * avgRd).toFixed(0) : null,
                 });
             });
 
@@ -2621,13 +2753,18 @@ function generateDashboard(data: DashboardData): string {
                 ? \`<span style="color:\${wrColor(wr)};font-weight:600">\${wr}%</span><span style="color:#666;font-size:11px"> (\${n})</span>\`
                 : '<span style="color:#555">—</span>';
 
-            let html = '<tr><th>Card</th><th>Char</th><th>ELO</th><th>Peak</th><th>Games</th><th>Win %</th><th>Skipped</th><th>Act 1 Win%</th><th>Act 2 Win%</th><th>Act 3 Win%</th></tr>';
+            const ciHeader = isAdvanced ? '<th title="±2×RD Glicko-2 confidence interval">ELO ±</th>' : '';
+            let html = \`<tr><th>Card</th><th>Char</th><th>ELO</th>\${ciHeader}<th>Peak</th><th>Games</th><th>Win %</th><th>Skipped</th><th>Act 1 Win%</th><th>Act 2 Win%</th><th>Act 3 Win%</th></tr>\`;
             records.forEach(r => {
                 const ratingColor = Number(r.rating) >= 1500 ? '#4db87a' : Number(r.rating) < 1450 ? '#e05252' : '#c9a84c';
+                const ciCell = isAdvanced
+                    ? \`<td style="color:#888;font-size:12px" title="\${r.lo} – \${r.hi}">±\${r.ci}</td>\`
+                    : '';
                 html += \`<tr>
                     <td><strong>\${r.card}</strong></td>
                     <td>\${r.character}</td>
                     <td><strong style="color: \${ratingColor};">\${r.rating}</strong></td>
+                    \${ciCell}
                     <td style="color:#888">\${r.peak}</td>
                     <td>\${r.games}</td>
                     <td><strong style="color:\${wrColor(r.winRate)}">\${r.winRate}%</strong></td>
@@ -2637,39 +2774,33 @@ function generateDashboard(data: DashboardData): string {
                     <td>\${fmtAct(r.a3wr, r.a3n)}</td>
                 </tr>\`;
             });
-            document.getElementById('tableElo').innerHTML = html || '<tr><td colspan="10">No ELO data (try adjusting filters)</td></tr>';
+            document.getElementById('tableElo').innerHTML = html || \`<tr><td colspan="\${isAdvanced ? 11 : 10}">No ELO data (try adjusting filters)</td></tr>\`;
             makeSortable('tableElo');
         }
 
         function drawEloScatter() {
-            const eloState = DATA.eloState;
+            const isAdvanced = currentEloMethod === 'advanced';
+            const eloState = isAdvanced ? DATA.eloAdvancedState : DATA.eloState;
             if (!eloState) return;
             const character = document.getElementById('characterFilter')?.value;
             const CHAR_COLORS_E = { Ironclad: '#e05252', Silent: '#4db87a', Regent: '#c9a84c', Necrobinder: '#9b59b6', Defect: '#3498db' };
 
-            // Aggregate across all ascensions per card+character
-            const agg = new Map();
-            for (const char of Object.keys(eloState)) {
-                const cName = nameMapper.getCharacterName(char);
-                if (character && cName !== character) continue;
-                for (const asc of Object.keys(eloState[char])) {
-                    for (const [cardId, rec] of Object.entries(eloState[char][asc])) {
-                        const r = rec;
-                        const key = nameMapper.getCardName(cardId) + '|' + cName;
-                        if (!agg.has(key)) agg.set(key, { name: nameMapper.getCardName(cardId), char: cName, ratingSum: 0, games: 0, wins: 0 });
-                        const a = agg.get(key);
-                        a.ratingSum += r.rating * r.gamesPlayed;
-                        a.games += r.gamesPlayed;
-                        a.wins += r.wins;
-                    }
-                }
-            }
+            const agg = aggregateEloState(eloState, character);
 
             const byChar = {};
             agg.forEach(a => {
                 if (a.games < 3) return;
+                const avgRating = a.ratingSum / a.games;
+                const avgRd = isAdvanced && a.games > 0 ? a.rdWeightedSum / a.games : null;
                 if (!byChar[a.char]) byChar[a.char] = [];
-                byChar[a.char].push({ name: a.name, rating: a.ratingSum / a.games, winRate: (a.wins / a.games) * 100, games: a.games });
+                byChar[a.char].push({
+                    name: a.name || a.card,
+                    rating: avgRating,
+                    winRate: (a.wins / a.games) * 100,
+                    games: a.games,
+                    rdLo: avgRd !== null ? avgRating - 2 * avgRd : null,
+                    rdHi: avgRd !== null ? avgRating + 2 * avgRd : null,
+                });
             });
 
             const allPoints = [].concat(...Object.values(byChar));
@@ -2685,21 +2816,39 @@ function generateDashboard(data: DashboardData): string {
             }];
 
             Object.keys(byChar).sort().forEach(cName => {
-                traces.push({
-                    x: byChar[cName].map(c => c.rating),
-                    y: byChar[cName].map(c => c.winRate),
+                const pts = byChar[cName];
+                const trace = {
+                    x: pts.map(c => c.rating),
+                    y: pts.map(c => c.winRate),
                     mode: 'markers',
                     type: 'scatter',
                     name: cName,
-                    text: byChar[cName].map(c => \`<b>\${c.name}</b> (\${cName})<br>ELO: \${c.rating.toFixed(0)}<br>Win Rate: \${c.winRate.toFixed(1)}%<br>Games: \${c.games}\`),
+                    text: pts.map(c => {
+                        const ci = c.rdHi !== null ? \`<br>95% CI: \${c.rdLo.toFixed(0)}–\${c.rdHi.toFixed(0)}\` : '';
+                        return \`<b>\${c.name}</b> (\${cName})<br>ELO: \${c.rating.toFixed(0)}\${ci}<br>Win Rate: \${c.winRate.toFixed(1)}%<br>Games: \${c.games}\`;
+                    }),
                     hovertemplate: '%{text}<extra></extra>',
                     marker: {
-                        size: byChar[cName].map(c => Math.max(Math.sqrt(c.games) * 3, 6)),
+                        size: pts.map(c => Math.max(Math.sqrt(c.games) * 3, 6)),
                         color: CHAR_COLORS_E[cName] || '#888',
                         opacity: 0.75,
                         line: { width: 1, color: 'rgba(255,255,255,0.2)' }
                     }
-                });
+                };
+                // In advanced mode, add horizontal error bars for confidence intervals
+                if (isAdvanced && pts.some(c => c.rdLo !== null)) {
+                    trace['error_x'] = {
+                        type: 'data',
+                        symmetric: false,
+                        array: pts.map(c => c.rdHi !== null ? c.rdHi - c.rating : 0),
+                        arrayminus: pts.map(c => c.rdLo !== null ? c.rating - c.rdLo : 0),
+                        color: CHAR_COLORS_E[cName] || '#888',
+                        thickness: 1,
+                        width: 3,
+                        opacity: 0.35,
+                    };
+                }
+                traces.push(trace);
             });
 
             safePlot('chartEloScatter', traces, darkLayout({

@@ -39,49 +39,29 @@ C:\Users\username\AppData\Roaming\SlayTheSpire2\steam\12345678901234567\profile1
 
 ## Configuring for Your Setup
 
-If you have a different username or Steam ID, update these files:
+If you have a different username or Steam ID, there is a single config file to update:
 
-### 1. `src/analyze/extractRunData.ts` (Line ~20)
-
-Current:
-
-```typescript
-const HISTORY_PATH = path.expandUser(
-  "~/AppData/Roaming/SlayTheSpire2/steam/0000000000000000/profile1/saves/history"
-).replace(/~/g, require("os").homedir());
-```
-
-Change to your path:
-
-```typescript
-const HISTORY_PATH = path.expandUser(
-  "~/AppData/Roaming/SlayTheSpire2/steam/YOUR_STEAM_ID/profile1/saves/history"
-).replace(/~/g, require("os").homedir());
-```
-
-### 2. `src/server/index.ts` (Line ~21)
+### `src/config.ts`
 
 Current:
 
 ```typescript
-const HISTORY_PATH = (
-  "C:\\Users\\you\\AppData\\Roaming\\SlayTheSpire2\\steam\\0000000000000000\\profile1\\saves\\history"
-);
+export const YOUR_STEAM_ID = 0000000000000000;
+
+export const HISTORY_PATH =
+  "C:\\Users\\you\\AppData\\Roaming\\SlayTheSpire2\\steam\\0000000000000000\\profile1\\saves\\history";
 ```
 
-Change to:
+Change to your details:
 
 ```typescript
-const HISTORY_PATH = (
-  "C:\\Users\\YOUR_USERNAME\\AppData\\Roaming\\SlayTheSpire2\\steam\\YOUR_STEAM_ID\\profile1\\saves\\history"
-);
+export const YOUR_STEAM_ID = YOUR_STEAM_ID_HERE;
+
+export const HISTORY_PATH =
+  "C:\\Users\\YOUR_USERNAME\\AppData\\Roaming\\SlayTheSpire2\\steam\\YOUR_STEAM_ID\\profile1\\saves\\history";
 ```
 
-### 3. `src/server/watcher.ts` (Line ~17)
-
-Same change as above.
-
-**Important:** Use `\\` (double backslash) in TypeScript strings for Windows paths!
+**Important:** Use `\\` (double backslash) in TypeScript strings for Windows paths. All other modules (`extractRunData.ts`, `server/index.ts`, `server/watcher.ts`) import from `src/config.ts` automatically — you only need to edit one file.
 
 ## Verification
 
