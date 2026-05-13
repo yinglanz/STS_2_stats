@@ -39,9 +39,13 @@ extractRunData.ts (Normalize & extract by Steam ID)
     ↓
 runs.db (SQLite database)
     ↓
-generateDashboard_v2.ts (Single-file HTML)
+Express API Server
+    ├─ /api/dashboard-data (loads all analytics)
+    ├─ /api/runs (filtered run queries)
+    ├─ /api/stats (aggregated stats)
+    └─ / (serves dashboard.html)
     ↓
-output/dashboard.html (Interactive dashboard)
+http://localhost:3000 (Interactive website)
 ```
 
 ## Quick Start
@@ -59,12 +63,19 @@ npm run analyze    # Full pipeline: extract → DB → ELO → reports → dashb
 npm run dashboard  # Regenerate dashboard only (fast, for UI changes)
 ```
 
-### Start API Server
+### Run as Website
 
+**Terminal 1 — Start the server:**
 ```bash
-npm run server     # Start Express API on localhost:3000
-npm run watch      # Start file watcher for auto-ingestion
+npm run server     # Express API on http://localhost:3000
 ```
+
+**Terminal 2 (optional) — Auto-ingest new runs:**
+```bash
+npm run watch      # File watcher for new .run files
+```
+
+Then open **http://localhost:3000** in your browser.
 
 ## Dashboard Features
 

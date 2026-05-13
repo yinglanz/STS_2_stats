@@ -15,6 +15,7 @@ import path from "path";
 import fs from "fs";
 import { openDb, loadAllRunsFromDb, insertRun, getRunCount } from "../analyze/database";
 import { loadAllRuns, extractAllRuns } from "../analyze/extractRunData";
+import { loadDashboardData } from "../analyze/generateDashboard_v2";
 import { ExtractedRun } from "../analyze/types";
 
 import { HISTORY_PATH } from "../config";
@@ -120,6 +121,18 @@ app.get("/api/stats", (_req: Request, res: Response) => {
   } catch (err) {
     console.error("GET /api/stats error:", err);
     res.status(500).json({ error: "Failed to calculate stats" });
+  }
+});
+
+// ── GET /api/dashboard-data ─────────────────────────────────────────────────
+
+app.get("/api/dashboard-data", (_req: Request, res: Response) => {
+  try {
+    const data = loadDashboardData();
+    res.json(data);
+  } catch (err) {
+    console.error("GET /api/dashboard-data error:", err);
+    res.status(500).json({ error: "Failed to load dashboard data" });
   }
 });
 

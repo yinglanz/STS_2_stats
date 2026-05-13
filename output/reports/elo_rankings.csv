@@ -78,6 +78,7 @@
 "Silent",7,"Acrobatics","CARD.ACROBATICS",1538.4,1538.4,2,2,0,100.0
 "Regent",1,"Radiate","CARD.RADIATE",1538.0,1538.0,2,2,0,100.0
 "Defect",4,"Gunk Up","CARD.GUNK_UP",1537.9,1537.9,4,3,1,75.0
+"Necrobinder",3,"Sleight Of Flesh","CARD.SLEIGHT_OF_FLESH",1537.8,1537.8,2,2,0,100.0
 "Defect",4,"Go For The Eyes","CARD.GO_FOR_THE_EYES",1537.2,1537.2,4,3,1,75.0
 "Defect",4,"Modded","CARD.MODDED",1537.2,1537.2,2,2,0,100.0
 "Defect",4,"Trash To Treasure","CARD.TRASH_TO_TREASURE",1537.1,1537.1,2,2,0,100.0
@@ -224,9 +225,7 @@
 "Defect",10,"Ftl","CARD.FTL",1522.2,1522.2,1,1,0,100.0
 "Defect",10,"All For One","CARD.ALL_FOR_ONE",1522.2,1522.2,1,1,0,100.0
 "Defect",10,"Genetic Algorithm","CARD.GENETIC_ALGORITHM",1522.2,1522.2,1,1,0,100.0
-"Defect",10,"Momentum Strike","CARD.MOMENTUM_STRIKE",1522.2,1522.2,1,1,0,100.0
 "Defect",10,"Doubt","CARD.DOUBT",1522.2,1522.2,1,1,0,100.0
-"Defect",10,"Boost Away","CARD.BOOST_AWAY",1522.2,1522.2,1,1,0,100.0
 "Silent",2,"Afterimage","CARD.AFTERIMAGE",1522.2,1522.2,1,1,0,100.0
 "Silent",2,"Phantom Blades","CARD.PHANTOM_BLADES",1522.2,1522.2,1,1,0,100.0
 "Silent",2,"Deflect","CARD.DEFLECT",1522.2,1522.2,1,1,0,100.0
@@ -255,7 +254,6 @@
 "Regent",1,"Monologue","CARD.MONOLOGUE",1521.4,1521.4,1,1,0,100.0
 "Regent",1,"Tyranny","CARD.TYRANNY",1521.4,1521.4,1,1,0,100.0
 "Regent",1,"Cloak Of Stars","CARD.CLOAK_OF_STARS",1521.4,1521.4,1,1,0,100.0
-"Defect",10,"Lightning Rod","CARD.LIGHTNING_ROD",1521.3,1525.2,3,2,1,66.7
 "Silent",1,"Strangle","CARD.STRANGLE",1521.2,1521.2,1,1,0,100.0
 "Silent",1,"Sneaky","CARD.SNEAKY",1521.2,1521.2,1,1,0,100.0
 "Silent",1,"Envenom","CARD.ENVENOM",1521.2,1521.2,1,1,0,100.0
@@ -290,6 +288,11 @@
 "Silent",0,"Afterimage","CARD.AFTERIMAGE",1519.9,1519.9,1,1,0,100.0
 "Silent",0,"Ultimate Strike","CARD.ULTIMATE_STRIKE",1519.9,1519.9,1,1,0,100.0
 "Silent",0,"Regret","CARD.REGRET",1519.9,1519.9,1,1,0,100.0
+"Necrobinder",3,"Shroud","CARD.SHROUD",1519.7,1519.7,1,1,0,100.0
+"Necrobinder",3,"Undeath","CARD.UNDEATH",1519.7,1519.7,1,1,0,100.0
+"Necrobinder",3,"Misery","CARD.MISERY",1519.7,1519.7,1,1,0,100.0
+"Necrobinder",3,"Ultimate Strike","CARD.ULTIMATE_STRIKE",1519.7,1519.7,1,1,0,100.0
+"Necrobinder",3,"Mad Science","CARD.MAD_SCIENCE",1519.7,1519.7,1,1,0,100.0
 "Defect",4,"Compact","CARD.COMPACT",1519.5,1519.5,3,2,1,66.7
 "Defect",4,"Refract","CARD.REFRACT",1519.4,1519.4,1,1,0,100.0
 "Defect",4,"Focused Strike","CARD.FOCUSED_STRIKE",1519.4,1519.4,1,1,0,100.0
@@ -561,6 +564,10 @@
 "Defect",4,"Fight Through","CARD.FIGHT_THROUGH",1501.0,1501.0,2,1,1,50.0
 "Defect",4,"Boot Sequence","CARD.BOOT_SEQUENCE",1501.0,1501.0,2,1,1,50.0
 "Defect",4,"Subroutine","CARD.SUBROUTINE",1500.8,1500.8,2,1,1,50.0
+"Necrobinder",3,"Scourge","CARD.SCOURGE",1500.8,1500.8,2,1,1,50.0
+"Necrobinder",3,"Times Up","CARD.TIMES_UP",1500.8,1500.8,2,1,1,50.0
+"Necrobinder",3,"Deathbringer","CARD.DEATHBRINGER",1500.8,1500.8,2,1,1,50.0
+"Necrobinder",3,"Hang","CARD.HANG",1500.8,1500.8,2,1,1,50.0
 "Silent",0,"Shadow Step","CARD.SHADOW_STEP",1500.7,1519.9,2,1,1,50.0
 "Defect",3,"Rocket Punch","CARD.ROCKET_PUNCH",1500.6,1500.6,2,1,1,50.0
 "Defect",3,"Scavenge","CARD.SCAVENGE",1500.6,1500.6,2,1,1,50.0
@@ -583,6 +590,7 @@
 "Necrobinder",1,"Dirge","CARD.DIRGE",1499.7,1500.0,2,1,1,50.0
 "Necrobinder",2,"Bone Shards","CARD.BONE_SHARDS",1499.7,1500.0,2,1,1,50.0
 "Defect",5,"Capacitor","CARD.CAPACITOR",1499.6,1500.0,4,2,2,50.0
+"Necrobinder",3,"Squash","CARD.SQUASH",1499.5,1500.0,2,1,1,50.0
 "Defect",1,"Buffer","CARD.BUFFER",1499.4,1500.0,2,1,1,50.0
 "Defect",10,"Shadow Shield","CARD.SHADOW_SHIELD",1499.4,1525.2,4,2,2,50.0
 "Silent",1,"Snakebite","CARD.SNAKEBITE",1499.3,1500.0,2,1,1,50.0
@@ -595,7 +603,6 @@
 "Necrobinder",0,"Times Up","CARD.TIMES_UP",1499.0,1520.2,2,1,1,50.0
 "Defect",10,"Focused Strike","CARD.FOCUSED_STRIKE",1499.0,1525.2,2,1,1,50.0
 "Defect",10,"Darkness","CARD.DARKNESS",1499.0,1525.2,2,1,1,50.0
-"Defect",10,"Charge Battery","CARD.CHARGE_BATTERY",1499.0,1525.2,2,1,1,50.0
 "Defect",10,"Chaos","CARD.CHAOS",1499.0,1525.2,2,1,1,50.0
 "Defect",10,"Glasswork","CARD.GLASSWORK",1499.0,1525.2,2,1,1,50.0
 "Defect",10,"Defragment","CARD.DEFRAGMENT",1499.0,1525.2,2,1,1,50.0
@@ -677,7 +684,6 @@
 "Silent",0,"Leading Strike","CARD.LEADING_STRIKE",1490.8,1519.0,7,3,4,42.9
 "Defect",2,"Ball Lightning","CARD.BALL_LIGHTNING",1490.4,1535.5,4,2,2,50.0
 "Silent",5,"The Hunt","CARD.THE_HUNT",1490.1,1500.0,2,1,1,50.0
-"Defect",10,"Hologram","CARD.HOLOGRAM",1489.6,1525.2,4,2,2,50.0
 "Silent",5,"Haze","CARD.HAZE",1489.2,1500.0,2,1,1,50.0
 "Defect",8,"Chill","CARD.CHILL",1489.2,1500.0,2,1,1,50.0
 "Defect",8,"Go For The Eyes","CARD.GO_FOR_THE_EYES",1488.7,1528.2,4,2,2,50.0
@@ -726,6 +732,7 @@
 "Necrobinder",0,"Fetch","CARD.FETCH",1483.0,1500.0,3,1,2,33.3
 "Defect",8,"Lightning Rod","CARD.LIGHTNING_ROD",1483.0,1528.2,4,2,2,50.0
 "Ironclad",0,"Body Slam","CARD.BODY_SLAM",1482.9,1500.0,3,1,2,33.3
+"Necrobinder",3,"Drain Power","CARD.DRAIN_POWER",1482.9,1500.0,3,1,2,33.3
 "Silent",1,"Prepared","CARD.PREPARED",1482.8,1521.2,5,2,3,40.0
 "Defect",0,"Capacitor","CARD.CAPACITOR",1482.8,1500.0,1,0,1,0.0
 "Defect",0,"Byrd Swoop","CARD.BYRD_SWOOP",1482.8,1500.0,1,0,1,0.0
@@ -758,6 +765,7 @@
 "Necrobinder",1,"Protector","CARD.PROTECTOR",1482.2,1500.0,1,0,1,0.0
 "Necrobinder",1,"Spur","CARD.SPUR",1482.2,1500.0,1,0,1,0.0
 "Defect",0,"Double Energy","CARD.DOUBLE_ENERGY",1482.2,1500.0,3,1,2,33.3
+"Necrobinder",3,"Demesne","CARD.DEMESNE",1482.1,1500.0,3,1,2,33.3
 "Silent",1,"Poor Sleep","CARD.POOR_SLEEP",1482.0,1500.0,1,0,1,0.0
 "Silent",1,"Tracking","CARD.TRACKING",1482.0,1500.0,1,0,1,0.0
 "Silent",1,"Metamorphosis","CARD.METAMORPHOSIS",1482.0,1500.0,1,0,1,0.0
@@ -824,6 +832,7 @@
 "Defect",0,"Doubt","CARD.DOUBT",1481.0,1500.0,1,0,1,0.0
 "Defect",0,"Genetic Algorithm","CARD.GENETIC_ALGORITHM",1480.9,1500.0,3,1,2,33.3
 "Defect",5,"Compact","CARD.COMPACT",1480.8,1500.0,7,3,4,42.9
+"Defect",10,"Momentum Strike","CARD.MOMENTUM_STRIKE",1480.8,1522.2,2,1,1,50.0
 "Ironclad",0,"Thrash","CARD.THRASH",1480.8,1516.8,3,1,2,33.3
 "Ironclad",0,"Pommel Strike","CARD.POMMEL_STRIKE",1480.8,1516.8,3,1,2,33.3
 "Regent",0,"Arsenal","CARD.ARSENAL",1480.7,1500.0,1,0,1,0.0
@@ -853,14 +862,12 @@
 "Silent",0,"Flechettes","CARD.FLECHETTES",1480.4,1500.0,1,0,1,0.0
 "Silent",0,"Clumsy","CARD.CLUMSY",1480.4,1500.0,1,0,1,0.0
 "Silent",0,"Automation","CARD.AUTOMATION",1480.4,1500.0,1,0,1,0.0
+"Necrobinder",3,"Debilitate","CARD.DEBILITATE",1480.3,1500.0,3,1,2,33.3
 "Necrobinder",3,"Defile","CARD.DEFILE",1480.3,1500.0,1,0,1,0.0
-"Necrobinder",3,"Drain Power","CARD.DRAIN_POWER",1480.3,1500.0,1,0,1,0.0
-"Necrobinder",3,"Sow","CARD.SOW",1480.3,1500.0,1,0,1,0.0
 "Necrobinder",3,"Flatten","CARD.FLATTEN",1480.3,1500.0,1,0,1,0.0
 "Necrobinder",3,"Sic Em","CARD.SIC_EM",1480.3,1500.0,1,0,1,0.0
 "Necrobinder",3,"Squeeze","CARD.SQUEEZE",1480.3,1500.0,1,0,1,0.0
 "Necrobinder",3,"Pull Aggro","CARD.PULL_AGGRO",1480.3,1500.0,1,0,1,0.0
-"Necrobinder",3,"Neurosurge","CARD.NEUROSURGE",1480.3,1500.0,1,0,1,0.0
 "Necrobinder",3,"The Scythe","CARD.THE_SCYTHE",1480.3,1500.0,1,0,1,0.0
 "Necrobinder",3,"Melancholy","CARD.MELANCHOLY",1480.3,1500.0,1,0,1,0.0
 "Necrobinder",0,"Transfigure","CARD.TRANSFIGURE",1480.1,1500.0,1,0,1,0.0
@@ -868,6 +875,7 @@
 "Necrobinder",0,"Seance","CARD.SEANCE",1480.1,1500.0,1,0,1,0.0
 "Necrobinder",0,"Shame","CARD.SHAME",1480.1,1500.0,1,0,1,0.0
 "Necrobinder",0,"Scourge","CARD.SCOURGE",1480.1,1500.0,1,0,1,0.0
+"Defect",10,"Lightning Rod","CARD.LIGHTNING_ROD",1480.0,1525.2,4,2,2,50.0
 "Defect",5,"Smokestack","CARD.SMOKESTACK",1480.0,1500.0,1,0,1,0.0
 "Defect",6,"Charge Battery","CARD.CHARGE_BATTERY",1479.9,1522.4,6,3,3,50.0
 "Silent",0,"Sucker Punch","CARD.SUCKER_PUNCH",1479.9,1500.0,3,1,2,33.3
@@ -884,21 +892,17 @@
 "Defect",4,"Tesla Coil","CARD.TESLA_COIL",1479.7,1500.0,1,0,1,0.0
 "Defect",4,"Chaos","CARD.CHAOS",1479.7,1500.0,1,0,1,0.0
 "Defect",4,"Ftl","CARD.FTL",1479.7,1500.0,1,0,1,0.0
+"Defect",10,"Boost Away","CARD.BOOST_AWAY",1479.7,1522.2,2,1,1,50.0
 "Necrobinder",0,"Dredge","CARD.DREDGE",1479.5,1500.0,1,0,1,0.0
 "Necrobinder",0,"Bury","CARD.BURY",1479.5,1500.0,1,0,1,0.0
 "Defect",3,"Glacier","CARD.GLACIER",1479.5,1500.0,1,0,1,0.0
 "Defect",3,"Adaptive Strike","CARD.ADAPTIVE_STRIKE",1479.5,1500.0,1,0,1,0.0
 "Necrobinder",3,"Call Of The Void","CARD.CALL_OF_THE_VOID",1479.4,1500.0,1,0,1,0.0
-"Necrobinder",3,"Scourge","CARD.SCOURGE",1479.4,1500.0,1,0,1,0.0
-"Necrobinder",3,"Times Up","CARD.TIMES_UP",1479.4,1500.0,1,0,1,0.0
 "Necrobinder",3,"End Of Days","CARD.END_OF_DAYS",1479.4,1500.0,1,0,1,0.0
-"Necrobinder",3,"Putrefy","CARD.PUTREFY",1479.4,1500.0,1,0,1,0.0
 "Necrobinder",3,"Shared Fate","CARD.SHARED_FATE",1479.4,1500.0,1,0,1,0.0
-"Necrobinder",3,"Deathbringer","CARD.DEATHBRINGER",1479.4,1500.0,1,0,1,0.0
 "Necrobinder",3,"No Escape","CARD.NO_ESCAPE",1479.4,1500.0,1,0,1,0.0
 "Necrobinder",3,"Mind Blast","CARD.MIND_BLAST",1479.4,1500.0,1,0,1,0.0
 "Necrobinder",3,"Doubt","CARD.DOUBT",1479.4,1500.0,1,0,1,0.0
-"Necrobinder",3,"Hang","CARD.HANG",1479.4,1500.0,1,0,1,0.0
 "Defect",2,"Spoils Map","CARD.SPOILS_MAP",1479.4,1500.0,1,0,1,0.0
 "Defect",2,"Subroutine","CARD.SUBROUTINE",1479.4,1500.0,1,0,1,0.0
 "Defect",2,"Echo Form","CARD.ECHO_FORM",1479.4,1500.0,1,0,1,0.0
@@ -927,6 +931,9 @@
 "Defect",10,"Modded","CARD.MODDED",1478.4,1500.0,3,1,2,33.3
 "Defect",6,"Believe In You","CARD.BELIEVE_IN_YOU",1478.2,1500.0,1,0,1,0.0
 "Defect",6,"Ftl","CARD.FTL",1478.0,1500.0,3,1,2,33.3
+"Necrobinder",3,"Danse Macabre","CARD.DANSE_MACABRE",1478.0,1500.0,1,0,1,0.0
+"Necrobinder",3,"Equilibrium","CARD.EQUILIBRIUM",1478.0,1500.0,1,0,1,0.0
+"Necrobinder",3,"Right Hand Hand","CARD.RIGHT_HAND_HAND",1478.0,1500.0,1,0,1,0.0
 "Defect",5,"Shatter","CARD.SHATTER",1477.8,1500.0,1,0,1,0.0
 "Defect",3,"Tempest","CARD.TEMPEST",1477.8,1519.3,3,1,2,33.3
 "Defect",3,"Spinner","CARD.SPINNER",1477.8,1519.3,3,1,2,33.3
@@ -1220,7 +1227,6 @@
 "Defect",3,"Charge Battery","CARD.CHARGE_BATTERY",1463.5,1500.0,2,0,2,0.0
 "Defect",8,"Neows Fury","CARD.NEOWS_FURY",1463.5,1500.0,1,0,1,0.0
 "Defect",10,"Huddle Up","CARD.HUDDLE_UP",1463.3,1500.0,1,0,1,0.0
-"Defect",10,"Spoils Map","CARD.SPOILS_MAP",1463.3,1500.0,1,0,1,0.0
 "Defect",9,"Synthesis","CARD.SYNTHESIS",1463.2,1500.0,1,0,1,0.0
 "Necrobinder",0,"Shared Fate","CARD.SHARED_FATE",1463.2,1500.0,2,0,2,0.0
 "Defect",8,"Shatter","CARD.SHATTER",1463.2,1500.0,1,0,1,0.0
@@ -1248,23 +1254,28 @@
 "Defect",8,"White Noise","CARD.WHITE_NOISE",1461.2,1500.0,3,1,2,33.3
 "Silent",7,"Snakebite","CARD.SNAKEBITE",1461.2,1500.0,4,1,3,25.0
 "Silent",7,"Deadly Poison","CARD.DEADLY_POISON",1461.2,1500.0,4,1,3,25.0
+"Defect",10,"Toric Toughness","CARD.TORIC_TOUGHNESS",1461.2,1500.0,1,0,1,0.0
 "Defect",9,"Gang Up","CARD.GANG_UP",1461.0,1500.0,1,0,1,0.0
 "Defect",5,"Ftl","CARD.FTL",1461.0,1525.2,10,4,6,40.0
+"Defect",10,"Charge Battery","CARD.CHARGE_BATTERY",1460.3,1525.2,3,1,2,33.3
 "Defect",8,"Skim","CARD.SKIM",1460.1,1528.2,3,1,2,33.3
 "Defect",1,"Chaos","CARD.CHAOS",1460.0,1500.0,4,1,3,25.0
 "Regent",0,"Squash","CARD.SQUASH",1460.0,1500.0,2,0,2,0.0
 "Regent",0,"Child Of The Stars","CARD.CHILD_OF_THE_STARS",1459.9,1500.0,2,0,2,0.0
 "Regent",0,"Relax","CARD.RELAX",1459.9,1500.0,2,0,2,0.0
 "Defect",5,"Spinner","CARD.SPINNER",1459.9,1525.2,6,2,4,33.3
+"Necrobinder",3,"Sow","CARD.SOW",1459.9,1500.0,2,0,2,0.0
+"Necrobinder",3,"Neurosurge","CARD.NEUROSURGE",1459.9,1500.0,2,0,2,0.0
 "Defect",1,"Compile Driver","CARD.COMPILE_DRIVER",1459.9,1500.0,2,0,2,0.0
 "Necrobinder",1,"Sow","CARD.SOW",1459.8,1500.0,2,0,2,0.0
 "Regent",1,"Gather Light","CARD.GATHER_LIGHT",1459.4,1500.0,2,0,2,0.0
 "Regent",0,"Resonance","CARD.RESONANCE",1459.3,1500.0,2,0,2,0.0
 "Defect",1,"Ftl","CARD.FTL",1459.2,1500.0,2,0,2,0.0
 "Necrobinder",0,"Pull From Below","CARD.PULL_FROM_BELOW",1459.1,1500.0,2,0,2,0.0
+"Necrobinder",3,"Defy","CARD.DEFY",1459.1,1500.0,7,2,5,28.6
 "Defect",1,"Charge Battery","CARD.CHARGE_BATTERY",1459.1,1500.0,2,0,2,0.0
+"Necrobinder",3,"Putrefy","CARD.PUTREFY",1459.1,1500.0,2,0,2,0.0
 "Necrobinder",0,"Graveblast","CARD.GRAVEBLAST",1459.0,1500.0,2,0,2,0.0
-"Necrobinder",3,"Demesne","CARD.DEMESNE",1459.0,1500.0,2,0,2,0.0
 "Defect",9,"Panache","CARD.PANACHE",1459.0,1500.0,1,0,1,0.0
 "Regent",0,"Quasar","CARD.QUASAR",1458.4,1500.0,2,0,2,0.0
 "Necrobinder",0,"Greed","CARD.GREED",1458.3,1500.0,2,0,2,0.0
@@ -1274,6 +1285,7 @@
 "Necrobinder",3,"Countdown","CARD.COUNTDOWN",1458.2,1500.0,2,0,2,0.0
 "Necrobinder",3,"Reap","CARD.REAP",1458.2,1500.0,2,0,2,0.0
 "Necrobinder",3,"Fear","CARD.FEAR",1458.2,1500.0,2,0,2,0.0
+"Necrobinder",3,"Lethality","CARD.LETHALITY",1457.8,1500.0,2,0,2,0.0
 "Defect",5,"Shadow Shield","CARD.SHADOW_SHIELD",1457.7,1500.0,2,0,2,0.0
 "Necrobinder",3,"Grave Warden","CARD.GRAVE_WARDEN",1457.6,1500.0,2,0,2,0.0
 "Necrobinder",3,"High Five","CARD.HIGH_FIVE",1457.6,1500.0,2,0,2,0.0
@@ -1288,12 +1300,12 @@
 "Defect",8,"Double Energy","CARD.DOUBLE_ENERGY",1457.4,1528.2,3,1,2,33.3
 "Regent",0,"Cosmic Indifference","CARD.COSMIC_INDIFFERENCE",1457.1,1500.0,2,0,2,0.0
 "Silent",4,"Well Laid Plans","CARD.WELL_LAID_PLANS",1457.1,1500.0,2,0,2,0.0
-"Necrobinder",3,"Debilitate","CARD.DEBILITATE",1457.1,1500.0,2,0,2,0.0
 "Necrobinder",3,"Parse","CARD.PARSE",1457.1,1500.0,2,0,2,0.0
 "Necrobinder",3,"Reave","CARD.REAVE",1457.1,1500.0,2,0,2,0.0
 "Defect",3,"Ball Lightning","CARD.BALL_LIGHTNING",1457.1,1537.0,6,2,4,33.3
 "Defect",9,"Lightning Rod","CARD.LIGHTNING_ROD",1456.7,1500.0,3,1,2,33.3
 "Defect",9,"Darkness","CARD.DARKNESS",1456.5,1500.0,3,1,2,33.3
+"Necrobinder",3,"Wisp","CARD.WISP",1456.4,1500.0,7,2,5,28.6
 "Silent",7,"Survivor","CARD.SURVIVOR",1456.3,1500.0,4,1,3,25.0
 "Silent",7,"Ascenders Bane","CARD.ASCENDERS_BANE",1456.3,1500.0,4,1,3,25.0
 "Defect",8,"Beam Cell","CARD.BEAM_CELL",1456.3,1553.6,7,3,4,42.9
@@ -1333,6 +1345,7 @@
 "Silent",4,"Expose","CARD.EXPOSE",1451.7,1500.0,2,0,2,0.0
 "Ironclad",0,"Second Wind","CARD.SECOND_WIND",1451.6,1500.0,3,0,3,0.0
 "Regent",0,"Refine Blade","CARD.REFINE_BLADE",1451.2,1500.0,3,0,3,0.0
+"Defect",10,"Hologram","CARD.HOLOGRAM",1451.2,1525.2,5,2,3,40.0
 "Silent",5,"Dodge And Roll","CARD.DODGE_AND_ROLL",1451.0,1500.0,4,1,3,25.0
 "Defect",1,"Coolheaded","CARD.COOLHEADED",1451.0,1500.0,5,1,4,20.0
 "Silent",5,"Deadly Poison","CARD.DEADLY_POISON",1450.9,1500.0,4,1,3,25.0
@@ -1405,7 +1418,6 @@
 "Silent",0,"Backflip","CARD.BACKFLIP",1439.5,1500.0,4,0,4,0.0
 "Defect",8,"Ball Lightning","CARD.BALL_LIGHTNING",1439.3,1500.0,2,0,2,0.0
 "Defect",9,"Flak Cannon","CARD.FLAK_CANNON",1439.2,1500.0,2,0,2,0.0
-"Defect",10,"Turbo","CARD.TURBO",1438.6,1500.0,5,1,4,20.0
 "Defect",8,"Tempest","CARD.TEMPEST",1438.6,1500.0,2,0,2,0.0
 "Defect",8,"All For One","CARD.ALL_FOR_ONE",1438.4,1500.0,2,0,2,0.0
 "Regent",0,"Alignment","CARD.ALIGNMENT",1438.3,1500.0,3,0,3,0.0
@@ -1421,7 +1433,6 @@
 "Defect",8,"Momentum Strike","CARD.MOMENTUM_STRIKE",1435.7,1500.0,2,0,2,0.0
 "Necrobinder",0,"Fear","CARD.FEAR",1435.6,1500.0,6,1,5,16.7
 "Defect",9,"Rocket Punch","CARD.ROCKET_PUNCH",1435.1,1500.0,4,1,3,25.0
-"Necrobinder",3,"Wisp","CARD.WISP",1435.0,1500.0,3,0,3,0.0
 "Regent",0,"Hidden Cache","CARD.HIDDEN_CACHE",1434.8,1500.0,3,0,3,0.0
 "Defect",5,"Focused Strike","CARD.FOCUSED_STRIKE",1434.8,1525.2,5,1,4,20.0
 "Silent",4,"Dagger Spray","CARD.DAGGER_SPRAY",1434.7,1500.0,3,0,3,0.0
@@ -1434,20 +1445,18 @@
 "Defect",9,"Storm","CARD.STORM",1432.0,1500.0,2,0,2,0.0
 "Defect",8,"Leap","CARD.LEAP",1431.3,1500.0,2,0,2,0.0
 "Defect",6,"Greed","CARD.GREED",1431.1,1500.0,3,0,3,0.0
-"Defect",10,"Claw","CARD.CLAW",1431.0,1500.0,2,0,2,0.0
 "Defect",8,"Clumsy","CARD.CLUMSY",1430.8,1500.0,4,1,3,25.0
 "Defect",1,"Go For The Eyes","CARD.GO_FOR_THE_EYES",1430.3,1500.0,4,0,4,0.0
 "Defect",3,"Double Energy","CARD.DOUBLE_ENERGY",1430.2,1500.0,4,0,4,0.0
+"Necrobinder",3,"Negative Pulse","CARD.NEGATIVE_PULSE",1429.8,1500.0,6,1,5,16.7
 "Silent",5,"Ricochet","CARD.RICOCHET",1429.4,1500.0,5,1,4,20.0
 "Defect",9,"Smokestack","CARD.SMOKESTACK",1429.3,1522.0,4,1,3,25.0
-"Defect",10,"Beam Cell","CARD.BEAM_CELL",1429.2,1500.0,3,0,3,0.0
 "Defect",5,"Modded","CARD.MODDED",1428.9,1500.0,3,0,3,0.0
 "Regent",0,"Greed","CARD.GREED",1428.8,1500.0,3,0,3,0.0
+"Defect",10,"Spoils Map","CARD.SPOILS_MAP",1428.7,1500.0,2,0,2,0.0
 "Regent",0,"Spoils Of Battle","CARD.SPOILS_OF_BATTLE",1428.3,1500.0,4,0,4,0.0
 "Regent",0,"Conqueror","CARD.CONQUEROR",1428.3,1500.0,4,0,4,0.0
 "Defect",9,"Compact","CARD.COMPACT",1427.9,1500.0,4,1,3,25.0
-"Defect",10,"Dualcast","CARD.DUALCAST",1427.6,1525.2,7,2,5,28.6
-"Defect",10,"Ascenders Bane","CARD.ASCENDERS_BANE",1427.6,1525.2,7,2,5,28.6
 "Defect",5,"Thunder","CARD.THUNDER",1427.1,1500.0,3,0,3,0.0
 "Defect",6,"Subroutine","CARD.SUBROUTINE",1426.9,1500.0,3,0,3,0.0
 "Necrobinder",0,"Poke","CARD.POKE",1426.2,1520.2,6,1,5,16.7
@@ -1460,11 +1469,12 @@
 "Regent",0,"Begone","CARD.BEGONE",1423.2,1500.0,4,0,4,0.0
 "Defect",5,"Glasswork","CARD.GLASSWORK",1423.2,1500.0,3,0,3,0.0
 "Silent",1,"Blade Dance","CARD.BLADE_DANCE",1423.0,1500.0,5,0,5,0.0
-"Necrobinder",3,"Defy","CARD.DEFY",1422.0,1500.0,4,0,4,0.0
 "Defect",9,"Claw","CARD.CLAW",1421.2,1500.0,8,3,5,37.5
 "Defect",0,"Coolheaded","CARD.COOLHEADED",1419.4,1500.0,5,0,5,0.0
 "Defect",5,"Boost Away","CARD.BOOST_AWAY",1418.8,1548.1,13,5,8,38.5
 "Defect",0,"Go For The Eyes","CARD.GO_FOR_THE_EYES",1418.4,1500.0,8,1,7,12.5
+"Necrobinder",3,"Bodyguard","CARD.BODYGUARD",1417.7,1500.0,7,1,6,14.3
+"Necrobinder",3,"Unleash","CARD.UNLEASH",1417.7,1500.0,7,1,6,14.3
 "Necrobinder",0,"Reave","CARD.REAVE",1417.5,1500.0,7,1,6,14.3
 "Defect",9,"Iteration","CARD.ITERATION",1416.9,1500.0,5,1,4,20.0
 "Defect",5,"Scavenge","CARD.SCAVENGE",1416.8,1500.0,3,0,3,0.0
@@ -1480,6 +1490,7 @@
 "Defect",1,"Beam Cell","CARD.BEAM_CELL",1411.1,1500.0,5,0,5,0.0
 "Defect",6,"Refract","CARD.REFRACT",1410.4,1500.0,4,0,4,0.0
 "Necrobinder",0,"Rattle","CARD.RATTLE",1407.4,1500.0,5,0,5,0.0
+"Defect",10,"Turbo","CARD.TURBO",1406.9,1500.0,6,1,5,16.7
 "Silent",5,"Sucker Punch","CARD.SUCKER_PUNCH",1406.6,1500.0,4,0,4,0.0
 "Regent",0,"Gather Light","CARD.GATHER_LIGHT",1405.5,1500.0,5,0,5,0.0
 "Defect",6,"White Noise","CARD.WHITE_NOISE",1405.2,1500.0,4,0,4,0.0
@@ -1491,14 +1502,13 @@
 "Necrobinder",0,"Defile","CARD.DEFILE",1403.4,1500.0,5,0,5,0.0
 "Regent",0,"Solar Strike","CARD.SOLAR_STRIKE",1403.4,1500.0,5,0,5,0.0
 "Defect",9,"Genetic Algorithm","CARD.GENETIC_ALGORITHM",1403.2,1500.0,3,0,3,0.0
-"Necrobinder",3,"Bodyguard","CARD.BODYGUARD",1402.7,1500.0,5,0,5,0.0
-"Necrobinder",3,"Unleash","CARD.UNLEASH",1402.7,1500.0,5,0,5,0.0
-"Necrobinder",3,"Negative Pulse","CARD.NEGATIVE_PULSE",1402.0,1500.0,5,0,5,0.0
 "Silent",5,"Untouchable","CARD.UNTOUCHABLE",1401.8,1500.0,4,0,4,0.0
 "Regent",0,"Black Hole","CARD.BLACK_HOLE",1401.0,1500.0,6,0,6,0.0
+"Defect",10,"Claw","CARD.CLAW",1400.1,1500.0,3,0,3,0.0
 "Defect",6,"Hotfix","CARD.HOTFIX",1400.1,1500.0,4,0,4,0.0
 "Defect",6,"Coolheaded","CARD.COOLHEADED",1399.3,1500.0,4,0,4,0.0
 "Necrobinder",0,"Sow","CARD.SOW",1399.2,1500.0,5,0,5,0.0
+"Defect",10,"Beam Cell","CARD.BEAM_CELL",1398.6,1500.0,4,0,4,0.0
 "Regent",0,"Know Thy Place","CARD.KNOW_THY_PLACE",1398.0,1500.0,5,0,5,0.0
 "Silent",5,"Snakebite","CARD.SNAKEBITE",1397.3,1500.0,7,1,6,14.3
 "Regent",0,"Astral Pulse","CARD.ASTRAL_PULSE",1396.7,1500.0,6,0,6,0.0
@@ -1528,6 +1538,8 @@
 "Defect",9,"Cold Snap","CARD.COLD_SNAP",1374.5,1500.0,4,0,4,0.0
 "Defect",5,"Hologram","CARD.HOLOGRAM",1374.1,1500.0,9,1,8,11.1
 "Regent",0,"Glow","CARD.GLOW",1370.8,1500.0,8,0,8,0.0
+"Defect",10,"Dualcast","CARD.DUALCAST",1370.1,1525.2,9,2,7,22.2
+"Defect",10,"Ascenders Bane","CARD.ASCENDERS_BANE",1370.1,1525.2,9,2,7,22.2
 "Regent",0,"Crush Under","CARD.CRUSH_UNDER",1369.3,1500.0,8,0,8,0.0
 "Necrobinder",0,"Bodyguard","CARD.BODYGUARD",1364.9,1520.2,13,2,11,15.4
 "Defect",8,"Uproar","CARD.UPROAR",1363.2,1500.0,8,1,7,12.5

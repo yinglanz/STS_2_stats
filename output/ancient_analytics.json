@@ -6,11 +6,11 @@
     "act": 3,
     "versionMin": "v0.99.1",
     "versionMax": "v0.103.2",
-    "elo": 1557,
-    "peakElo": 1557,
-    "overallOffered": 4,
-    "overallPicked": 3,
-    "overallWins": 3,
+    "elo": 1571.9,
+    "peakElo": 1571.9,
+    "overallOffered": 5,
+    "overallPicked": 4,
+    "overallWins": 4,
     "byChar": {
       "Defect": {
         "offered": 1,
@@ -21,6 +21,11 @@
         "offered": 3,
         "picked": 2,
         "wins": 2
+      },
+      "Necrobinder": {
+        "offered": 1,
+        "picked": 1,
+        "wins": 1
       }
     }
   },
@@ -98,7 +103,7 @@
     "versionMax": "v0.103.2",
     "elo": 1553.5,
     "peakElo": 1553.5,
-    "overallOffered": 6,
+    "overallOffered": 7,
     "overallPicked": 3,
     "overallWins": 3,
     "byChar": {
@@ -108,7 +113,7 @@
         "wins": 2
       },
       "Necrobinder": {
-        "offered": 1,
+        "offered": 2,
         "picked": 0,
         "wins": 0
       },
@@ -128,7 +133,7 @@
     "versionMax": "v0.103.2",
     "elo": 1549.2,
     "peakElo": 1561.6,
-    "overallOffered": 10,
+    "overallOffered": 11,
     "overallPicked": 5,
     "overallWins": 4,
     "byChar": {
@@ -138,7 +143,7 @@
         "wins": 0
       },
       "Necrobinder": {
-        "offered": 2,
+        "offered": 3,
         "picked": 0,
         "wins": 0
       },
@@ -493,7 +498,7 @@
     "versionMax": "v0.103.2",
     "elo": 1524.4,
     "peakElo": 1524.4,
-    "overallOffered": 16,
+    "overallOffered": 17,
     "overallPicked": 1,
     "overallWins": 1,
     "byChar": {
@@ -508,7 +513,7 @@
         "wins": 1
       },
       "Necrobinder": {
-        "offered": 2,
+        "offered": 3,
         "picked": 0,
         "wins": 0
       },
@@ -643,7 +648,7 @@
     "versionMax": "v0.103.2",
     "elo": 1516.8,
     "peakElo": 1516.8,
-    "overallOffered": 8,
+    "overallOffered": 9,
     "overallPicked": 1,
     "overallWins": 1,
     "byChar": {
@@ -659,6 +664,11 @@
       },
       "Defect": {
         "offered": 3,
+        "picked": 0,
+        "wins": 0
+      },
+      "Necrobinder": {
+        "offered": 1,
         "picked": 0,
         "wins": 0
       }
@@ -696,6 +706,46 @@
         "offered": 1,
         "picked": 0,
         "wins": 0
+      }
+    }
+  },
+  {
+    "textKey": "PAELS_CLAW",
+    "displayName": "Paels Claw",
+    "ancient": "Pael",
+    "act": 2,
+    "versionMin": "v0.98.3",
+    "versionMax": "v0.103.2",
+    "elo": 1515.8,
+    "peakElo": 1538.6,
+    "overallOffered": 15,
+    "overallPicked": 14,
+    "overallWins": 8,
+    "byChar": {
+      "Silent": {
+        "offered": 4,
+        "picked": 4,
+        "wins": 3
+      },
+      "Ironclad": {
+        "offered": 1,
+        "picked": 0,
+        "wins": 0
+      },
+      "Defect": {
+        "offered": 8,
+        "picked": 8,
+        "wins": 4
+      },
+      "Regent": {
+        "offered": 1,
+        "picked": 1,
+        "wins": 0
+      },
+      "Necrobinder": {
+        "offered": 1,
+        "picked": 1,
+        "wins": 1
       }
     }
   },
@@ -800,36 +850,6 @@
     }
   },
   {
-    "textKey": "SMALL_CAPSULE",
-    "displayName": "Small Capsule",
-    "ancient": "Neow",
-    "act": 1,
-    "versionMin": "v0.99.1",
-    "versionMax": "v0.103.2",
-    "elo": 1504.8,
-    "peakElo": 1504.8,
-    "overallOffered": 10,
-    "overallPicked": 2,
-    "overallWins": 1,
-    "byChar": {
-      "Ironclad": {
-        "offered": 1,
-        "picked": 1,
-        "wins": 0
-      },
-      "Defect": {
-        "offered": 6,
-        "picked": 1,
-        "wins": 1
-      },
-      "Silent": {
-        "offered": 3,
-        "picked": 0,
-        "wins": 0
-      }
-    }
-  },
-  {
     "textKey": "DUSTY_TOME",
     "displayName": "Dusty Tome",
     "ancient": "Darv",
@@ -895,41 +915,6 @@
     }
   },
   {
-    "textKey": "PAELS_CLAW",
-    "displayName": "Paels Claw",
-    "ancient": "Pael",
-    "act": 2,
-    "versionMin": "v0.98.3",
-    "versionMax": "v0.103.2",
-    "elo": 1503.1,
-    "peakElo": 1538.6,
-    "overallOffered": 14,
-    "overallPicked": 13,
-    "overallWins": 7,
-    "byChar": {
-      "Silent": {
-        "offered": 4,
-        "picked": 4,
-        "wins": 3
-      },
-      "Ironclad": {
-        "offered": 1,
-        "picked": 0,
-        "wins": 0
-      },
-      "Defect": {
-        "offered": 8,
-        "picked": 8,
-        "wins": 4
-      },
-      "Regent": {
-        "offered": 1,
-        "picked": 1,
-        "wins": 0
-      }
-    }
-  },
-  {
     "textKey": "LOOMING_FRUIT",
     "displayName": "Looming Fruit",
     "ancient": "Nonupeipe",
@@ -968,7 +953,7 @@
     "versionMax": "v0.103.2",
     "elo": 1500,
     "peakElo": 1500,
-    "overallOffered": 39,
+    "overallOffered": 40,
     "overallPicked": 0,
     "overallWins": 0,
     "byChar": {
@@ -988,7 +973,7 @@
         "wins": 0
       },
       "Defect": {
-        "offered": 22,
+        "offered": 23,
         "picked": 0,
         "wins": 0
       },
@@ -1103,7 +1088,7 @@
     "versionMax": "v0.103.2",
     "elo": 1500,
     "peakElo": 1500,
-    "overallOffered": 9,
+    "overallOffered": 10,
     "overallPicked": 0,
     "overallWins": 0,
     "byChar": {
@@ -1118,7 +1103,7 @@
         "wins": 0
       },
       "Necrobinder": {
-        "offered": 2,
+        "offered": 3,
         "picked": 0,
         "wins": 0
       }
@@ -1461,6 +1446,41 @@
         "offered": 2,
         "picked": 2,
         "wins": 1
+      }
+    }
+  },
+  {
+    "textKey": "SILVER_CRUCIBLE",
+    "displayName": "Silver Crucible",
+    "ancient": "Neow",
+    "act": 1,
+    "versionMin": "v0.98.3",
+    "versionMax": "v0.103.2",
+    "elo": 1491.7,
+    "peakElo": 1500,
+    "overallOffered": 18,
+    "overallPicked": 11,
+    "overallWins": 5,
+    "byChar": {
+      "Silent": {
+        "offered": 5,
+        "picked": 2,
+        "wins": 2
+      },
+      "Defect": {
+        "offered": 10,
+        "picked": 6,
+        "wins": 2
+      },
+      "Necrobinder": {
+        "offered": 2,
+        "picked": 2,
+        "wins": 1
+      },
+      "Regent": {
+        "offered": 1,
+        "picked": 1,
+        "wins": 0
       }
     }
   },
@@ -1870,41 +1890,6 @@
     }
   },
   {
-    "textKey": "SILVER_CRUCIBLE",
-    "displayName": "Silver Crucible",
-    "ancient": "Neow",
-    "act": 1,
-    "versionMin": "v0.98.3",
-    "versionMax": "v0.103.2",
-    "elo": 1477.6,
-    "peakElo": 1500,
-    "overallOffered": 17,
-    "overallPicked": 10,
-    "overallWins": 4,
-    "byChar": {
-      "Silent": {
-        "offered": 5,
-        "picked": 2,
-        "wins": 2
-      },
-      "Defect": {
-        "offered": 10,
-        "picked": 6,
-        "wins": 2
-      },
-      "Necrobinder": {
-        "offered": 1,
-        "picked": 1,
-        "wins": 0
-      },
-      "Regent": {
-        "offered": 1,
-        "picked": 1,
-        "wins": 0
-      }
-    }
-  },
-  {
     "textKey": "STONE_HUMIDIFIER",
     "displayName": "Stone Humidifier",
     "ancient": "Neow",
@@ -1943,7 +1928,7 @@
     "versionMax": "v0.103.2",
     "elo": 1473.7,
     "peakElo": 1500,
-    "overallOffered": 20,
+    "overallOffered": 21,
     "overallPicked": 4,
     "overallWins": 1,
     "byChar": {
@@ -1958,7 +1943,7 @@
         "wins": 0
       },
       "Necrobinder": {
-        "offered": 4,
+        "offered": 5,
         "picked": 2,
         "wins": 1
       },
@@ -2020,6 +2005,36 @@
       "Defect": {
         "offered": 3,
         "picked": 1,
+        "wins": 0
+      }
+    }
+  },
+  {
+    "textKey": "SMALL_CAPSULE",
+    "displayName": "Small Capsule",
+    "ancient": "Neow",
+    "act": 1,
+    "versionMin": "v0.99.1",
+    "versionMax": "v0.103.2",
+    "elo": 1469.7,
+    "peakElo": 1504.8,
+    "overallOffered": 11,
+    "overallPicked": 3,
+    "overallWins": 1,
+    "byChar": {
+      "Ironclad": {
+        "offered": 1,
+        "picked": 1,
+        "wins": 0
+      },
+      "Defect": {
+        "offered": 7,
+        "picked": 2,
+        "wins": 1
+      },
+      "Silent": {
+        "offered": 3,
+        "picked": 0,
         "wins": 0
       }
     }
@@ -2170,46 +2185,6 @@
       "Necrobinder": {
         "offered": 1,
         "picked": 1,
-        "wins": 0
-      }
-    }
-  },
-  {
-    "textKey": "LOST_COFFER",
-    "displayName": "Lost Coffer",
-    "ancient": "Neow",
-    "act": 1,
-    "versionMin": "v0.98.3",
-    "versionMax": "v0.103.2",
-    "elo": 1464.6,
-    "peakElo": 1500,
-    "overallOffered": 25,
-    "overallPicked": 8,
-    "overallWins": 3,
-    "byChar": {
-      "Defect": {
-        "offered": 16,
-        "picked": 6,
-        "wins": 3
-      },
-      "Necrobinder": {
-        "offered": 2,
-        "picked": 0,
-        "wins": 0
-      },
-      "Silent": {
-        "offered": 4,
-        "picked": 2,
-        "wins": 0
-      },
-      "Ironclad": {
-        "offered": 2,
-        "picked": 0,
-        "wins": 0
-      },
-      "Regent": {
-        "offered": 1,
-        "picked": 0,
         "wins": 0
       }
     }
@@ -2580,41 +2555,6 @@
     }
   },
   {
-    "textKey": "TOUCH_OF_OROBAS",
-    "displayName": "Touch Of Orobas",
-    "ancient": "Orobas",
-    "act": 2,
-    "versionMin": "v0.98.3",
-    "versionMax": "v0.103.2",
-    "elo": 1440.6,
-    "peakElo": 1537.7,
-    "overallOffered": 12,
-    "overallPicked": 9,
-    "overallWins": 3,
-    "byChar": {
-      "Ironclad": {
-        "offered": 1,
-        "picked": 1,
-        "wins": 1
-      },
-      "Silent": {
-        "offered": 1,
-        "picked": 1,
-        "wins": 1
-      },
-      "Defect": {
-        "offered": 8,
-        "picked": 5,
-        "wins": 1
-      },
-      "Necrobinder": {
-        "offered": 2,
-        "picked": 2,
-        "wins": 0
-      }
-    }
-  },
-  {
     "textKey": "PRECARIOUS_SHEARS",
     "displayName": "Precarious Shears",
     "ancient": "Neow",
@@ -2623,7 +2563,7 @@
     "versionMax": "v0.103.2",
     "elo": 1437.6,
     "peakElo": 1518.3,
-    "overallOffered": 41,
+    "overallOffered": 42,
     "overallPicked": 6,
     "overallWins": 2,
     "byChar": {
@@ -2633,7 +2573,7 @@
         "wins": 1
       },
       "Necrobinder": {
-        "offered": 5,
+        "offered": 6,
         "picked": 1,
         "wins": 0
       },
@@ -2663,12 +2603,12 @@
     "versionMax": "v0.103.2",
     "elo": 1434.3,
     "peakElo": 1523.5,
-    "overallOffered": 12,
+    "overallOffered": 13,
     "overallPicked": 9,
     "overallWins": 3,
     "byChar": {
       "Defect": {
-        "offered": 3,
+        "offered": 4,
         "picked": 2,
         "wins": 1
       },
@@ -2681,6 +2621,46 @@
         "offered": 3,
         "picked": 2,
         "wins": 1
+      }
+    }
+  },
+  {
+    "textKey": "LOST_COFFER",
+    "displayName": "Lost Coffer",
+    "ancient": "Neow",
+    "act": 1,
+    "versionMin": "v0.98.3",
+    "versionMax": "v0.103.2",
+    "elo": 1433.7,
+    "peakElo": 1500,
+    "overallOffered": 26,
+    "overallPicked": 9,
+    "overallWins": 3,
+    "byChar": {
+      "Defect": {
+        "offered": 17,
+        "picked": 7,
+        "wins": 3
+      },
+      "Necrobinder": {
+        "offered": 2,
+        "picked": 0,
+        "wins": 0
+      },
+      "Silent": {
+        "offered": 4,
+        "picked": 2,
+        "wins": 0
+      },
+      "Ironclad": {
+        "offered": 2,
+        "picked": 0,
+        "wins": 0
+      },
+      "Regent": {
+        "offered": 1,
+        "picked": 0,
+        "wins": 0
       }
     }
   },
@@ -2715,6 +2695,41 @@
       "Defect": {
         "offered": 20,
         "picked": 1,
+        "wins": 0
+      }
+    }
+  },
+  {
+    "textKey": "TOUCH_OF_OROBAS",
+    "displayName": "Touch Of Orobas",
+    "ancient": "Orobas",
+    "act": 2,
+    "versionMin": "v0.98.3",
+    "versionMax": "v0.103.2",
+    "elo": 1425.9,
+    "peakElo": 1537.7,
+    "overallOffered": 13,
+    "overallPicked": 10,
+    "overallWins": 3,
+    "byChar": {
+      "Ironclad": {
+        "offered": 1,
+        "picked": 1,
+        "wins": 1
+      },
+      "Silent": {
+        "offered": 1,
+        "picked": 1,
+        "wins": 1
+      },
+      "Defect": {
+        "offered": 8,
+        "picked": 5,
+        "wins": 1
+      },
+      "Necrobinder": {
+        "offered": 3,
+        "picked": 3,
         "wins": 0
       }
     }
@@ -2763,7 +2778,7 @@
     "versionMax": "v0.103.2",
     "elo": 1416,
     "peakElo": 1500,
-    "overallOffered": 29,
+    "overallOffered": 31,
     "overallPicked": 4,
     "overallWins": 0,
     "byChar": {
@@ -2778,7 +2793,7 @@
         "wins": 0
       },
       "Necrobinder": {
-        "offered": 3,
+        "offered": 4,
         "picked": 0,
         "wins": 0
       },
@@ -2788,7 +2803,7 @@
         "wins": 0
       },
       "Defect": {
-        "offered": 12,
+        "offered": 13,
         "picked": 2,
         "wins": 0
       }
@@ -2803,7 +2818,7 @@
     "versionMax": "v0.103.2",
     "elo": 1415.9,
     "peakElo": 1522.7,
-    "overallOffered": 15,
+    "overallOffered": 16,
     "overallPicked": 5,
     "overallWins": 1,
     "byChar": {
@@ -2818,7 +2833,7 @@
         "wins": 0
       },
       "Necrobinder": {
-        "offered": 3,
+        "offered": 4,
         "picked": 0,
         "wins": 0
       }
@@ -2913,12 +2928,12 @@
     "versionMax": "v0.103.2",
     "elo": 1390.4,
     "peakElo": 1500,
-    "overallOffered": 27,
+    "overallOffered": 28,
     "overallPicked": 9,
     "overallWins": 1,
     "byChar": {
       "Defect": {
-        "offered": 10,
+        "offered": 11,
         "picked": 3,
         "wins": 0
       },
@@ -2991,15 +3006,15 @@
     "act": 1,
     "versionMin": "v0.98.3",
     "versionMax": "v0.103.2",
-    "elo": 1369.8,
+    "elo": 1363.6,
     "peakElo": 1500,
-    "overallOffered": 26,
-    "overallPicked": 16,
+    "overallOffered": 27,
+    "overallPicked": 17,
     "overallWins": 3,
     "byChar": {
       "Necrobinder": {
-        "offered": 3,
-        "picked": 1,
+        "offered": 4,
+        "picked": 2,
         "wins": 0
       },
       "Silent": {
@@ -3033,7 +3048,7 @@
     "versionMax": "v0.103.2",
     "elo": 1351.3,
     "peakElo": 1500,
-    "overallOffered": 45,
+    "overallOffered": 46,
     "overallPicked": 13,
     "overallWins": 1,
     "byChar": {
@@ -3048,7 +3063,7 @@
         "wins": 0
       },
       "Necrobinder": {
-        "offered": 8,
+        "offered": 9,
         "picked": 3,
         "wins": 0
       },

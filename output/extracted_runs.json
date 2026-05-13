@@ -104188,5 +104188,1629 @@
         "mx": 0
       }
     ]
+  },
+  {
+    "id": "run_1778583811",
+    "t": 1778583811,
+    "c": "CHARACTER.NECROBINDER",
+    "a": 3,
+    "w": false,
+    "m": 1,
+    "dmg": 134,
+    "sz": 22,
+    "rc": 11,
+    "fl": 2,
+    "seed": "R1YDVFB1Q0",
+    "dur": 15029,
+    "acts": "[\"ACT.UNDERDOCKS\",\"ACT.HIVE\",\"ACT.GLORY\"]",
+    "cp": 7,
+    "v": "v0.103.2",
+    "a1c": [
+      "CARD.PUTREFY",
+      "CARD.LETHALITY",
+      "CARD.DRAIN_POWER",
+      "CARD.WISP",
+      "CARD.LETHALITY",
+      "CARD.NEUROSURGE"
+    ],
+    "a2c": [
+      "CARD.SNAP",
+      "CARD.RIGHT_HAND_HAND"
+    ],
+    "a3c": [],
+    "a1sk": 2,
+    "a2sk": 4,
+    "a3sk": 0,
+    "skippedCards": [
+      "CARD.INVOKE",
+      "CARD.PAGESTORM",
+      "CARD.FRIENDSHIP",
+      "CARD.INVOKE",
+      "CARD.BURY",
+      "CARD.SPIRIT_OF_ASH",
+      "CARD.BLIGHT_STRIKE",
+      "CARD.POKE",
+      "CARD.INVOKE",
+      "CARD.DEFY",
+      "CARD.COUNTDOWN",
+      "CARD.MASTER_OF_STRATEGY",
+      "CARD.AFTERLIFE",
+      "CARD.SHROUD",
+      "CARD.DIRGE",
+      "CARD.BORROWED_TIME",
+      "CARD.SEVERANCE",
+      "CARD.FEAR",
+      "CARD.MISERY",
+      "CARD.VEILPIERCER",
+      "CARD.SEANCE",
+      "CARD.NEGATIVE_PULSE",
+      "CARD.SHROUD",
+      "CARD.ULTIMATE_DEFEND",
+      "CARD.SECRET_TECHNIQUE"
+    ],
+    "alc": [
+      {
+        "id": 1,
+        "c": "CHARACTER.NECROBINDER"
+      }
+    ],
+    "k": "ENCOUNTER.KAISER_CRAB_BOSS",
+    "cards": [
+      "CARD.STRIKE_NECROBINDER",
+      "CARD.STRIKE_NECROBINDER",
+      "CARD.STRIKE_NECROBINDER",
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.BODYGUARD",
+      "CARD.UNLEASH",
+      "CARD.DANSE_MACABRE",
+      "CARD.DEFY",
+      "CARD.SOW",
+      "CARD.PUTREFY",
+      "CARD.LETHALITY",
+      "CARD.DRAIN_POWER",
+      "CARD.WISP",
+      "CARD.LETHALITY",
+      "CARD.NEUROSURGE",
+      "CARD.EQUILIBRIUM",
+      "CARD.SQUASH",
+      "CARD.RIGHT_HAND_HAND",
+      "CARD.WISP"
+    ],
+    "cardsMeta": [
+      {
+        "id": "CARD.STRIKE_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.STRIKE_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.STRIKE_NECROBINDER",
+        "floor": 1,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.BODYGUARD",
+        "floor": 1,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.UNLEASH",
+        "floor": 1,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.DANSE_MACABRE",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFY",
+        "floor": 3,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.SOW",
+        "floor": 3,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.PUTREFY",
+        "floor": 4,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.LETHALITY",
+        "floor": 6,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.DRAIN_POWER",
+        "floor": 8,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.WISP",
+        "floor": 13,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.LETHALITY",
+        "floor": 14,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.NEUROSURGE",
+        "floor": 17,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.EQUILIBRIUM",
+        "floor": 21,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.SQUASH",
+        "floor": 22,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.RIGHT_HAND_HAND",
+        "floor": 23,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.WISP",
+        "floor": 31,
+        "upgraded": false
+      }
+    ],
+    "relics": [
+      "RELIC.PHYLACTERY_UNBOUND",
+      "RELIC.NEW_LEAF",
+      "RELIC.CENTENNIAL_PUZZLE",
+      "RELIC.BOOK_REPAIR_KNIFE",
+      "RELIC.PEN_NIB",
+      "RELIC.TOUCH_OF_OROBAS",
+      "RELIC.MEAL_TICKET",
+      "RELIC.VAMBRACE",
+      "RELIC.PENDULUM",
+      "RELIC.BAG_OF_MARBLES",
+      "RELIC.WHETSTONE"
+    ],
+    "potions": [
+      {
+        "id": "POTION.SPEED_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.HEART_OF_IRON",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.COLORLESS_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.ENERGY_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.BLESSING_OF_THE_FORGE",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.SKILL_POTION",
+        "o": 2,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 1,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.DEXTERITY_POTION",
+        "o": 2,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 1,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.ENTROPIC_BREW",
+        "o": 2,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 1,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.FLEX_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.SWIFT_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.GIGANTIFICATION_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 1,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.FRUIT_JUICE",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 1,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.EXPLOSIVE_AMPOULE",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 1,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.STABLE_SERUM",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      }
+    ],
+    "encs": [
+      {
+        "id": "ENCOUNTER.CORPSE_SLUGS_WEAK",
+        "a": 1,
+        "d": 1,
+        "s": true,
+        "tp": 1,
+        "tu": 6,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.TOADPOLES_WEAK",
+        "a": 1,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 4,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SEAPUNK_WEAK",
+        "a": 1,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 4,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.CULTISTS_NORMAL",
+        "a": 1,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 5,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.TERROR_EEL_ELITE",
+        "a": 1,
+        "d": 3,
+        "s": true,
+        "tp": 2,
+        "tu": 6,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SEWER_CLAM_NORMAL",
+        "a": 1,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 5,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.PHANTASMAL_GARDENERS_ELITE",
+        "a": 1,
+        "d": 3,
+        "s": true,
+        "tp": 2,
+        "tu": 6,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SOUL_FYSH_BOSS",
+        "a": 1,
+        "d": 27,
+        "s": true,
+        "tp": 3,
+        "tu": 11,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.TUNNELER_WEAK",
+        "a": 2,
+        "d": 2,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.BOWLBUGS_WEAK",
+        "a": 2,
+        "d": 7,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.ENTOMANCER_ELITE",
+        "a": 2,
+        "d": 18,
+        "s": true,
+        "tp": 2,
+        "tu": 5,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.DECIMILLIPEDE_ELITE",
+        "a": 2,
+        "d": 33,
+        "s": true,
+        "tp": 2,
+        "tu": 5,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.KAISER_CRAB_BOSS",
+        "a": 2,
+        "d": 40,
+        "s": false,
+        "tp": 3,
+        "tu": 7,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      }
+    ]
+  },
+  {
+    "id": "run_1778674277",
+    "t": 1778674277,
+    "c": "CHARACTER.NECROBINDER",
+    "a": 3,
+    "w": true,
+    "m": 1,
+    "dmg": 120,
+    "sz": 26,
+    "rc": 17,
+    "fl": 3,
+    "seed": "GUJ8DWBEMU",
+    "dur": 2710,
+    "acts": "[\"ACT.UNDERDOCKS\",\"ACT.HIVE\",\"ACT.GLORY\"]",
+    "cp": 14,
+    "v": "v0.103.2",
+    "a1c": [
+      "CARD.SCOURGE",
+      "CARD.SHROUD",
+      "CARD.DRAIN_POWER",
+      "CARD.DEFY",
+      "CARD.DEFY",
+      "CARD.UNDEATH",
+      "CARD.MISERY"
+    ],
+    "a2c": [
+      "CARD.NEGATIVE_PULSE",
+      "CARD.WISP",
+      "CARD.DEATHBRINGER",
+      "CARD.HANG",
+      "CARD.TIMES_UP"
+    ],
+    "a3c": [
+      "CARD.WISP",
+      "CARD.DEBILITATE",
+      "CARD.SLEIGHT_OF_FLESH",
+      "CARD.DEMESNE"
+    ],
+    "a1sk": 1,
+    "a2sk": 3,
+    "a3sk": 3,
+    "skippedCards": [
+      "CARD.REAP",
+      "CARD.TIMES_UP",
+      "CARD.INVOKE",
+      "CARD.EIDOLON",
+      "CARD.PROWESS",
+      "CARD.ALCHEMIZE",
+      "CARD.FETCH",
+      "CARD.SNAP",
+      "CARD.AFTERLIFE",
+      "CARD.SCOURGE",
+      "CARD.SLEIGHT_OF_FLESH",
+      "CARD.EQUILIBRIUM",
+      "CARD.MAYHEM",
+      "CARD.DEFY",
+      "CARD.INVOKE",
+      "CARD.SEANCE",
+      "CARD.TIMES_UP",
+      "CARD.UNDEATH",
+      "CARD.SACRIFICE",
+      "CARD.DRAIN_POWER",
+      "CARD.BORROWED_TIME",
+      "CARD.SCOURGE",
+      "CARD.VEILPIERCER",
+      "CARD.SNAP",
+      "CARD.DEFY",
+      "CARD.GRAVE_WARDEN",
+      "CARD.DEVOUR_LIFE",
+      "CARD.PURITY",
+      "CARD.REND",
+      "CARD.SCOURGE",
+      "CARD.DEFY",
+      "CARD.REAVE"
+    ],
+    "alc": [
+      {
+        "id": 1,
+        "c": "CHARACTER.NECROBINDER"
+      }
+    ],
+    "k": "NONE.NONE",
+    "cards": [
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.DEFEND_NECROBINDER",
+      "CARD.BODYGUARD",
+      "CARD.UNLEASH",
+      "CARD.SCOURGE",
+      "CARD.SHROUD",
+      "CARD.DRAIN_POWER",
+      "CARD.DEFY",
+      "CARD.DEFY",
+      "CARD.SLEIGHT_OF_FLESH",
+      "CARD.UNDEATH",
+      "CARD.MISERY",
+      "CARD.NEGATIVE_PULSE",
+      "CARD.WISP",
+      "CARD.DEATHBRINGER",
+      "CARD.ULTIMATE_STRIKE",
+      "CARD.HANG",
+      "CARD.TIMES_UP",
+      "CARD.SQUASH",
+      "CARD.WISP",
+      "CARD.DEBILITATE",
+      "CARD.SLEIGHT_OF_FLESH",
+      "CARD.DEMESNE",
+      "CARD.MAD_SCIENCE"
+    ],
+    "cardsMeta": [
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_NECROBINDER",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.BODYGUARD",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.UNLEASH",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.SCOURGE",
+        "floor": 2,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.SHROUD",
+        "floor": 3,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.DRAIN_POWER",
+        "floor": 7,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.DEFY",
+        "floor": 8,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFY",
+        "floor": 12,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.SLEIGHT_OF_FLESH",
+        "floor": 14,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.UNDEATH",
+        "floor": 15,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.MISERY",
+        "floor": 17,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.NEGATIVE_PULSE",
+        "floor": 19,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.WISP",
+        "floor": 22,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.DEATHBRINGER",
+        "floor": 24,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.ULTIMATE_STRIKE",
+        "floor": 25,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.HANG",
+        "floor": 28,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.TIMES_UP",
+        "floor": 30,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.SQUASH",
+        "floor": 31,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.WISP",
+        "floor": 37,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.DEBILITATE",
+        "floor": 38,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.SLEIGHT_OF_FLESH",
+        "floor": 39,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEMESNE",
+        "floor": 40,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.MAD_SCIENCE",
+        "floor": 46,
+        "upgraded": false
+      }
+    ],
+    "relics": [
+      "RELIC.BOUND_PHYLACTERY",
+      "RELIC.SILVER_CRUCIBLE",
+      "RELIC.SWORD_OF_JADE",
+      "RELIC.CHOSEN_CHEESE",
+      "RELIC.STURDY_CLAMP",
+      "RELIC.PAELS_CLAW",
+      "RELIC.AMETHYST_AUBERGINE",
+      "RELIC.JUZU_BRACELET",
+      "RELIC.HAPPY_FLOWER",
+      "RELIC.SPARKLING_ROUGE",
+      "RELIC.RIPPLE_BASIN",
+      "RELIC.CHOICES_PARADOX",
+      "RELIC.GAMBLING_CHIP",
+      "RELIC.PENDULUM",
+      "RELIC.BAG_OF_MARBLES",
+      "RELIC.ART_OF_WAR",
+      "RELIC.PERMAFROST"
+    ],
+    "potions": [
+      {
+        "id": "POTION.SKILL_POTION",
+        "o": 4,
+        "pk": true,
+        "b": true,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 2,
+        "a": 0
+      },
+      {
+        "id": "POTION.POWER_POTION",
+        "o": 2,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.SWIFT_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.VULNERABLE_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.LIQUID_MEMORIES",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.DUPLICATOR",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.DEXTERITY_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.FIRE_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.CLARITY",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.POTION_OF_DOOM",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 1,
+        "fu": 1,
+        "a": 0
+      },
+      {
+        "id": "POTION.STRENGTH_POTION",
+        "o": 2,
+        "pk": true,
+        "b": false,
+        "u": false,
+        "d": true,
+        "fo": 1,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.TOUCH_OF_INSANITY",
+        "o": 1,
+        "pk": true,
+        "b": true,
+        "u": true,
+        "d": false,
+        "fo": 2,
+        "fu": 2,
+        "a": 0
+      },
+      {
+        "id": "POTION.ATTACK_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 2,
+        "fu": 2,
+        "a": 0
+      },
+      {
+        "id": "POTION.ENERGY_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 2,
+        "fu": 2,
+        "a": 0
+      }
+    ],
+    "encs": [
+      {
+        "id": "ENCOUNTER.CORPSE_SLUGS_WEAK",
+        "a": 1,
+        "d": 7,
+        "s": true,
+        "tp": 1,
+        "tu": 7,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SLUDGE_SPINNER_WEAK",
+        "a": 1,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.CORPSE_SLUGS_NORMAL",
+        "a": 1,
+        "d": 3,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.FOSSIL_STALKER_NORMAL",
+        "a": 1,
+        "d": 20,
+        "s": true,
+        "tp": 1,
+        "tu": 4,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.PHANTASMAL_GARDENERS_ELITE",
+        "a": 1,
+        "d": 22,
+        "s": true,
+        "tp": 2,
+        "tu": 7,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SOUL_FYSH_BOSS",
+        "a": 1,
+        "d": 0,
+        "s": true,
+        "tp": 3,
+        "tu": 13,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.TUNNELER_WEAK",
+        "a": 2,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 7,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.EXOSKELETONS_WEAK",
+        "a": 2,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 4,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.LOUSE_PROGENITOR_NORMAL",
+        "a": 2,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 7,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.INFESTED_PRISMS_ELITE",
+        "a": 2,
+        "d": 14,
+        "s": true,
+        "tp": 2,
+        "tu": 8,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.DECIMILLIPEDE_ELITE",
+        "a": 2,
+        "d": 0,
+        "s": true,
+        "tp": 2,
+        "tu": 6,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.ENTOMANCER_ELITE",
+        "a": 2,
+        "d": 10,
+        "s": true,
+        "tp": 2,
+        "tu": 5,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.KAISER_CRAB_BOSS",
+        "a": 2,
+        "d": 8,
+        "s": true,
+        "tp": 3,
+        "tu": 9,
+        "po": 0,
+        "fn": 2,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.TURRET_OPERATOR_WEAK",
+        "a": 3,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 3,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.DEVOTED_SCULPTOR_WEAK",
+        "a": 3,
+        "d": 5,
+        "s": true,
+        "tp": 1,
+        "tu": 5,
+        "po": 0,
+        "fn": 3,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.THE_LOST_AND_FORGOTTEN_NORMAL",
+        "a": 3,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 3,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.OWL_MAGISTRATE_NORMAL",
+        "a": 3,
+        "d": 2,
+        "s": true,
+        "tp": 1,
+        "tu": 6,
+        "po": 0,
+        "fn": 3,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.KNIGHTS_ELITE",
+        "a": 3,
+        "d": 4,
+        "s": true,
+        "tp": 2,
+        "tu": 4,
+        "po": 0,
+        "fn": 3,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SOUL_NEXUS_ELITE",
+        "a": 3,
+        "d": 18,
+        "s": true,
+        "tp": 2,
+        "tu": 4,
+        "po": 0,
+        "fn": 3,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.QUEEN_BOSS",
+        "a": 3,
+        "d": 7,
+        "s": true,
+        "tp": 3,
+        "tu": 6,
+        "po": 0,
+        "fn": 3,
+        "mx": 0
+      }
+    ]
+  },
+  {
+    "id": "run_1778679740",
+    "t": 1778679740,
+    "c": "CHARACTER.DEFECT",
+    "a": 10,
+    "w": false,
+    "m": 1,
+    "dmg": 75,
+    "sz": 14,
+    "rc": 3,
+    "fl": 1,
+    "seed": "TT9LLYS5JB",
+    "dur": 225,
+    "acts": "[\"ACT.UNDERDOCKS\",\"ACT.HIVE\",\"ACT.GLORY\"]",
+    "cp": 1,
+    "v": "v0.103.2",
+    "a1c": [
+      "CARD.HOLOGRAM"
+    ],
+    "a2c": [],
+    "a3c": [],
+    "a1sk": 2,
+    "a2sk": 0,
+    "a3sk": 0,
+    "skippedCards": [
+      "CARD.ROCKET_PUNCH",
+      "CARD.MOMENTUM_STRIKE",
+      "CARD.SHADOW_SHIELD",
+      "CARD.FTL",
+      "CARD.HOTFIX",
+      "CARD.SUBROUTINE",
+      "CARD.FISTICUFFS",
+      "CARD.NOSTALGIA"
+    ],
+    "alc": [
+      {
+        "id": 1,
+        "c": "CHARACTER.DEFECT"
+      }
+    ],
+    "k": "ENCOUNTER.TERROR_EEL_ELITE",
+    "cards": [
+      "CARD.STRIKE_DEFECT",
+      "CARD.STRIKE_DEFECT",
+      "CARD.STRIKE_DEFECT",
+      "CARD.STRIKE_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.ZAP",
+      "CARD.DUALCAST",
+      "CARD.ASCENDERS_BANE",
+      "CARD.HOLOGRAM",
+      "CARD.CLAW",
+      "CARD.BOOST_AWAY"
+    ],
+    "cardsMeta": [
+      {
+        "id": "CARD.STRIKE_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.STRIKE_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.STRIKE_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.STRIKE_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.ZAP",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DUALCAST",
+        "floor": 1,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.ASCENDERS_BANE",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.HOLOGRAM",
+        "floor": 3,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.CLAW",
+        "floor": 4,
+        "upgraded": true
+      },
+      {
+        "id": "CARD.BOOST_AWAY",
+        "floor": 4,
+        "upgraded": false
+      }
+    ],
+    "relics": [
+      "RELIC.CRACKED_CORE",
+      "RELIC.SMALL_CAPSULE",
+      "RELIC.MEAL_TICKET"
+    ],
+    "potions": [
+      {
+        "id": "POTION.BLOCK_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.STABLE_SERUM",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.FIRE_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.SWIFT_POTION",
+        "o": 1,
+        "pk": false,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      }
+    ],
+    "encs": [
+      {
+        "id": "ENCOUNTER.CORPSE_SLUGS_WEAK",
+        "a": 1,
+        "d": 14,
+        "s": true,
+        "tp": 1,
+        "tu": 4,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SLUDGE_SPINNER_WEAK",
+        "a": 1,
+        "d": 7,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.TERROR_EEL_ELITE",
+        "a": 1,
+        "d": 54,
+        "s": false,
+        "tp": 2,
+        "tu": 7,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      }
+    ]
+  },
+  {
+    "id": "run_1778679992",
+    "t": 1778679992,
+    "c": "CHARACTER.DEFECT",
+    "a": 10,
+    "w": false,
+    "m": 1,
+    "dmg": 36,
+    "sz": 17,
+    "rc": 3,
+    "fl": 1,
+    "seed": "DRV6G2JT2Q",
+    "dur": 558,
+    "acts": "[\"ACT.OVERGROWTH\",\"ACT.HIVE\",\"ACT.GLORY\"]",
+    "cp": 5,
+    "v": "v0.103.2",
+    "a1c": [
+      "CARD.CHARGE_BATTERY",
+      "CARD.MOMENTUM_STRIKE",
+      "CARD.LIGHTNING_ROD",
+      "CARD.TURBO",
+      "CARD.BEAM_CELL"
+    ],
+    "a2c": [],
+    "a3c": [],
+    "a1sk": 0,
+    "a2sk": 0,
+    "a3sk": 0,
+    "skippedCards": [],
+    "alc": [
+      {
+        "id": 1,
+        "c": "CHARACTER.DEFECT"
+      }
+    ],
+    "k": "ENCOUNTER.PHROG_PARASITE_ELITE",
+    "cards": [
+      "CARD.STRIKE_DEFECT",
+      "CARD.STRIKE_DEFECT",
+      "CARD.STRIKE_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.DEFEND_DEFECT",
+      "CARD.ZAP",
+      "CARD.DUALCAST",
+      "CARD.ASCENDERS_BANE",
+      "CARD.CHARGE_BATTERY",
+      "CARD.MOMENTUM_STRIKE",
+      "CARD.TORIC_TOUGHNESS",
+      "CARD.LIGHTNING_ROD",
+      "CARD.SPOILS_MAP",
+      "CARD.TURBO",
+      "CARD.BEAM_CELL"
+    ],
+    "cardsMeta": [
+      {
+        "id": "CARD.STRIKE_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.STRIKE_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.STRIKE_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DEFEND_DEFECT",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.ZAP",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.DUALCAST",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.ASCENDERS_BANE",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.CHARGE_BATTERY",
+        "floor": 1,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.MOMENTUM_STRIKE",
+        "floor": 2,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.TORIC_TOUGHNESS",
+        "floor": 3,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.LIGHTNING_ROD",
+        "floor": 4,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.SPOILS_MAP",
+        "floor": 6,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.TURBO",
+        "floor": 7,
+        "upgraded": false
+      },
+      {
+        "id": "CARD.BEAM_CELL",
+        "floor": 8,
+        "upgraded": false
+      }
+    ],
+    "relics": [
+      "RELIC.CRACKED_CORE",
+      "RELIC.LOST_COFFER",
+      "RELIC.INTIMIDATING_HELMET"
+    ],
+    "potions": [
+      {
+        "id": "POTION.EXPLOSIVE_AMPOULE",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.DEXTERITY_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": false,
+        "d": true,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.ENTROPIC_BREW",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.STRENGTH_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": true,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      },
+      {
+        "id": "POTION.VULNERABLE_POTION",
+        "o": 1,
+        "pk": true,
+        "b": false,
+        "u": false,
+        "d": false,
+        "fo": 0,
+        "fu": 0,
+        "a": 0
+      }
+    ],
+    "encs": [
+      {
+        "id": "ENCOUNTER.SHRINKER_BEETLE_WEAK",
+        "a": 1,
+        "d": 0,
+        "s": true,
+        "tp": 1,
+        "tu": 3,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.SLIMES_WEAK",
+        "a": 1,
+        "d": 7,
+        "s": true,
+        "tp": 1,
+        "tu": 4,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.FUZZY_WURM_CRAWLER_WEAK",
+        "a": 1,
+        "d": 3,
+        "s": true,
+        "tp": 1,
+        "tu": 4,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      },
+      {
+        "id": "ENCOUNTER.PHROG_PARASITE_ELITE",
+        "a": 1,
+        "d": 26,
+        "s": false,
+        "tp": 2,
+        "tu": 6,
+        "po": 0,
+        "fn": 1,
+        "mx": 0
+      }
+    ]
   }
 ]

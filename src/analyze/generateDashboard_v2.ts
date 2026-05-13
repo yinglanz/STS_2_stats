@@ -85,7 +85,7 @@ function parseValue(val: string): any {
 /**
  * Load all dashboard data
  */
-function loadDashboardData(): DashboardData {
+export function loadDashboardData(): DashboardData {
   const runsPath = path.join(OUTPUT_PATH, "extracted_runs.json");
   const eloPath = path.join(OUTPUT_PATH, "elo_ratings.json");
 
@@ -595,6 +595,14 @@ function generateDashboard(data: DashboardData): string {
                         <option value="">All Versions</option>
                     </select>
                 </div>
+                <div class="filter-group">
+                    <label for="dateStartFilter">From Date:</label>
+                    <input type="date" id="dateStartFilter" style="padding: 6px; border: 1px solid #3a3f4a; border-radius: 4px; background: #0d1117; color: #e0e0e0;">
+                </div>
+                <div class="filter-group">
+                    <label for="dateEndFilter">To Date:</label>
+                    <input type="date" id="dateEndFilter" style="padding: 6px; border: 1px solid #3a3f4a; border-radius: 4px; background: #0d1117; color: #e0e0e0;">
+                </div>
                 <button class="reset-btn" onclick="resetFilters()">Reset Filters</button>
             </div>
             <div id="tabSpecificFilters" class="tab-specific-filters"></div>
@@ -695,7 +703,7 @@ function generateDashboard(data: DashboardData): string {
                 <p class="note">🎯 How does picking a card in Act 1 vs Act 2 vs Act 3 affect your win rate? Only shows cards picked 3+ times in at least one act.</p>
                 <div class="filter-row">
                     <label>Show top: <input type="number" id="actCardTopN" value="20" min="5" max="100" style="width:60px" oninput="drawActCardWinRate()"></label>
-                    <label>Sort by: <select id="actCardSort" onchange="drawActCardWinRate()"><option value="diff">Biggest Act Difference</option><option value="overall">Overall Win Rate</option><option value="name">Name</option></select></label>
+                    <label>Sort by: <select id="actCardSort" onchange="drawActCardWinRate()"><option value="overall">Overall Win Rate</option><option value="diff">Biggest Act Difference</option><option value="name">Name</option></select></label>
                 </div>
                 <div class="chart" id="chartActCardWinRate"></div>
             </div>
@@ -1188,16 +1196,23 @@ function generateDashboard(data: DashboardData): string {
         const STARTER_CARDS = new Set([
             'CARD.STRIKE_IRONCLAD', 'CARD.DEFEND_IRONCLAD', 'CARD.BASH',
             'CARD.STRIKE_SILENT',   'CARD.DEFEND_SILENT',   'CARD.NEUTRALIZE',  'CARD.SURVIVOR',
-            'CARD.STRIKE_DEFECT',   'CARD.DEFEND_DEFECT',   'CARD.ZAP',
-            'CARD.STRIKE_NECROBINDER', 'CARD.DEFEND_NECROBINDER',
-            'CARD.STRIKE_REGENT',   'CARD.DEFEND_REGENT',
+            'CARD.STRIKE_DEFECT',   'CARD.DEFEND_DEFECT',   'CARD.ZAP',         'CARD.DUALCAST',
+            'CARD.STRIKE_NECROBINDER', 'CARD.DEFEND_NECROBINDER', 'CARD.BODYGUARD', 'CARD.UNLEASH',
+            'CARD.STRIKE_REGENT',   'CARD.DEFEND_REGENT',   'CARD.FALLING_STAR', 'CARD.VENERATE',
             'CARD.STRIKE',          'CARD.DEFEND'
         ]);
 
-        // Global data
+        // Global data - embedded at build time
         const DATA = ${JSON.stringify(data)};
         let filteredRuns = [...DATA.runs];
         let currentTab = 'overview';
+
+        // Initialize dashboard from embedded data
+        function initializeDashboard() {
+            console.log('Loaded', DATA.runs.length, 'runs from embedded data');
+            populateFilters();
+            updateDashboard();
+        }
 
         // Generic sortable table utility — call after setting innerHTML on any table
         function makeSortable(tableId) {
@@ -1262,10 +1277,9 @@ function generateDashboard(data: DashboardData): string {
         });
 
         // Initialize immediately (script is at end of body, so DOM is ready)
-        console.log('Initializing dashboard...', DATA.runs.length, 'runs loaded');
-        populateFilters();
-        updateDashboard();
-        console.log('Dashboard initialized');
+        console.log('Initializing dashboard...');
+        initializeDashboard();
+        console.log('Dashboard initialization started (loading data from API)');
 
         // Add filter listeners
         document.getElementById('ascensionFilter')?.addEventListener('input', applyFilters);
@@ -1279,6 +1293,8 @@ function generateDashboard(data: DashboardData): string {
             document.getElementById('outcomeFilter').value = '';
             document.getElementById('multiplayerFilter').value = '';
             document.getElementById('versionFilter').value  = '';
+            document.getElementById('dateStartFilter').value = '';
+            document.getElementById('dateEndFilter').value = '';
             applyFilters();
         }
 
@@ -1312,6 +1328,28 @@ function generateDashboard(data: DashboardData): string {
                     });
                     console.log('Populated versions:', Array.from(versions).length);
                 }
+
+                // Set date filter min/max from run data
+                const timestamps = DATA.runs.filter(r => r.t).map(r => r.t * 1000);
+                if (timestamps.length > 0) {
+                    const minDate = new Date(Math.min(...timestamps));
+                    const maxDate = new Date(Math.max(...timestamps));
+                    const minDateStr = minDate.toISOString().split('T')[0];
+                    const maxDateStr = maxDate.toISOString().split('T')[0];
+                    
+                    const dateStartEl = document.getElementById('dateStartFilter');
+                    const dateEndEl = document.getElementById('dateEndFilter');
+                    if (dateStartEl) {
+                        dateStartEl.min = minDateStr;
+                        dateStartEl.max = maxDateStr;
+                    }
+                    if (dateEndEl) {
+                        dateEndEl.min = minDateStr;
+                        dateEndEl.max = maxDateStr;
+                        dateEndEl.value = maxDateStr;
+                    }
+                    console.log('Date filters set: ' + minDateStr + ' to ' + maxDateStr);
+                }
             } catch (e) {
                 console.error('Error populating filters:', e);
             }
@@ -1324,8 +1362,18 @@ function generateDashboard(data: DashboardData): string {
                 const outcome = document.getElementById('outcomeFilter')?.value;
                 const multiplayer = document.getElementById('multiplayerFilter')?.value;
                 const version = document.getElementById('versionFilter')?.value;
+                const dateStart = document.getElementById('dateStartFilter')?.value;
+                const dateEnd = document.getElementById('dateEndFilter')?.value;
 
                 document.getElementById('ascensionLabel').textContent = ascension + '+';
+
+                let startTime = null, endTime = null;
+                if (dateStart) {
+                    startTime = new Date(dateStart).getTime() / 1000;
+                }
+                if (dateEnd) {
+                    endTime = (new Date(dateEnd).getTime() / 1000) + 86400;
+                }
 
                 filteredRuns = DATA.runs.filter(r => {
                     if (r.a < ascension) return false;
@@ -1339,6 +1387,8 @@ function generateDashboard(data: DashboardData): string {
                     if (multiplayer === '4' && r.m !== 4) return false;
                     if (multiplayer === 'multi' && r.m === 1) return false;
                     if (version && r.v !== version) return false;
+                    if (startTime !== null && r.t < startTime) return false;
+                    if (endTime !== null && r.t > endTime) return false;
                     return true;
                 });
 
@@ -1528,10 +1578,12 @@ function generateDashboard(data: DashboardData): string {
             filteredRuns.forEach(run => {
                 // Track skips
                 (run.skippedCards || []).forEach(card => {
+                    if (STARTER_CARDS.has(card)) return;
                     if (!cardMap.has(card)) cardMap.set(card, { name: nameMapper.getCardName(card), picks: 0, wins: 0, skips: 0 });
                     cardMap.get(card).skips++;
                 });
                 run.cards.forEach(card => {
+                    if (STARTER_CARDS.has(card)) return;
                     if (!cardMap.has(card)) {
                         cardMap.set(card, { name: nameMapper.getCardName(card), picks: 0, wins: 0, skips: 0 });
                     }
@@ -1576,7 +1628,7 @@ function generateDashboard(data: DashboardData): string {
         function drawActCardWinRate() {
             const MIN_PICKS = 3;
             const topN = parseInt(document.getElementById('actCardTopN')?.value || '20');
-            const sortBy = document.getElementById('actCardSort')?.value || 'diff';
+            const sortBy = document.getElementById('actCardSort')?.value || 'overall';
 
             // Aggregate: card → { act1: {wins, total}, act2: ..., act3: ... }
             const cardActs = new Map();
@@ -1584,6 +1636,7 @@ function generateDashboard(data: DashboardData): string {
                 const actFields = [run.a1c || [], run.a2c || [], run.a3c || []];
                 actFields.forEach((cards, actIdx) => {
                     cards.forEach(cardId => {
+                        if (STARTER_CARDS.has(cardId)) return;
                         if (!cardActs.has(cardId)) cardActs.set(cardId, { name: nameMapper.getCardName(cardId), acts: [{w:0,t:0},{w:0,t:0},{w:0,t:0}] });
                         const entry = cardActs.get(cardId);
                         entry.acts[actIdx].t++;
@@ -1955,7 +2008,9 @@ function generateDashboard(data: DashboardData): string {
             // Recalculate from filtered runs
             const pairMap = new Map();
             filteredRuns.forEach(run => {
-                const pickedCards = run.cards.map(c => nameMapper.getCardName(c));
+                const pickedCards = run.cards
+                    .filter(c => !STARTER_CARDS.has(c))
+                    .map(c => nameMapper.getCardName(c));
                 for (let i = 0; i < pickedCards.length; i++) {
                     for (let j = i + 1; j < pickedCards.length; j++) {
                         const pair = [pickedCards[i], pickedCards[j]].sort().join(' + ');
@@ -2087,7 +2142,10 @@ function generateDashboard(data: DashboardData): string {
                     topCards: Object.entries(b.cardCounts).sort((x, y) => y[1] - x[1]).slice(0, 3).map(e => e[0]).join(', '),
                     topRelics: Object.entries(b.relicCounts).sort((x, y) => y[1] - x[1]).slice(0, 3).map(e => e[0]).join(', ')
                 }))
-                .sort((a, b) => Number(b.winRate) - Number(a.winRate)).slice(0, 30);
+                .sort((a, b) => {
+                    const charCmp = a.character.localeCompare(b.character);
+                    return charCmp !== 0 ? charCmp : a.ascension - b.ascension;
+                }).slice(0, 30);
 
             let html = '<tr><th>Character</th><th>Asc</th><th>Runs</th><th>Win Rate</th><th>Top Cards</th><th>Top Relics</th></tr>';
             builds.forEach(b => {
@@ -2473,7 +2531,9 @@ function generateDashboard(data: DashboardData): string {
         function drawCardSynergiesChart() {
             const pairMap = new Map();
             filteredRuns.forEach(run => {
-                const cards = run.cards.map(c => nameMapper.getCardName(c));
+                const cards = run.cards
+                    .filter(c => !STARTER_CARDS.has(c))
+                    .map(c => nameMapper.getCardName(c));
                 for (let i = 0; i < cards.length; i++) {
                     for (let j = i + 1; j < cards.length; j++) {
                         const pair = [cards[i], cards[j]].sort().join(' + ');
@@ -2852,11 +2912,12 @@ function generateDashboard(data: DashboardData): string {
             });
 
             safePlot('chartEloScatter', traces, darkLayout({
-                xaxis: { ...DARK.xaxis, title: 'ELO Rating' },
-                yaxis: { ...DARK.yaxis, title: 'Win Rate (%)' },
-                margin: { t: 10, b: 50, l: 60, r: 20 },
-                height: 420,
-                legend: { ...DARK.legend, orientation: 'h', y: -0.15 },
+                xaxis: { ...DARK.xaxis, title: 'ELO Rating', tickfont: { color: '#aaa', size: 12 }, tickformat: '.0f' },
+                yaxis: { ...DARK.yaxis, title: 'Win Rate (%)', tickfont: { color: '#aaa', size: 12 } },
+                margin: { t: 20, b: 150, l: 80, r: 30 },
+                height: 600,
+                width: null,
+                legend: { ...DARK.legend, orientation: 'h', y: -0.28, x: 0.5, xanchor: 'center', font: { color: '#ccc', size: 12 } },
                 hovermode: 'closest'
             }), { responsive: true });
         }
@@ -3113,7 +3174,7 @@ function generateDashboard(data: DashboardData): string {
                 return best ? { name: best, rating: Math.round(bestRating) } : null;
             }
 
-            let html = '<tr><th>#</th><th>Date</th><th>Char</th><th>Result</th><th>CP</th><th>Deck</th><th>Ver</th><th>Best A1</th><th>Best A2</th><th>Best A3</th><th>Raw%</th><th>Bayesian</th><th>Kalman (σ=0.1)</th><th>Kalman MLE</th><th>MLE 95% CI</th></tr>';
+            let html = '<tr><th>#</th><th>Date</th><th>Char</th><th>Result</th><th>Card Picks</th><th>Deck</th><th>Ver</th><th>Best A1</th><th>Best A2</th><th>Best A3</th><th>Raw%</th><th>Bayesian</th><th>Kalman (σ=0.1)</th><th>Kalman MLE</th><th>MLE 95% CI</th></tr>';
             let tWins = 0;
             sorted.forEach((r, i) => {
                 if (r.w) tWins++;
@@ -3138,7 +3199,7 @@ function generateDashboard(data: DashboardData): string {
 
                 html += \`<tr style="cursor:pointer" onclick="var d=document.getElementById('\${rowId}');d.style.display=d.style.display==='table-row'?'none':'table-row'">
                     <td>\${i + 1}</td>
-                    <td>\${dates[i]}</td>
+                    <td data-sort="\${r.t || 0}">\${dates[i]}</td>
                     <td><strong>\${chars[i]}</strong></td>
                     <td><strong style="color: \${outcomeColor};">\${outcomes[i]}</strong></td>
                     <td>\${r.cp || 0}</td>
@@ -3249,6 +3310,8 @@ function generateDashboard(data: DashboardData): string {
 
         // Add filter listeners (versionFilter wired here; ascensionFilter uses 'input' above)
         document.getElementById('versionFilter')?.addEventListener('change', applyFilters);
+        document.getElementById('dateStartFilter')?.addEventListener('change', applyFilters);
+        document.getElementById('dateEndFilter')?.addEventListener('change', applyFilters);
     </script>
 </body>
 </html>`;

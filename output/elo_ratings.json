@@ -4430,16 +4430,16 @@
     },
     "3": {
       "CARD.BODYGUARD": {
-        "rating": 1402.67,
+        "rating": 1417.66,
         "peakRating": 1500,
-        "gamesPlayed": 5,
-        "wins": 0
+        "gamesPlayed": 7,
+        "wins": 1
       },
       "CARD.UNLEASH": {
-        "rating": 1402.67,
+        "rating": 1417.66,
         "peakRating": 1500,
-        "gamesPlayed": 5,
-        "wins": 0
+        "gamesPlayed": 7,
+        "wins": 1
       },
       "CARD.COUNTDOWN": {
         "rating": 1458.15,
@@ -4460,10 +4460,10 @@
         "wins": 0
       },
       "CARD.WISP": {
-        "rating": 1435.02,
+        "rating": 1456.41,
         "peakRating": 1500,
-        "gamesPlayed": 3,
-        "wins": 0
+        "gamesPlayed": 7,
+        "wins": 2
       },
       "CARD.DELAY": {
         "rating": 1442.66,
@@ -4472,10 +4472,10 @@
         "wins": 0
       },
       "CARD.DEMESNE": {
-        "rating": 1459.01,
+        "rating": 1482.09,
         "peakRating": 1500,
-        "gamesPlayed": 2,
-        "wins": 0
+        "gamesPlayed": 3,
+        "wins": 1
       },
       "CARD.ENFEEBLING_TOUCH": {
         "rating": 1411.84,
@@ -4496,15 +4496,15 @@
         "wins": 0
       },
       "CARD.DRAIN_POWER": {
-        "rating": 1480.26,
+        "rating": 1482.89,
         "peakRating": 1500,
-        "gamesPlayed": 1,
-        "wins": 0
+        "gamesPlayed": 3,
+        "wins": 1
       },
       "CARD.SOW": {
-        "rating": 1480.26,
+        "rating": 1459.88,
         "peakRating": 1500,
-        "gamesPlayed": 1,
+        "gamesPlayed": 2,
         "wins": 0
       },
       "CARD.FLATTEN": {
@@ -4550,16 +4550,16 @@
         "wins": 0
       },
       "CARD.NEUROSURGE": {
-        "rating": 1480.26,
+        "rating": 1459.88,
         "peakRating": 1500,
-        "gamesPlayed": 1,
+        "gamesPlayed": 2,
         "wins": 0
       },
       "CARD.NEGATIVE_PULSE": {
-        "rating": 1402.03,
+        "rating": 1429.81,
         "peakRating": 1500,
-        "gamesPlayed": 5,
-        "wins": 0
+        "gamesPlayed": 6,
+        "wins": 1
       },
       "CARD.THE_SCYTHE": {
         "rating": 1480.26,
@@ -4580,10 +4580,10 @@
         "wins": 0
       },
       "CARD.DEFY": {
-        "rating": 1422.02,
+        "rating": 1459.14,
         "peakRating": 1500,
-        "gamesPlayed": 4,
-        "wins": 0
+        "gamesPlayed": 7,
+        "wins": 2
       },
       "CARD.POKE": {
         "rating": 1457.62,
@@ -4598,10 +4598,10 @@
         "wins": 0
       },
       "CARD.DEBILITATE": {
-        "rating": 1457.08,
+        "rating": 1480.32,
         "peakRating": 1500,
-        "gamesPlayed": 2,
-        "wins": 0
+        "gamesPlayed": 3,
+        "wins": 1
       },
       "CARD.DUAL_WIELD": {
         "rating": 1475.65,
@@ -4634,16 +4634,16 @@
         "wins": 0
       },
       "CARD.SCOURGE": {
-        "rating": 1479.41,
-        "peakRating": 1500,
-        "gamesPlayed": 1,
-        "wins": 0
+        "rating": 1500.8,
+        "peakRating": 1500.8,
+        "gamesPlayed": 2,
+        "wins": 1
       },
       "CARD.TIMES_UP": {
-        "rating": 1479.41,
-        "peakRating": 1500,
-        "gamesPlayed": 1,
-        "wins": 0
+        "rating": 1500.8,
+        "peakRating": 1500.8,
+        "gamesPlayed": 2,
+        "wins": 1
       },
       "CARD.END_OF_DAYS": {
         "rating": 1479.41,
@@ -4652,9 +4652,9 @@
         "wins": 0
       },
       "CARD.PUTREFY": {
-        "rating": 1479.41,
+        "rating": 1459.11,
         "peakRating": 1500,
-        "gamesPlayed": 1,
+        "gamesPlayed": 2,
         "wins": 0
       },
       "CARD.SHARED_FATE": {
@@ -4664,10 +4664,10 @@
         "wins": 0
       },
       "CARD.DEATHBRINGER": {
-        "rating": 1479.41,
-        "peakRating": 1500,
-        "gamesPlayed": 1,
-        "wins": 0
+        "rating": 1500.8,
+        "peakRating": 1500.8,
+        "gamesPlayed": 2,
+        "wins": 1
       },
       "CARD.NO_ESCAPE": {
         "rating": 1479.41,
@@ -4688,10 +4688,10 @@
         "wins": 0
       },
       "CARD.HANG": {
-        "rating": 1479.41,
-        "peakRating": 1500,
-        "gamesPlayed": 1,
-        "wins": 0
+        "rating": 1500.8,
+        "peakRating": 1500.8,
+        "gamesPlayed": 2,
+        "wins": 1
       },
       "CARD.HAUNT": {
         "rating": 1473.23,
@@ -4710,6 +4710,72 @@
         "peakRating": 1500,
         "gamesPlayed": 1,
         "wins": 0
+      },
+      "CARD.DANSE_MACABRE": {
+        "rating": 1477.95,
+        "peakRating": 1500,
+        "gamesPlayed": 1,
+        "wins": 0
+      },
+      "CARD.LETHALITY": {
+        "rating": 1457.77,
+        "peakRating": 1500,
+        "gamesPlayed": 2,
+        "wins": 0
+      },
+      "CARD.EQUILIBRIUM": {
+        "rating": 1477.95,
+        "peakRating": 1500,
+        "gamesPlayed": 1,
+        "wins": 0
+      },
+      "CARD.SQUASH": {
+        "rating": 1499.46,
+        "peakRating": 1500,
+        "gamesPlayed": 2,
+        "wins": 1
+      },
+      "CARD.RIGHT_HAND_HAND": {
+        "rating": 1477.95,
+        "peakRating": 1500,
+        "gamesPlayed": 1,
+        "wins": 0
+      },
+      "CARD.SHROUD": {
+        "rating": 1519.69,
+        "peakRating": 1519.69,
+        "gamesPlayed": 1,
+        "wins": 1
+      },
+      "CARD.SLEIGHT_OF_FLESH": {
+        "rating": 1537.78,
+        "peakRating": 1537.78,
+        "gamesPlayed": 2,
+        "wins": 2
+      },
+      "CARD.UNDEATH": {
+        "rating": 1519.69,
+        "peakRating": 1519.69,
+        "gamesPlayed": 1,
+        "wins": 1
+      },
+      "CARD.MISERY": {
+        "rating": 1519.69,
+        "peakRating": 1519.69,
+        "gamesPlayed": 1,
+        "wins": 1
+      },
+      "CARD.ULTIMATE_STRIKE": {
+        "rating": 1519.69,
+        "peakRating": 1519.69,
+        "gamesPlayed": 1,
+        "wins": 1
+      },
+      "CARD.MAD_SCIENCE": {
+        "rating": 1519.69,
+        "peakRating": 1519.69,
+        "gamesPlayed": 1,
+        "wins": 1
       }
     }
   },
@@ -8528,15 +8594,15 @@
     },
     "10": {
       "CARD.DUALCAST": {
-        "rating": 1427.56,
+        "rating": 1370.14,
         "peakRating": 1525.2,
-        "gamesPlayed": 7,
+        "gamesPlayed": 9,
         "wins": 2
       },
       "CARD.ASCENDERS_BANE": {
-        "rating": 1427.56,
+        "rating": 1370.14,
         "peakRating": 1525.2,
-        "gamesPlayed": 7,
+        "gamesPlayed": 9,
         "wins": 2
       },
       "CARD.ENERGY_SURGE": {
@@ -8576,15 +8642,15 @@
         "wins": 1
       },
       "CARD.CHARGE_BATTERY": {
-        "rating": 1498.99,
+        "rating": 1460.26,
         "peakRating": 1525.2,
-        "gamesPlayed": 2,
+        "gamesPlayed": 3,
         "wins": 1
       },
       "CARD.LIGHTNING_ROD": {
-        "rating": 1521.3,
+        "rating": 1480.03,
         "peakRating": 1525.2,
-        "gamesPlayed": 3,
+        "gamesPlayed": 4,
         "wins": 2
       },
       "CARD.COLD_SNAP": {
@@ -8666,9 +8732,9 @@
         "wins": 1
       },
       "CARD.HOLOGRAM": {
-        "rating": 1489.58,
+        "rating": 1451.15,
         "peakRating": 1525.2,
-        "gamesPlayed": 4,
+        "gamesPlayed": 5,
         "wins": 2
       },
       "CARD.GO_FOR_THE_EYES": {
@@ -8678,9 +8744,9 @@
         "wins": 0
       },
       "CARD.TURBO": {
-        "rating": 1438.62,
+        "rating": 1406.91,
         "peakRating": 1500,
-        "gamesPlayed": 5,
+        "gamesPlayed": 6,
         "wins": 1
       },
       "CARD.REFRACT": {
@@ -8720,9 +8786,9 @@
         "wins": 0
       },
       "CARD.BEAM_CELL": {
-        "rating": 1429.22,
+        "rating": 1398.59,
         "peakRating": 1500,
-        "gamesPlayed": 3,
+        "gamesPlayed": 4,
         "wins": 0
       },
       "CARD.THUNDER": {
@@ -8834,15 +8900,15 @@
         "wins": 0
       },
       "CARD.CLAW": {
-        "rating": 1430.99,
+        "rating": 1400.12,
         "peakRating": 1500,
-        "gamesPlayed": 2,
+        "gamesPlayed": 3,
         "wins": 0
       },
       "CARD.SPOILS_MAP": {
-        "rating": 1463.28,
+        "rating": 1428.7,
         "peakRating": 1500,
-        "gamesPlayed": 1,
+        "gamesPlayed": 2,
         "wins": 0
       },
       "CARD.FERAL": {
@@ -8918,9 +8984,9 @@
         "wins": 1
       },
       "CARD.MOMENTUM_STRIKE": {
-        "rating": 1522.2,
+        "rating": 1480.83,
         "peakRating": 1522.2,
-        "gamesPlayed": 1,
+        "gamesPlayed": 2,
         "wins": 1
       },
       "CARD.DOUBT": {
@@ -8930,10 +8996,16 @@
         "wins": 1
       },
       "CARD.BOOST_AWAY": {
-        "rating": 1522.2,
+        "rating": 1479.66,
         "peakRating": 1522.2,
-        "gamesPlayed": 1,
+        "gamesPlayed": 2,
         "wins": 1
+      },
+      "CARD.TORIC_TOUGHNESS": {
+        "rating": 1461.16,
+        "peakRating": 1500,
+        "gamesPlayed": 1,
+        "wins": 0
       }
     }
   },

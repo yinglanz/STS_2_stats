@@ -1,11 +1,11 @@
 "relic","pickedCount","winRateWithRelic","avgFinalDeckCountWithRelic"
 "Venerable Tea Set",35,48.6,14.3
 "Blood Vial",31,29.0,13.9
+"Whetstone",31,45.2,14.8
 "War Paint",31,48.4,15.1
+"Centennial Puzzle",30,40.0,13.9
 "Lantern",30,46.7,13.6
-"Whetstone",30,46.7,14.9
 "Gorget",29,65.5,16.2
-"Centennial Puzzle",29,41.4,14.0
 "Regal Pillow",29,51.7,16.0
 "Oddly Smooth Stone",27,51.9,14.8
 "Leafy Poultice",26,26.9,11.2
@@ -13,63 +13,64 @@
 "Potion Belt",25,48.0,13.7
 "Strike Dummy",24,41.7,14.8
 "Strawberry",23,43.5,13.1
+"Bag Of Marbles",23,43.5,14.7
+"Permafrost",22,45.5,13.9
 "Red Mask",22,45.5,14.9
-"Permafrost",21,42.9,13.7
-"Bag Of Marbles",21,42.9,14.7
-"Happy Flower",21,47.6,14.5
+"Happy Flower",22,50.0,14.6
+"Pendulum",21,66.7,13.7
 "Bronze Scales",20,35.0,12.8
 "Festive Popper",20,50.0,15.2
-"Pendulum",19,68.4,13.7
+"Amethyst Aubergine",19,52.6,14.2
 "Sword Of Stone",19,5.3,9.7
 "Scroll Boxes",19,21.1,9.5
 "Tuning Fork",19,21.1,11.5
-"Amethyst Aubergine",18,50.0,14.1
 "Bag Of Preparation",18,38.9,14.7
 "Golden Pearl",18,38.9,13.7
 "Anchor",18,38.9,16.2
 "Yummy Cookie",18,50.0,13.5
+"New Leaf",18,22.2,9.6
 "Book Of Five Rings",18,22.2,13.1
 "Eternal Feather",17,64.7,13.5
 "Ornamental Fan",17,47.1,14.1
 "Forgotten Soul",17,52.9,17.8
-"New Leaf",17,23.5,9.5
+"Juzu Bracelet",17,41.2,13.7
+"Sparkling Rouge",17,64.7,14.4
 "Horn Cleat",16,43.8,13.8
+"Meal Ticket",16,18.8,12.9
 "Cursed Pearl",16,18.8,10.3
-"Juzu Bracelet",16,37.5,13.5
-"Sparkling Rouge",16,62.5,14.2
 "Candelabra",15,20.0,12.6
 "Nunchaku",15,26.7,13.1
+"Paels Claw",14,57.1,12.7
 "Arcane Scroll",14,7.1,9.1
 "Letter Opener",14,35.7,12.9
-"Meal Ticket",14,21.4,13.8
 "Tiny Mailbox",14,28.6,11.9
-"Paels Claw",13,53.8,12.4
 "Gremlin Horn",13,23.1,12.6
+"Pen Nib",13,46.2,15.2
+"Intimidating Helmet",13,38.5,13.0
+"Vambrace",12,33.3,12.3
 "Akabeko",12,50.0,14.3
 "Bellows",12,58.3,16.3
 "Pantograph",12,41.7,15.2
-"Pen Nib",12,50.0,15.6
-"Intimidating Helmet",12,41.7,13.8
 "Lead Paperweight",12,16.7,7.9
+"Ripple Basin",12,50.0,13.8
 "Fresnel Lens",12,25.0,10.6
-"Vambrace",11,36.4,12.4
 "Shuriken",11,36.4,11.2
 "Bowler Hat",11,45.5,13.7
-"Ripple Basin",11,45.5,13.5
+"Silver Crucible",11,45.5,10.3
 "Reptile Trinket",11,45.5,13.0
 "Data Disk",11,63.6,16.0
 "Large Capsule",10,10.0,9.4
+"Gambling Chip",10,50.0,15.0
 "Pear",10,50.0,15.6
+"Touch Of Orobas",10,30.0,14.0
 "Unceasing Top",10,60.0,14.4
-"Silver Crucible",10,40.0,9.6
 "Miniature Cannon",10,30.0,10.9
 "Stone Cracker",10,40.0,15.2
-"Gambling Chip",9,44.4,14.8
 "Planisphere",9,33.3,12.0
 "Paels Tooth",9,22.2,14.3
 "Mercury Hourglass",9,33.3,14.6
-"Touch Of Orobas",9,33.3,14.3
 "Fake Venerable Tea Set",9,22.2,15.8
+"Lost Coffer",9,33.3,10.9
 "Parrying Shield",9,33.3,12.6
 "Beating Remnant",9,44.4,12.8
 "Petrified Toad",9,11.1,11.2
@@ -79,13 +80,13 @@
 "Fake Orichalcum",8,25.0,16.0
 "Game Piece",8,50.0,12.1
 "Kusarigama",8,37.5,15.3
-"Lost Coffer",8,37.5,11.9
 "Vexing Puzzlebox",8,25.0,14.8
 "Mango",8,75.0,16.8
 "Cloak Clasp",8,37.5,13.4
 "Chandelier",8,37.5,13.3
 "Pomander",8,0.0,5.6
 "Lizard Tail",7,42.9,12.9
+"Chosen Cheese",7,28.6,9.3
 "Fake Blood Vial",7,14.3,15.4
 "Unsettling Lamp",7,57.1,13.0
 "Girya",7,42.9,13.0
@@ -98,7 +99,6 @@
 "Astrolabe",7,42.9,14.3
 "Neows Talisman",7,14.3,11.9
 "Precarious Shears",6,33.3,8.7
-"Chosen Cheese",6,16.7,8.0
 "Razor Tooth",6,33.3,12.0
 "Meat On The Bone",6,0.0,11.5
 "Golden Compass",6,33.3,13.8
@@ -118,11 +118,14 @@
 "Bing Bong",5,20.0,13.6
 "Jeweled Mask",5,80.0,17.4
 "Kunai",5,20.0,13.6
+"Sturdy Clamp",5,60.0,14.6
 "Captains Wheel",5,40.0,15.0
 "Frozen Egg",5,20.0,14.4
 "Infused Core",5,20.0,12.6
 "Sand Castle",5,80.0,15.6
 "Music Box",5,20.0,16.4
+"Art Of War",5,100.0,18.6
+"Sword Of Jade",5,80.0,17.4
 "Precise Scissors",4,0.0,10.8
 "Pocketwatch",4,100.0,15.5
 "Mummified Hand",4,50.0,12.5
@@ -131,7 +134,6 @@
 "Orrery",4,100.0,19.5
 "Tri Boomerang",4,75.0,16.3
 "Royal Stamp",4,0.0,16.0
-"Sturdy Clamp",4,50.0,14.0
 "Pandoras Box",4,50.0,15.8
 "Tungsten Rod",4,100.0,17.3
 "Paels Horn",4,25.0,14.8
@@ -141,11 +143,10 @@
 "Prayer Wheel",4,75.0,16.8
 "Dream Catcher",4,75.0,15.0
 "Fur Coat",4,75.0,18.5
+"Choices Paradox",4,100.0,17.3
 "Electric Shrymp",4,50.0,15.0
 "Mr Struggles",4,50.0,15.8
 "Miniature Tent",4,50.0,12.0
-"Art Of War",4,100.0,19.0
-"Sword Of Jade",4,75.0,17.5
 "Snecko Skull",4,100.0,17.8
 "Stone Humidifier",4,50.0,14.0
 "Whispering Earring",3,100.0,15.7
@@ -154,6 +155,7 @@
 "Claws",3,100.0,16.0
 "History Course",3,100.0,19.3
 "Nutritious Oyster",3,33.3,17.3
+"Small Capsule",3,33.3,8.3
 "Shovel",3,33.3,13.3
 "Mystic Lighter",3,66.7,19.3
 "Twisted Funnel",3,66.7,15.7
@@ -164,9 +166,9 @@
 "Toolbox",3,66.7,12.0
 "White Star",3,66.7,17.0
 "Membership Card",3,66.7,19.3
+"Phylactery Unbound",3,0.0,14.3
 "Lees Waffle",3,0.0,10.3
 "Sai",3,33.3,16.3
-"Choices Paradox",3,100.0,17.3
 "Old Coin",3,33.3,10.0
 "Glitter",3,66.7,17.3
 "Gold Plated Cables",3,66.7,15.3
@@ -177,7 +179,7 @@
 "Paels Tears",2,0.0,7.0
 "The Courier",2,0.0,10.5
 "Meat Cleaver",2,50.0,17.0
-"Small Capsule",2,50.0,11.0
+"Book Repair Knife",2,0.0,14.5
 "Bone Tea",2,0.0,14.0
 "Storybook",2,0.0,9.0
 "Paper Phrog",2,0.0,14.0
@@ -195,7 +197,6 @@
 "Emotion Chip",2,50.0,15.5
 "Paels Growth",2,100.0,19.5
 "Wongos Mystery Ticket",2,100.0,20.5
-"Phylactery Unbound",2,0.0,16.0
 "Distinguished Cape",2,50.0,16.5
 "Dusty Tome",2,50.0,16.5
 "Wing Charm",2,0.0,19.5
@@ -210,7 +211,6 @@
 "Looming Fruit",2,50.0,18.0
 "Sling Of Courage",2,50.0,15.0
 "Spiked Gauntlets",1,100.0,13.0
-"Book Repair Knife",1,0.0,18.0
 "Black Blood",1,100.0,15.0
 "Red Skull",1,0.0,10.0
 "Toy Box",1,0.0,13.0

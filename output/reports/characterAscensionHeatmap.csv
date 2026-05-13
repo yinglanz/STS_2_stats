@@ -13,7 +13,7 @@
 "Silent",2,2,2,100.0
 "Defect",3,6,2,33.3
 "Ironclad",3,2,1,50.0
-"Necrobinder",3,5,0,0.0
+"Necrobinder",3,7,1,14.3
 "Silent",3,5,1,20.0
 "Defect",4,6,3,50.0
 "Regent",4,1,1,100.0
@@ -28,4 +28,4 @@
 "Silent",8,2,1,50.0
 "Defect",9,18,2,11.1
 "Silent",9,2,0,0.0
-"Defect",10,7,2,28.6
+"Defect",10,9,2,22.2

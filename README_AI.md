@@ -50,9 +50,23 @@ Maintain consistent, high-quality AI-generated code.
 
 ---
 
-**Last Updated**: May 10, 2026
+**Last Updated**: May 11, 2026
 
 ## Recent Changes
+
+### Website Conversion (May 11, 2026)
+
+- **Dashboard is now a live website** served via Express on `http://localhost:3000`
+- **Data loading changed**: Dashboard now fetches from `/api/dashboard-data` endpoint instead of embedded JSON
+- **New API endpoint**: `GET /api/dashboard-data` provides all analytics data (runs, cards, relics, ELO, etc.)
+- **Added npm scripts**: `npm run server` (start Express) and `npm run watch` (file watcher)
+- **Benefits**: Real-time updates possible, multi-user capable, cleaner separation of data and UI
+
+### Synergies Filtering (May 11, 2026)
+
+- **Basic starter cards now excluded** from Synergies tab: Falling Star, Venerate, Dualcast, Zap, Neutralize, Survivor, Bash, Bodyguard, Unleash
+- **Improved signal**: Card synergies now show only meaningful combinations, removing "noise" from auto-picked basic cards
+- **Applies to**: Both card pair table and bubble chart visualization
 
 ### Damage and Act Fixes (May 10, 2026)
 

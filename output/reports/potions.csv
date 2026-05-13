@@ -1,33 +1,33 @@
 "potion","timesOffered","timesPicked","pickRate","timesUsed","timesBought","timesDiscarded","winRateWhenUsed"
-"Explosive Ampoule",161,69,42.9,47,5,20,36.2
-"Block Potion",153,69,45.1,63,7,9,38.1
+"Explosive Ampoule",163,71,43.6,49,5,20,34.7
+"Block Potion",154,70,45.5,63,7,9,38.1
+"Strength Potion",152,63,41.4,45,3,16,48.9
 "Weak Potion",149,63,42.3,51,5,14,43.1
-"Strength Potion",149,61,40.9,44,3,15,50.0
-"Flex Potion",145,63,43.4,33,3,28,48.5
-"Dexterity Potion",141,53,37.6,41,0,16,48.8
-"Power Potion",135,60,44.4,55,9,9,47.3
-"Skill Potion",135,59,43.7,53,6,12,47.2
-"Speed Potion",135,52,38.5,22,1,30,36.4
-"Vulnerable Potion",135,61,45.2,46,8,13,50.0
-"Fire Potion",134,56,41.8,39,0,18,53.8
-"Swift Potion",133,62,46.6,47,2,15,44.7
-"Attack Potion",132,54,40.9,52,4,7,53.8
-"Energy Potion",131,51,38.9,37,3,14,59.5
-"Colorless Potion",127,53,41.7,48,4,8,52.1
-"Heart Of Iron",65,40,61.5,37,3,1,59.5
-"Clarity",65,28,43.1,24,2,5,37.5
+"Flex Potion",146,63,43.2,33,3,28,48.5
+"Dexterity Potion",145,55,37.9,42,0,17,47.6
+"Skill Potion",141,61,43.3,55,7,12,47.3
+"Power Potion",137,61,44.5,56,9,9,48.2
+"Vulnerable Potion",137,62,45.3,46,8,13,50.0
+"Fire Potion",136,56,41.2,39,0,18,53.8
+"Swift Potion",136,62,45.6,47,2,15,44.7
+"Speed Potion",136,53,39.0,23,1,30,34.8
+"Attack Potion",133,55,41.4,53,4,7,54.7
+"Energy Potion",133,52,39.1,38,3,14,60.5
+"Colorless Potion",128,54,42.2,49,4,8,51.0
+"Heart Of Iron",66,41,62.1,38,3,1,57.9
+"Clarity",66,28,42.4,24,2,5,37.5
 "Potion Of Binding",64,34,53.1,22,1,9,59.1
-"Touch Of Insanity",63,40,63.5,27,1,9,59.3
+"Touch Of Insanity",64,41,64.1,28,2,9,60.7
 "Regen Potion",62,32,51.6,29,7,3,37.9
 "Liquid Bronze",57,25,43.9,19,3,6,63.2
 "Fortifier",57,28,49.1,22,0,4,36.4
 "Fysh Oil",56,25,44.6,19,0,6,52.6
 "Potion Shaped Rock",56,13,23.2,13,0,4,23.1
-"Blessing Of The Forge",54,30,55.6,20,1,6,45.0
-"Duplicator",53,30,56.6,23,0,3,52.2
+"Blessing Of The Forge",55,30,54.5,20,1,6,45.0
+"Duplicator",54,31,57.4,24,0,3,54.2
 "Radiant Tincture",52,30,57.7,29,2,1,48.3
 "Cure All",52,32,61.5,30,1,2,56.7
-"Stable Serum",50,21,42.0,7,0,12,71.4
+"Stable Serum",52,22,42.3,7,0,12,71.4
 "Focus Potion",47,25,53.2,20,4,4,50.0
 "Gamblers Brew",46,25,54.3,13,0,10,53.8
 "Powdered Demise",45,21,46.7,17,0,4,52.9
@@ -35,18 +35,18 @@
 "Droplet Of Precognition",28,13,46.4,10,0,2,70.0
 "Fairy In A Bottle",27,16,59.3,10,0,1,20.0
 "Beetle Juice",27,20,74.1,20,1,0,45.0
+"Entropic Brew",26,15,57.7,15,0,0,53.3
 "Poison Potion",26,10,38.5,7,0,3,85.7
-"Fruit Juice",25,13,52.0,13,1,0,76.9
+"Fruit Juice",26,14,53.8,14,1,0,71.4
+"Liquid Memories",24,17,70.8,11,2,4,45.5
 "Mazaleths Gift",24,16,66.7,14,1,1,50.0
-"Entropic Brew",23,13,56.5,13,0,0,61.5
-"Liquid Memories",23,17,73.9,11,2,4,45.5
 "Bottled Potential",22,9,40.9,6,2,2,66.7
 "Lucky Tonic",21,11,52.4,11,1,0,18.2
 "Orobic Acid",21,13,61.9,12,2,0,66.7
 "Snecko Oil",21,7,33.3,4,1,3,50.0
+"Gigantification Potion",20,11,55.0,4,0,5,75.0
 "Ship In A Bottle",20,15,75.0,15,0,0,33.3
-"Gigantification Potion",19,10,52.6,3,0,5,100.0
-"Potion Of Doom",18,10,55.6,5,0,3,60.0
+"Potion Of Doom",19,11,57.9,6,0,3,66.7
 "Shackling Potion",17,14,82.4,13,0,0,76.9
 "Star Potion",16,6,37.5,3,2,1,66.7
 "Potion Of Capacity",14,8,57.1,4,0,3,100.0

@@ -1637,9 +1637,9 @@
       "wins": 2
     },
     "RELIC.CENTENNIAL_PUZZLE": {
-      "rating": 1492.68,
+      "rating": 1473.94,
       "peakRating": 1535.14,
-      "gamesPlayed": 6,
+      "gamesPlayed": 7,
       "wins": 3
     },
     "RELIC.MUMMIFIED_HAND": {
@@ -1715,9 +1715,9 @@
       "wins": 0
     },
     "RELIC.WHETSTONE": {
-      "rating": 1486.25,
+      "rating": 1468.02,
       "peakRating": 1506.05,
-      "gamesPlayed": 5,
+      "gamesPlayed": 6,
       "wins": 2
     },
     "RELIC.LEAFY_POULTICE": {
@@ -1757,9 +1757,9 @@
       "wins": 0
     },
     "RELIC.PEN_NIB": {
-      "rating": 1522.66,
+      "rating": 1501.54,
       "peakRating": 1522.66,
-      "gamesPlayed": 3,
+      "gamesPlayed": 4,
       "wins": 2
     },
     "RELIC.MEAT_CLEAVER": {
@@ -1787,9 +1787,9 @@
       "wins": 0
     },
     "RELIC.BOOK_REPAIR_KNIFE": {
-      "rating": 1483.2,
+      "rating": 1465.21,
       "peakRating": 1500,
-      "gamesPlayed": 1,
+      "gamesPlayed": 2,
       "wins": 0
     },
     "RELIC.HORN_CLEAT": {
@@ -1805,9 +1805,9 @@
       "wins": 0
     },
     "RELIC.VAMBRACE": {
-      "rating": 1479.84,
+      "rating": 1462.12,
       "peakRating": 1500,
-      "gamesPlayed": 1,
+      "gamesPlayed": 2,
       "wins": 0
     },
     "RELIC.CURSED_PEARL": {
@@ -1859,10 +1859,10 @@
       "wins": 0
     },
     "RELIC.SILVER_CRUCIBLE": {
-      "rating": 1479.84,
-      "peakRating": 1500,
-      "gamesPlayed": 1,
-      "wins": 0
+      "rating": 1504.62,
+      "peakRating": 1504.62,
+      "gamesPlayed": 2,
+      "wins": 1
     },
     "RELIC.POTION_BELT": {
       "rating": 1421.74,
@@ -1901,22 +1901,22 @@
       "wins": 0
     },
     "RELIC.RIPPLE_BASIN": {
-      "rating": 1499.85,
-      "peakRating": 1500,
-      "gamesPlayed": 2,
-      "wins": 1
+      "rating": 1523.05,
+      "peakRating": 1523.05,
+      "gamesPlayed": 3,
+      "wins": 2
     },
     "RELIC.PHYLACTERY_UNBOUND": {
-      "rating": 1465.21,
+      "rating": 1448.64,
       "peakRating": 1500,
-      "gamesPlayed": 2,
+      "gamesPlayed": 3,
       "wins": 0
     },
     "RELIC.JUZU_BRACELET": {
-      "rating": 1466,
+      "rating": 1491.88,
       "peakRating": 1500,
-      "gamesPlayed": 2,
-      "wins": 0
+      "gamesPlayed": 3,
+      "wins": 1
     },
     "RELIC.MANGO": {
       "rating": 1504.52,
@@ -1937,9 +1937,9 @@
       "wins": 0
     },
     "RELIC.TOUCH_OF_OROBAS": {
-      "rating": 1465.21,
+      "rating": 1448.64,
       "peakRating": 1500,
-      "gamesPlayed": 2,
+      "gamesPlayed": 3,
       "wins": 0
     },
     "RELIC.BOOK_OF_FIVE_RINGS": {
@@ -2027,10 +2027,10 @@
       "wins": 1
     },
     "RELIC.PERMAFROST": {
-      "rating": 1476.95,
+      "rating": 1501.96,
       "peakRating": 1520.16,
-      "gamesPlayed": 3,
-      "wins": 1
+      "gamesPlayed": 4,
+      "wins": 2
     },
     "RELIC.PAELS_WING": {
       "rating": 1520.16,
@@ -2045,10 +2045,10 @@
       "wins": 1
     },
     "RELIC.HAPPY_FLOWER": {
-      "rating": 1502.31,
-      "peakRating": 1520.16,
-      "gamesPlayed": 4,
-      "wins": 2
+      "rating": 1525.31,
+      "peakRating": 1525.31,
+      "gamesPlayed": 5,
+      "wins": 3
     },
     "RELIC.FUR_COAT": {
       "rating": 1520.16,
@@ -2057,9 +2057,9 @@
       "wins": 1
     },
     "RELIC.MEAL_TICKET": {
-      "rating": 1520.16,
+      "rating": 1499.24,
       "peakRating": 1520.16,
-      "gamesPlayed": 1,
+      "gamesPlayed": 2,
       "wins": 1
     },
     "RELIC.BRONZE_SCALES": {
@@ -2117,10 +2117,10 @@
       "wins": 0
     },
     "RELIC.BAG_OF_MARBLES": {
-      "rating": 1482.36,
+      "rating": 1490.44,
       "peakRating": 1500,
-      "gamesPlayed": 1,
-      "wins": 0
+      "gamesPlayed": 3,
+      "wins": 1
     },
     "RELIC.CROSSBOW": {
       "rating": 1482.36,
@@ -2129,22 +2129,22 @@
       "wins": 0
     },
     "RELIC.SPARKLING_ROUGE": {
-      "rating": 1478.82,
-      "peakRating": 1502.18,
-      "gamesPlayed": 3,
-      "wins": 1
+      "rating": 1503.68,
+      "peakRating": 1503.68,
+      "gamesPlayed": 4,
+      "wins": 2
     },
     "RELIC.SWORD_OF_JADE": {
-      "rating": 1517.64,
-      "peakRating": 1517.64,
-      "gamesPlayed": 1,
-      "wins": 1
+      "rating": 1539.42,
+      "peakRating": 1539.42,
+      "gamesPlayed": 2,
+      "wins": 2
     },
     "RELIC.AMETHYST_AUBERGINE": {
-      "rating": 1517.64,
-      "peakRating": 1517.64,
-      "gamesPlayed": 1,
-      "wins": 1
+      "rating": 1539.42,
+      "peakRating": 1539.42,
+      "gamesPlayed": 2,
+      "wins": 2
     },
     "RELIC.CLOAK_CLASP": {
       "rating": 1517.64,
@@ -2249,9 +2249,9 @@
       "wins": 1
     },
     "RELIC.NEW_LEAF": {
-      "rating": 1497.69,
+      "rating": 1478.55,
       "peakRating": 1518.48,
-      "gamesPlayed": 2,
+      "gamesPlayed": 3,
       "wins": 1
     },
     "RELIC.BIG_HAT": {
@@ -2343,6 +2343,48 @@
       "peakRating": 1500,
       "gamesPlayed": 1,
       "wins": 0
+    },
+    "RELIC.PENDULUM": {
+      "rating": 1505.4,
+      "peakRating": 1505.4,
+      "gamesPlayed": 2,
+      "wins": 1
+    },
+    "RELIC.CHOSEN_CHEESE": {
+      "rating": 1523.18,
+      "peakRating": 1523.18,
+      "gamesPlayed": 1,
+      "wins": 1
+    },
+    "RELIC.STURDY_CLAMP": {
+      "rating": 1523.18,
+      "peakRating": 1523.18,
+      "gamesPlayed": 1,
+      "wins": 1
+    },
+    "RELIC.PAELS_CLAW": {
+      "rating": 1523.18,
+      "peakRating": 1523.18,
+      "gamesPlayed": 1,
+      "wins": 1
+    },
+    "RELIC.CHOICES_PARADOX": {
+      "rating": 1523.18,
+      "peakRating": 1523.18,
+      "gamesPlayed": 1,
+      "wins": 1
+    },
+    "RELIC.GAMBLING_CHIP": {
+      "rating": 1523.18,
+      "peakRating": 1523.18,
+      "gamesPlayed": 1,
+      "wins": 1
+    },
+    "RELIC.ART_OF_WAR": {
+      "rating": 1523.18,
+      "peakRating": 1523.18,
+      "gamesPlayed": 1,
+      "wins": 1
     }
   },
   "CHARACTER.DEFECT": {
@@ -2563,9 +2605,9 @@
       "wins": 3
     },
     "RELIC.INTIMIDATING_HELMET": {
-      "rating": 1455.52,
+      "rating": 1425.54,
       "peakRating": 1510.48,
-      "gamesPlayed": 6,
+      "gamesPlayed": 7,
       "wins": 2
     },
     "RELIC.BING_BONG": {
@@ -2629,9 +2671,9 @@
       "wins": 4
     },
     "RELIC.LOST_COFFER": {
-      "rating": 1496.48,
+      "rating": 1462.28,
       "peakRating": 1516.8,
-      "gamesPlayed": 6,
+      "gamesPlayed": 7,
       "wins": 3
     },
     "RELIC.TUNGSTEN_ROD": {
@@ -2737,9 +2779,9 @@
       "wins": 0
     },
     "RELIC.MEAL_TICKET": {
-      "rating": 1420.33,
+      "rating": 1393.88,
       "peakRating": 1500,
-      "gamesPlayed": 7,
+      "gamesPlayed": 8,
       "wins": 1
     },
     "RELIC.GOLDEN_COMPASS": {
@@ -2983,9 +3025,9 @@
       "wins": 1
     },
     "RELIC.SMALL_CAPSULE": {
-      "rating": 1520.16,
+      "rating": 1483.51,
       "peakRating": 1520.16,
-      "gamesPlayed": 1,
+      "gamesPlayed": 2,
       "wins": 1
     },
     "RELIC.DREAM_CATCHER": {
