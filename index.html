@@ -3,91 +3,200 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>STS2 Run Analytics — Upload Your Runs</title>
+    <title>Slay the Spire 2 — Run Analytics</title>
     <style>
       :root {
-        --bg: #0f1117;
-        --panel: #181b24;
-        --border: #2a2f3d;
-        --text: #e6e9ef;
-        --muted: #9aa2b1;
-        --accent: #ff6b4a;
-        --accent-hover: #ff8266;
+        --bg: #0b0a0f;
+        --bg-2: #13111a;
+        --panel: #191622;
+        --panel-2: #211c2e;
+        --border: #372f47;
+        --border-gold: #6b5836;
+        --text: #ece7f2;
+        --muted: #a79fb8;
+        --faint: #776e8a;
+        --ember: #ff6b35;
+        --ember-2: #ff8c42;
+        --gold: #e8c37a;
+        --blood: #b03a2e;
+        --green: #7bc47f;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         font-family: "Segoe UI", system-ui, sans-serif;
-        background: var(--bg);
+        background:
+          radial-gradient(1200px 600px at 50% -10%, #241a2e 0%, transparent 60%),
+          radial-gradient(900px 500px at 90% 10%, #2a1614 0%, transparent 55%),
+          var(--bg);
         color: var(--text);
         min-height: 100vh;
+        line-height: 1.5;
       }
-      #uploader {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 64px 24px;
+      .serif { font-family: Georgia, "Times New Roman", serif; }
+      a { color: var(--ember-2); }
+
+      /* ── Layout ─────────────────────────────────────────── */
+      #uploader { max-width: 940px; margin: 0 auto; padding: 0 20px 80px; }
+
+      /* ── Hero ───────────────────────────────────────────── */
+      .hero { text-align: center; padding: 72px 0 40px; }
+      .eyebrow {
+        display: inline-block;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        color: var(--gold);
+        border: 1px solid var(--border-gold);
+        border-radius: 999px;
+        padding: 6px 16px;
+        margin-bottom: 22px;
+        background: rgba(232, 195, 122, 0.05);
       }
-      h1 { font-size: 2rem; margin-bottom: 8px; }
-      .subtitle { color: var(--muted); margin-bottom: 32px; line-height: 1.5; }
-      .dropZone {
-        border: 2px dashed var(--border);
-        border-radius: 16px;
-        background: var(--panel);
-        padding: 48px 24px;
-        text-align: center;
-        transition: border-color 0.15s, background 0.15s;
+      h1.title {
+        font-family: Georgia, serif;
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: 0.01em;
+        background: linear-gradient(180deg, #fff 0%, var(--gold) 60%, var(--ember) 130%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 60px rgba(255, 107, 53, 0.25);
       }
-      .dropZone--over { border-color: var(--accent); background: #1d2230; }
-      .dropZone p { color: var(--muted); margin: 12px 0; }
-      .btnRow { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--accent);
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        padding: 12px 20px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.15s;
-      }
-      .btn:hover { background: var(--accent-hover); }
-      .btn--ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
-      .btn--ghost:hover { background: var(--panel); }
-      input[type="file"] { display: none; }
-      .status { margin-top: 20px; color: var(--muted); min-height: 1.4em; text-align: center; }
-      .status--error { color: #ff7a7a; }
-      .help {
-        margin-top: 40px;
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 20px 24px;
-        font-size: 0.9rem;
-        line-height: 1.6;
+      .tagline {
+        max-width: 620px;
+        margin: 20px auto 0;
         color: var(--muted);
+        font-size: 1.12rem;
       }
-      .help strong { color: var(--text); }
-      .help code {
-        background: #11141c;
-        padding: 2px 6px;
-        border-radius: 5px;
-        font-size: 0.85em;
-        color: #cbd3e1;
-        word-break: break-all;
+
+      /* ── Buttons ────────────────────────────────────────── */
+      .btnRow { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 9px;
+        border: none; border-radius: 11px;
+        padding: 14px 24px;
+        font-size: 0.98rem; font-weight: 650; cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.15s, background 0.15s, border-color 0.15s;
+        font-family: inherit;
       }
-      .privacy { margin-top: 16px; font-size: 0.85rem; color: var(--muted); text-align: center; }
-      .privacy strong { color: #8fd694; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn--primary {
+        color: #1a0d06;
+        background: linear-gradient(180deg, var(--ember-2), var(--ember));
+        box-shadow: 0 6px 22px rgba(255, 107, 53, 0.35), inset 0 1px 0 rgba(255,255,255,0.3);
+      }
+      .btn--primary:hover { box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5); }
+      .btn--gold {
+        color: var(--gold);
+        background: rgba(232, 195, 122, 0.08);
+        border: 1px solid var(--border-gold);
+      }
+      .btn--gold:hover { background: rgba(232, 195, 122, 0.16); border-color: var(--gold); }
+      .btn--ghost {
+        color: var(--text);
+        background: transparent; border: 1px solid var(--border);
+      }
+      .btn--ghost:hover { background: var(--panel-2); }
+      input[type="file"] { display: none; }
+
+      /* ── Drop zone ──────────────────────────────────────── */
+      .dropZone {
+        position: relative;
+        border: 1.5px dashed var(--border-gold);
+        border-radius: 18px;
+        background: linear-gradient(180deg, var(--panel), var(--bg-2));
+        padding: 40px 24px 34px;
+        text-align: center;
+        margin-top: 40px;
+        transition: border-color 0.15s, background 0.15s, box-shadow 0.2s;
+      }
+      .dropZone::before {
+        content: "";
+        position: absolute; inset: 6px;
+        border: 1px solid rgba(232, 195, 122, 0.12);
+        border-radius: 13px; pointer-events: none;
+      }
+      .dropZone--over {
+        border-color: var(--ember);
+        background: linear-gradient(180deg, #241a2a, #1a1622);
+        box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15), inset 0 0 40px rgba(255,107,53,0.08);
+      }
+      .dropZone .flame { font-size: 2.6rem; filter: drop-shadow(0 0 12px rgba(255,107,53,0.5)); }
+      .dropZone .dz-lead { font-size: 1.12rem; margin: 10px 0 4px; color: var(--text); }
+      .dropZone .dz-sub { color: var(--faint); margin: 6px 0 18px; font-size: 0.9rem; }
+
+      code {
+        background: #100e16; padding: 2px 7px; border-radius: 5px;
+        font-size: 0.85em; color: var(--gold);
+        border: 1px solid var(--border); word-break: break-all;
+      }
+
+      .status { margin-top: 20px; min-height: 1.4em; text-align: center; color: var(--muted); }
+      .status--error { color: #ff8a8a; }
+
+      .privacy {
+        margin: 20px auto 0; max-width: 640px;
+        text-align: center; font-size: 0.9rem; color: var(--muted);
+        background: rgba(123, 196, 127, 0.06);
+        border: 1px solid rgba(123, 196, 127, 0.22);
+        border-radius: 10px; padding: 12px 18px;
+      }
+      .privacy strong { color: var(--green); }
+
+      /* ── Section headings ───────────────────────────────── */
+      .section { margin-top: 72px; }
+      .section h2 {
+        font-family: Georgia, serif; font-size: 1.7rem; text-align: center;
+        color: var(--text); margin-bottom: 6px;
+      }
+      .section .sub { text-align: center; color: var(--faint); margin-bottom: 30px; }
+
+      /* ── Feature grid ───────────────────────────────────── */
+      .features {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .feature {
+        background: linear-gradient(180deg, var(--panel), var(--bg-2));
+        border: 1px solid var(--border); border-radius: 14px;
+        padding: 22px 20px; transition: transform 0.14s, border-color 0.15s, box-shadow 0.2s;
+      }
+      .feature:hover {
+        transform: translateY(-3px);
+        border-color: var(--border-gold);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+      }
+      .feature .ic { font-size: 1.6rem; }
+      .feature h3 { font-size: 1.02rem; margin: 12px 0 6px; color: var(--gold); font-weight: 650; }
+      .feature p { font-size: 0.9rem; color: var(--muted); }
+
+      /* ── How-to steps ───────────────────────────────────── */
+      .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+      .step {
+        background: var(--panel); border: 1px solid var(--border);
+        border-radius: 14px; padding: 24px 22px; position: relative;
+      }
+      .step .num {
+        position: absolute; top: -14px; left: 22px;
+        width: 34px; height: 34px; border-radius: 50%;
+        display: grid; place-items: center; font-family: Georgia, serif; font-weight: 700;
+        color: #1a0d06; background: linear-gradient(180deg, var(--gold), #c9a25a);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      }
+      .step h3 { margin: 12px 0 8px; font-size: 1.05rem; color: var(--text); }
+      .step p { font-size: 0.9rem; color: var(--muted); }
+      .step p + p { margin-top: 8px; }
+
+      .foot { text-align: center; color: var(--faint); font-size: 0.82rem; margin-top: 70px; }
+
+      /* ── Dashboard view ─────────────────────────────────── */
       #resetBtn { position: fixed; top: 14px; right: 16px; z-index: 10; display: none; }
       #dashboardFrame {
-        display: none;
-        width: 100vw;
-        height: 100vh;
-        border: none;
-        position: fixed;
-        inset: 0;
+        display: none; width: 100vw; height: 100vh;
+        border: none; position: fixed; inset: 0; background: #0b0a0f;
       }
     </style>
   </head>
@@ -95,23 +204,30 @@
     <button id="resetBtn" class="btn btn--ghost">← Load different runs</button>
 
     <main id="uploader">
-      <h1>🗡️ Slay the Spire 2 — Run Analytics</h1>
-      <p class="subtitle">
-        Upload your own <code>.run</code> files to generate a full analytics dashboard —
-        win rates, card &amp; relic ELO, encounter survival, build archetypes and more.
-      </p>
+      <!-- Hero -->
+      <section class="hero">
+        <span class="eyebrow">Slay the Spire 2</span>
+        <h1 class="title">Know Your Spire</h1>
+        <p class="tagline">
+          Turn your run history into a deep analytics dashboard — win rates, card &amp; relic
+          ELO rankings, encounter survival, build archetypes and more. Drop in your runs and see
+          what's actually winning.
+        </p>
+      </section>
 
+      <!-- Upload / demo -->
       <div class="dropZone" id="dropZone">
-        <p style="font-size: 2.5rem;">📂</p>
-        <p><strong>Drag &amp; drop</strong> your <code>.run</code> files here</p>
-        <p>or</p>
+        <div class="flame">🔥</div>
+        <p class="dz-lead"><strong>Drag &amp; drop</strong> your <code>.run</code> files here</p>
+        <p class="dz-sub">or choose below — everything runs locally in your browser</p>
         <div class="btnRow">
-          <button class="btn" onclick="document.getElementById('folderInput').click()">
-            Select history folder
+          <button class="btn btn--primary" onclick="document.getElementById('folderInput').click()">
+            📂 Select history folder
           </button>
           <button class="btn btn--ghost" onclick="document.getElementById('fileInput').click()">
             Select .run files
           </button>
+          <button class="btn btn--gold" id="sampleBtn">✨ Try with sample data</button>
         </div>
         <input type="file" id="fileInput" accept=".run" multiple />
         <input type="file" id="folderInput" webkitdirectory directory multiple />
@@ -119,15 +235,52 @@
 
       <p id="status" class="status"></p>
 
-      <p class="privacy">🔒 <strong>100% private:</strong> your runs are analyzed entirely in your browser and never uploaded anywhere.</p>
+      <p class="privacy">
+        🔒 <strong>Completely private.</strong> Your runs are read and analyzed entirely in your
+        browser — nothing is ever uploaded to a server. Close the tab and it's gone.
+      </p>
 
-      <div class="help">
-        <strong>Where are my run files?</strong><br />
-        They live in your Slay the Spire 2 save folder, typically:<br />
-        <code>C:\Users\&lt;you&gt;\AppData\Roaming\SlayTheSpire2\steam\&lt;steam-id&gt;\profile1\saves\history</code><br />
-        Every completed run is a <code>.run</code> file in that folder. Use
-        <strong>Select history folder</strong> and point it there, or drag the <code>.run</code> files in directly.
-      </div>
+      <!-- Features -->
+      <section class="section">
+        <h2>What you'll see</h2>
+        <p class="sub">Every completed run, distilled into the metrics that matter.</p>
+        <div class="features">
+          <div class="feature"><div class="ic">🏆</div><h3>Win Rates &amp; Trends</h3><p>Overall and per-character win rates, streaks, and how you're trending over time.</p></div>
+          <div class="feature"><div class="ic">🃏</div><h3>Card ELO Rankings</h3><p>Every card rated by how much it actually contributes to winning — basic and Glicko-2 models.</p></div>
+          <div class="feature"><div class="ic">💎</div><h3>Relic ELO &amp; Synergies</h3><p>Which relics carry runs, and the pairings that over-perform together.</p></div>
+          <div class="feature"><div class="ic">⚔️</div><h3>Encounter Survival</h3><p>Where runs die — survival rates by enemy, elite, and boss, broken down per act.</p></div>
+          <div class="feature"><div class="ic">🧱</div><h3>Build Archetypes</h3><p>The deck shapes you gravitate toward and how each one performs.</p></div>
+          <div class="feature"><div class="ic">📈</div><h3>Ascension &amp; Floors</h3><p>Difficulty curve by ascension and per-floor analytics across the climb.</p></div>
+        </div>
+      </section>
+
+      <!-- How to -->
+      <section class="section">
+        <h2>Three steps to your dashboard</h2>
+        <p class="sub">No install, no account — just your run files.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>Find your runs</h3>
+            <p>Every completed run is a <code>.run</code> file in your save folder:</p>
+            <p><code>…\SlayTheSpire2\steam\&lt;id&gt;\profile1\saves\history</code></p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>Drop them in</h3>
+            <p>Use <strong>Select history folder</strong> and point it at that folder, or drag the
+            <code>.run</code> files straight onto the page.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>Explore</h3>
+            <p>Your dashboard builds instantly. Filter by character, ascension and outcome, and dig
+            through every tab. Curious first? Hit <strong>Try with sample data</strong>.</p>
+          </div>
+        </div>
+      </section>
+
+      <p class="foot">Built for the Spire 2 community · runs stay on your machine · open source on GitHub</p>
     </main>
 
     <iframe id="dashboardFrame" title="STS2 Dashboard"></iframe>

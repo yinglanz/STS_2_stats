@@ -3,7 +3,8 @@
  *
  * The user picks their own `.run` files (or their whole history folder); we
  * parse + analyze entirely in the browser and render the same dashboard the CLI
- * produces. No data ever leaves the machine.
+ * produces. No data ever leaves the machine. A "Try with sample data" button
+ * loads a bundled, anonymized run set so first-time visitors can explore.
  */
 
 import { RunData } from "../analyze/types";
@@ -17,12 +18,33 @@ const statusEl = document.getElementById("status") as HTMLElement;
 const uploader = document.getElementById("uploader") as HTMLElement;
 const frame = document.getElementById("dashboardFrame") as HTMLIFrameElement;
 const resetBtn = document.getElementById("resetBtn") as HTMLButtonElement;
+const sampleBtn = document.getElementById("sampleBtn") as HTMLButtonElement;
 
 let currentUrl: string | null = null;
 
 function setStatus(msg: string, kind: "info" | "error" = "info") {
   statusEl.textContent = msg;
   statusEl.className = kind === "error" ? "status status--error" : "status";
+}
+
+/** Render a computed dashboard into the iframe and swap the uploader out. */
+function renderRuns(rawRuns: RunData[], label: string) {
+  try {
+    const data = buildDashboardData(rawRuns);
+    const html = generateDashboard(data);
+
+    if (currentUrl) URL.revokeObjectURL(currentUrl);
+    currentUrl = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+    frame.src = currentUrl;
+
+    uploader.style.display = "none";
+    frame.style.display = "block";
+    resetBtn.style.display = "inline-flex";
+    setStatus(label);
+  } catch (err) {
+    console.error(err);
+    setStatus(`Analysis failed: ${err instanceof Error ? err.message : String(err)}`, "error");
+  }
 }
 
 async function handleFiles(fileList: FileList | File[]) {
@@ -49,30 +71,28 @@ async function handleFiles(fileList: FileList | File[]) {
   }
 
   setStatus(`Analyzing ${rawRuns.length} run${rawRuns.length === 1 ? "" : "s"}…`);
+  await new Promise((r) => setTimeout(r, 16)); // let the status paint before heavy work
+  renderRuns(rawRuns, `Loaded ${rawRuns.length} runs${skipped ? ` (${skipped} skipped)` : ""}.`);
+}
 
-  // Yield a frame so the status text paints before the heavy synchronous work.
-  await new Promise((r) => setTimeout(r, 16));
-
+async function loadSample() {
+  setStatus("Loading sample data…");
   try {
-    const data = buildDashboardData(rawRuns);
-    const html = generateDashboard(data);
-
-    if (currentUrl) URL.revokeObjectURL(currentUrl);
-    currentUrl = URL.createObjectURL(new Blob([html], { type: "text/html" }));
-    frame.src = currentUrl;
-
-    uploader.style.display = "none";
-    frame.style.display = "block";
-    resetBtn.style.display = "inline-flex";
-    setStatus(`Loaded ${rawRuns.length} runs${skipped ? ` (${skipped} skipped)` : ""}.`);
+    const res = await fetch(`${import.meta.env.BASE_URL}sample-runs.json`);
+    if (!res.ok) throw new Error(`sample data not found (${res.status})`);
+    const rawRuns = (await res.json()) as RunData[];
+    setStatus(`Analyzing ${rawRuns.length} sample runs…`);
+    await new Promise((r) => setTimeout(r, 16));
+    renderRuns(rawRuns, `Sample data — ${rawRuns.length} anonymized runs.`);
   } catch (err) {
     console.error(err);
-    setStatus(`Analysis failed: ${err instanceof Error ? err.message : String(err)}`, "error");
+    setStatus(`Couldn't load sample data: ${err instanceof Error ? err.message : String(err)}`, "error");
   }
 }
 
 fileInput.addEventListener("change", () => fileInput.files && handleFiles(fileInput.files));
 folderInput.addEventListener("change", () => folderInput.files && handleFiles(folderInput.files));
+sampleBtn.addEventListener("click", loadSample);
 
 dropZone.addEventListener("dragover", (e) => {
   e.preventDefault();
