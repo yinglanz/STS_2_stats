@@ -21,14 +21,13 @@ The project reads `.run` files directly from your STS2 save folder:
 C:\Users\[YOUR_USERNAME]\AppData\Roaming\SlayTheSpire2\steam\[STEAM_ID]\profile1\saves\history\
 ```
 
-**Current Configuration:**
+**Configuration:** copy `src/config.example.ts` to `src/config.ts` and set your
+own `YOUR_STEAM_ID` and `HISTORY_PATH`. `config.ts` is gitignored so your Steam
+ID and save path stay out of the repo.
 
-- User: `you`
-- Steam ID: `0000000000000000`
-- Profile: `profile1`
-- Path configured in `src/config.ts`
-
-⚠️ **To use with a different profile**, update `YOUR_STEAM_ID` and `HISTORY_PATH` in `src/config.ts`.
+> The hosted browser dashboard does not use this — visitors upload their own
+> `.run` files. This only affects the local CLI (`npm run extract` / `analyze` /
+> `server`).
 
 ## Data Pipeline
 
@@ -166,49 +165,41 @@ leading/trailing slash). For Netlify/Cloudflare Pages instead, build with
 ## Project Structure
 
 ```text
-c:\code\STS_2_stats\
+STS_2_stats/
+├── index.html                           # Hosted app: upload UI + dashboard iframe
+├── vite.config.ts                       # Static web build config (GitHub Pages)
 ├── src/
-│   ├── config.ts                        # YOUR_STEAM_ID and HISTORY_PATH
+│   ├── config.example.ts                # Template for local CLI config (copy → config.ts)
+│   ├── browser/                         # Client-side (in-browser) dashboard
+│   │   ├── main.ts                      # Upload handling + render
+│   │   ├── buildData.ts                 # Build dashboard data from uploaded runs
+│   │   └── shims/                       # Browser stubs for Node fs/path
 │   ├── analyze/
 │   │   ├── extractRunData.ts            # Parse .run files → ExtractedRun
-│   │   ├── database.ts                  # SQLite schema & queries
+│   │   ├── database.ts                  # SQLite schema & queries (local CLI)
 │   │   ├── generateDashboard_v2.ts      # Generate single-file dashboard HTML
 │   │   ├── eloCalculator.ts             # Basic card ELO rankings
 │   │   ├── elo.ts                       # Advanced card ELO (Glicko-2)
 │   │   ├── relicEloCalculator.ts        # Relic ELO rankings
 │   │   ├── nameMapper.ts                # Raw ID → display name mapping
-│   │   ├── floorAnalytics.ts            # Per-floor stats → floor_analytics.json
-│   │   ├── ancientAnalytics.ts          # Ancient blessing ELO → ancient_analytics.json
+│   │   ├── floorAnalytics.ts            # Per-floor stats
+│   │   ├── ancientAnalytics.ts          # Ancient blessing ELO
 │   │   ├── reports.ts                   # CSV report generation
-│   │   ├── index.ts                     # Pipeline orchestrator
+│   │   ├── index.ts                     # Local pipeline orchestrator
 │   │   └── types.ts                     # TypeScript interfaces
 │   └── server/
-│       ├── index.ts                     # Express API
+│       ├── index.ts                     # Express API (local dev)
 │       └── watcher.ts                   # File watcher for auto-ingest
 ├── validate_dashboard.ts                # Brace/paren/bracket balance check on dashboard JS
-├── output/
-│   ├── runs.db                          # SQLite database (auto-generated)
-│   ├── extracted_runs.json              # Normalized run data (auto-generated)
-│   ├── elo_ratings.json                 # Basic card ELO state (auto-generated)
-│   ├── elo_ratings_advanced.json        # Glicko-2 card ELO state (auto-generated)
-│   ├── relic_elo_ratings.json           # Relic ELO state (auto-generated)
-│   ├── floor_analytics.json             # Floor stats (auto-generated)
-│   ├── ancient_analytics.json           # Ancient blessing stats (auto-generated)
-│   ├── dashboard.html                   # Interactive dashboard (auto-generated)
-│   └── reports/                         # 13 CSV analytics reports (auto-generated)
-└── .github/
-    ├── copilot-instructions.md          # AI code generation guidelines
-    └── instructions/
-        ├── api.instructions.md          # API endpoint patterns
-        ├── dashboard.instructions.md    # Dashboard architecture
-        └── database.instructions.md    # SQLite patterns
+├── output/                              # Auto-generated locally (gitignored): runs.db, JSON, dashboard.html, reports/
+└── .github/workflows/deploy-pages.yml   # Auto-build + deploy the hosted app
 ```
 
 ## Troubleshooting
 
 ### No runs appearing
 
-- Check `src/config.ts` has correct `HISTORY_PATH`
+- Check `src/config.ts` has the correct `HISTORY_PATH` (copy it from `src/config.example.ts`)
 - Verify `.run` files exist in the history folder
 - Run `npm run analyze` to manually trigger extraction
 
@@ -224,9 +215,6 @@ c:\code\STS_2_stats\
 ## Documentation
 
 - **[CHANGELOG.md](CHANGELOG.md)** — Change history
-- **[.github/copilot-instructions.md](.github/copilot-instructions.md)** — AI development guidelines
-- **[.github/instructions/](./github/instructions/)** — Module-specific technical specs
-- **[.ai/](./ai/)** — Architecture, rules, prompts, workflow reference
 
 ---
 

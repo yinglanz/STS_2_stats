@@ -120,14 +120,14 @@ npm run dashboard  # Exit 0, dashboard regenerated clean
 
 #### Solution
 
-- Extract character by finding the player matching `YOUR_STEAM_ID` (0000000000000000)
+- Extract character by finding the player matching `YOUR_STEAM_ID`
 - Fallback to `run.players[0]` if ID not found
 - Filter allies by removing user's Steam ID from player array
 
 #### Files Modified
 
 - `src/analyze/extractRunData.ts`
-  - Added constant: `const YOUR_STEAM_ID = 0000000000000000`
+  - Added constant: `const YOUR_STEAM_ID = <your-steam-id>`
   - Changed: `const character = run.players[0]?.character`
   - To: `const yourPlayer = run.players.find(p => p.id === YOUR_STEAM_ID) || run.players[0]`
   - Updated: Use `yourPlayer` for character extraction, deck size, relics count

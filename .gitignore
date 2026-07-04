@@ -7,3 +7,6 @@ output/
 
 *.log
 .env
+
+# Local machine config with personal Steam ID / save path — copy config.example.ts
+src/config.ts
