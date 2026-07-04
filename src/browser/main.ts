@@ -90,6 +90,19 @@ async function loadSample() {
   }
 }
 
+const copyPathBtn = document.getElementById("copyPathBtn") as HTMLButtonElement;
+copyPathBtn?.addEventListener("click", async () => {
+  const path = document.getElementById("pathText")?.textContent ?? "";
+  try {
+    await navigator.clipboard.writeText(path);
+    const original = copyPathBtn.textContent;
+    copyPathBtn.textContent = "✓ Copied!";
+    setTimeout(() => { copyPathBtn.textContent = original; }, 1600);
+  } catch {
+    setStatus("Couldn't copy automatically — select the path and copy it manually.", "error");
+  }
+});
+
 fileInput.addEventListener("change", () => fileInput.files && handleFiles(fileInput.files));
 folderInput.addEventListener("change", () => folderInput.files && handleFiles(folderInput.files));
 sampleBtn.addEventListener("click", loadSample);

@@ -134,6 +134,22 @@
         border: 1px solid var(--border); word-break: break-all;
       }
 
+      /* ── Path helper ────────────────────────────────────── */
+      .btn--sm { padding: 8px 14px; font-size: 0.85rem; }
+      .pathHelp {
+        margin: 24px auto 0; max-width: 560px; text-align: left;
+        background: rgba(255, 107, 53, 0.05);
+        border: 1px solid var(--border);
+        border-radius: 12px; padding: 18px 20px;
+      }
+      .ph-title { color: var(--gold); font-weight: 650; font-size: 0.95rem; margin-bottom: 14px; text-align: center; }
+      .ph-copy { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+      .ph-copy code { font-size: 0.9rem; padding: 8px 12px; }
+      .ph-steps { margin: 0 0 4px 1.2em; color: var(--muted); font-size: 0.9rem; }
+      .ph-steps li { margin: 5px 0; }
+      .ph-steps strong { color: var(--text); }
+      .ph-mac { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--faint); font-size: 0.84rem; text-align: center; }
+
       .status { margin-top: 20px; min-height: 1.4em; text-align: center; color: var(--muted); }
       .status--error { color: #ff8a8a; }
 
@@ -231,6 +247,20 @@
         </div>
         <input type="file" id="fileInput" accept=".run" multiple />
         <input type="file" id="folderInput" webkitdirectory directory multiple />
+
+        <div class="pathHelp">
+          <p class="ph-title">🪟 Can't find the folder? Windows hides it — here's the trick:</p>
+          <div class="ph-copy">
+            <code id="pathText">%APPDATA%\SlayTheSpire2</code>
+            <button class="btn btn--gold btn--sm" id="copyPathBtn">📋 Copy</button>
+          </div>
+          <ol class="ph-steps">
+            <li>Click <strong>Select history folder</strong> above.</li>
+            <li>In the dialog's <em>Folder</em> field, paste the path (<strong>Ctrl+V</strong>) and press <strong>Enter</strong>.</li>
+            <li>Click <strong>Select Folder</strong> — it grabs every run inside automatically.</li>
+          </ol>
+          <p class="ph-mac">On macOS the runs live in <code>~/Library/Application Support/SlayTheSpire2</code> (press <strong>⌘⇧G</strong> in the file dialog and paste it).</p>
+        </div>
       </div>
 
       <p id="status" class="status"></p>
@@ -262,14 +292,15 @@
           <div class="step">
             <div class="num">1</div>
             <h3>Find your runs</h3>
-            <p>Every completed run is a <code>.run</code> file in your save folder:</p>
-            <p><code>…\SlayTheSpire2\steam\&lt;id&gt;\profile1\saves\history</code></p>
+            <p>Your runs live in a hidden Windows folder — no need to unhide it. Just copy this path:</p>
+            <p><code>%APPDATA%\SlayTheSpire2</code></p>
           </div>
           <div class="step">
             <div class="num">2</div>
-            <h3>Drop them in</h3>
-            <p>Use <strong>Select history folder</strong> and point it at that folder, or drag the
-            <code>.run</code> files straight onto the page.</p>
+            <h3>Paste &amp; select</h3>
+            <p>Click <strong>Select history folder</strong>, paste the path into the dialog and press
+            <strong>Enter</strong>, then <strong>Select Folder</strong> — every run inside is picked up
+            automatically.</p>
           </div>
           <div class="step">
             <div class="num">3</div>
