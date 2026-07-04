@@ -148,6 +148,24 @@
       .ph-steps { margin: 0 0 4px 1.2em; color: var(--muted); font-size: 0.9rem; }
       .ph-steps li { margin: 5px 0; }
       .ph-steps strong { color: var(--text); }
+      .breadcrumb {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+        margin: 10px 0 4px; padding: 10px 12px;
+        background: #100e16; border: 1px solid var(--border); border-radius: 8px;
+      }
+      .breadcrumb span { color: var(--gold); font-size: 0.82rem; }
+      .breadcrumb span:not(.bc-end):nth-child(odd) {
+        background: rgba(232,195,122,0.08); border: 1px solid var(--border-gold);
+        border-radius: 5px; padding: 3px 8px;
+      }
+      .breadcrumb span:nth-child(even) { color: var(--faint); }
+      .breadcrumb .bc-end {
+        background: linear-gradient(180deg, var(--ember-2), var(--ember));
+        color: #1a0d06; font-weight: 700; border-radius: 5px; padding: 3px 10px;
+      }
+      .breadcrumb em { color: var(--faint); font-style: italic; }
+      .ph-tip { margin-top: 12px; color: var(--muted); font-size: 0.86rem; text-align: center; }
+      .ph-tip strong { color: var(--text); }
       .ph-mac { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--faint); font-size: 0.84rem; text-align: center; }
 
       .status { margin-top: 20px; min-height: 1.4em; text-align: center; color: var(--muted); }
@@ -255,10 +273,20 @@
             <button class="btn btn--gold btn--sm" id="copyPathBtn">📋 Copy</button>
           </div>
           <ol class="ph-steps">
-            <li>Click <strong>Select history folder</strong> above.</li>
-            <li>In the dialog's <em>Folder</em> field, paste the path (<strong>Ctrl+V</strong>) and press <strong>Enter</strong>.</li>
-            <li>Click <strong>Select Folder</strong> — it grabs every run inside automatically.</li>
+            <li>Click <strong>Select history folder</strong> above to open the dialog.</li>
+            <li>In the <em>Folder</em> field at the bottom, paste the path (<strong>Ctrl+V</strong>) and press <strong>Enter</strong>.</li>
+            <li>You're now inside <code>SlayTheSpire2</code>. Double-click down through these folders:
+              <div class="breadcrumb">
+                <span>steam</span><span>›</span>
+                <span>your&nbsp;Steam&nbsp;ID <em>(a long number)</em></span><span>›</span>
+                <span>profile1</span><span>›</span>
+                <span>saves</span><span>›</span>
+                <span class="bc-end">history</span>
+              </div>
+            </li>
+            <li>With <code>history</code> open, click <strong>Select Folder</strong>. Done — every run loads.</li>
           </ol>
+          <p class="ph-tip">💡 In a hurry? You can click <strong>Select Folder</strong> right at <code>SlayTheSpire2</code> without going deeper — it finds every run inside. Selecting <code>history</code> directly is just faster to scan.</p>
           <p class="ph-mac">On macOS the runs live in <code>~/Library/Application Support/SlayTheSpire2</code> (press <strong>⌘⇧G</strong> in the file dialog and paste it).</p>
         </div>
       </div>
