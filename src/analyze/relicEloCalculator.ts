@@ -19,7 +19,7 @@
  * carry across all acts and the same relic appears at all ascension levels.
  */
 
-import { ExtractedRun, ELORecord, RelicELOState } from "./types";
+import type { ExtractedRun, ELORecord, RelicELOState } from "./types";
 
 const DEFAULT_RATING = 1500;
 

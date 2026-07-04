@@ -66,16 +66,40 @@ npm run dashboard  # Regenerate dashboard only (fast, for UI changes)
 ### Run as Website
 
 **Terminal 1 — Start the server:**
+
 ```bash
 npm run server     # Express API on http://localhost:3000
 ```
 
 **Terminal 2 (optional) — Auto-ingest new runs:**
+
 ```bash
 npm run watch      # File watcher for new .run files
 ```
 
-Then open **http://localhost:3000** in your browser.
+Then open **<http://localhost:3000>** in your browser.
+
+### Hosted version (users upload their own runs)
+
+A fully client-side build lets anyone analyze **their own** `.run` files with no
+server and no data leaving their machine — the same analysis runs in the browser.
+
+```bash
+npm run dev:web      # local dev server (Vite)
+npm run build:web    # static production build → dist/
+npm run preview:web  # preview the production build
+```
+
+The page has an upload UI: the user selects their `saves/history` folder (or the
+`.run` files inside it), and the dashboard is generated entirely in-browser.
+
+**Publish free on GitHub Pages:** pushing to `main` runs
+[`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml), which
+builds `dist/` and deploys it. Enable it once under **Settings → Pages → Source:
+GitHub Actions**. The site serves at `https://<user>.github.io/<repo>/`. If the
+repo isn't named `STS_2_stats`, update `VITE_BASE` in the workflow (keep the
+leading/trailing slash). For Netlify/Cloudflare Pages instead, build with
+`VITE_BASE=/ npm run build:web` and publish `dist/`.
 
 ## Dashboard Features
 
@@ -149,7 +173,10 @@ c:\code\STS_2_stats\
 │   │   ├── extractRunData.ts            # Parse .run files → ExtractedRun
 │   │   ├── database.ts                  # SQLite schema & queries
 │   │   ├── generateDashboard_v2.ts      # Generate single-file dashboard HTML
-│   │   ├── eloCalculator.ts             # Card ELO rankings
+│   │   ├── eloCalculator.ts             # Basic card ELO rankings
+│   │   ├── elo.ts                       # Advanced card ELO (Glicko-2)
+│   │   ├── relicEloCalculator.ts        # Relic ELO rankings
+│   │   ├── nameMapper.ts                # Raw ID → display name mapping
 │   │   ├── floorAnalytics.ts            # Per-floor stats → floor_analytics.json
 │   │   ├── ancientAnalytics.ts          # Ancient blessing ELO → ancient_analytics.json
 │   │   ├── reports.ts                   # CSV report generation
@@ -158,14 +185,17 @@ c:\code\STS_2_stats\
 │   └── server/
 │       ├── index.ts                     # Express API
 │       └── watcher.ts                   # File watcher for auto-ingest
+├── validate_dashboard.ts                # Brace/paren/bracket balance check on dashboard JS
 ├── output/
 │   ├── runs.db                          # SQLite database (auto-generated)
 │   ├── extracted_runs.json              # Normalized run data (auto-generated)
-│   ├── elo_ratings.json                 # Card ELO state (auto-generated)
+│   ├── elo_ratings.json                 # Basic card ELO state (auto-generated)
+│   ├── elo_ratings_advanced.json        # Glicko-2 card ELO state (auto-generated)
+│   ├── relic_elo_ratings.json           # Relic ELO state (auto-generated)
 │   ├── floor_analytics.json             # Floor stats (auto-generated)
 │   ├── ancient_analytics.json           # Ancient blessing stats (auto-generated)
 │   ├── dashboard.html                   # Interactive dashboard (auto-generated)
-│   └── reports/                         # CSV analytics reports (auto-generated)
+│   └── reports/                         # 13 CSV analytics reports (auto-generated)
 └── .github/
     ├── copilot-instructions.md          # AI code generation guidelines
     └── instructions/

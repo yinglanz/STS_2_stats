@@ -173,7 +173,9 @@ db.close();"
    }>;
    ```
 
-2. **Data Extraction** (`src/analyze/extractRunData.ts`)   ```typescript
+2. **Data Extraction** (`src/analyze/extractRunData.ts`)
+
+   ```typescript
    // Extract allies (all players except you)
    const allies = playerCount > 1
      ? run.players.filter(p => p.id !== YOUR_STEAM_ID).map(p => ({
@@ -181,9 +183,6 @@ db.close();"
          c: p.character
        }))
      : undefined;
-
-   ```text
-   (end of extraction snippet)
    ```
 
 3. **Database Storage** (`src/analyze/database.ts`)

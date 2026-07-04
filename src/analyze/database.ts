@@ -6,7 +6,7 @@
 import Database from "better-sqlite3";
 import path from "path";
 import fs from "fs";
-import { ExtractedRun } from "./types";
+import type { ExtractedRun } from "./types";
 
 const OUTPUT_PATH = path.join(__dirname, "../../output");
 const DB_PATH = path.join(OUTPUT_PATH, "runs.db");
@@ -64,13 +64,13 @@ export function openDb(): Database.Database {
       run_id   TEXT    NOT NULL REFERENCES runs(id),
       enc_id   TEXT    NOT NULL,
       act      INTEGER NOT NULL,
-      damage   INTEGER NOT NULL,
+      damage   INTEGER,
       survived INTEGER NOT NULL,
-      enc_type TEXT    NOT NULL DEFAULT 'monster',
-      turns    INTEGER NOT NULL DEFAULT 0,
-      potions  INTEGER NOT NULL DEFAULT 0,
-      floor_num INTEGER NOT NULL DEFAULT 0,
-      max_hp   INTEGER NOT NULL DEFAULT 80
+      enc_type TEXT    DEFAULT 'monster',
+      turns    INTEGER DEFAULT 0,
+      potions  INTEGER DEFAULT 0,
+      floor_num INTEGER DEFAULT 0,
+      max_hp   INTEGER DEFAULT 80
     );
 
     CREATE TABLE IF NOT EXISTS run_potions (
@@ -95,28 +95,90 @@ export function openDb(): Database.Database {
     CREATE INDEX IF NOT EXISTS idx_potions_run ON run_potions(run_id);
   `);
 
-  // Add fl column for existing DBs that predate this field
-  try { db.exec(`ALTER TABLE runs ADD COLUMN fl INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN seed TEXT NOT NULL DEFAULT ''`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN dur INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN acts TEXT NOT NULL DEFAULT ''`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN cp INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN a1c TEXT NOT NULL DEFAULT '[]'`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN a2c TEXT NOT NULL DEFAULT '[]'`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN a3c TEXT NOT NULL DEFAULT '[]'`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN alc TEXT`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN a1sk INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN a2sk INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN a3sk INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE runs ADD COLUMN skippedCards TEXT NOT NULL DEFAULT '[]'`); } catch {}
-  try { db.exec(`ALTER TABLE run_encounters ADD COLUMN enc_type TEXT NOT NULL DEFAULT 'monster'`); } catch {}
-  try { db.exec(`ALTER TABLE run_encounters ADD COLUMN turns INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE run_encounters ADD COLUMN potions INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE run_encounters ADD COLUMN floor_num INTEGER NOT NULL DEFAULT 0`); } catch {}
-  try { db.exec(`ALTER TABLE run_encounters ADD COLUMN max_hp INTEGER NOT NULL DEFAULT 80`); } catch {}
-  try { db.exec(`ALTER TABLE run_potions ADD COLUMN act_offered INTEGER DEFAULT NULL`); } catch {}
+  // Add columns for existing DBs that predate these fields.
+  // addColumnIfMissing swallows only the expected "column already exists" error —
+  // any other failure (disk, syntax, locked file) propagates instead of being silently lost.
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN fl INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN seed TEXT NOT NULL DEFAULT ''`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN dur INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN acts TEXT NOT NULL DEFAULT ''`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN cp INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN a1c TEXT NOT NULL DEFAULT '[]'`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN a2c TEXT NOT NULL DEFAULT '[]'`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN a3c TEXT NOT NULL DEFAULT '[]'`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN alc TEXT`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN a1sk INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN a2sk INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN a3sk INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE runs ADD COLUMN skippedCards TEXT NOT NULL DEFAULT '[]'`);
+  addColumnIfMissing(db, `ALTER TABLE run_encounters ADD COLUMN enc_type TEXT NOT NULL DEFAULT 'monster'`);
+  addColumnIfMissing(db, `ALTER TABLE run_encounters ADD COLUMN turns INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE run_encounters ADD COLUMN potions INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE run_encounters ADD COLUMN floor_num INTEGER NOT NULL DEFAULT 0`);
+  addColumnIfMissing(db, `ALTER TABLE run_encounters ADD COLUMN max_hp INTEGER NOT NULL DEFAULT 80`);
+  addColumnIfMissing(db, `ALTER TABLE run_potions ADD COLUMN act_offered INTEGER DEFAULT NULL`);
+
+  relaxEncounterNotNullConstraints(db);
 
   return db;
+}
+
+/**
+ * One-time migration: older DBs have `damage`/`enc_type`/`turns`/`potions`/`floor_num`/`max_hp`
+ * as NOT NULL on run_encounters, from when ExtractedRun.encs carried that detail per-encounter.
+ * The compact encs format ({id, a, s}) no longer captures it, so inserts now pass NULL for those
+ * columns — which the old constraint rejects. SQLite can't drop a NOT NULL constraint via ALTER
+ * TABLE, so rebuild the table, preserving any historical data already stored for older runs.
+ */
+function relaxEncounterNotNullConstraints(db: Database.Database): void {
+  const columns = db.prepare(`PRAGMA table_info(run_encounters)`).all() as Array<{
+    name: string;
+    notnull: number;
+  }>;
+  const damageCol = columns.find((c) => c.name === "damage");
+  if (!damageCol || damageCol.notnull === 0) return; // already relaxed (or table doesn't exist yet)
+
+  db.pragma("foreign_keys = OFF");
+  db.exec(`
+    ALTER TABLE run_encounters RENAME TO run_encounters_old;
+
+    CREATE TABLE run_encounters (
+      run_id    TEXT    NOT NULL REFERENCES runs(id),
+      enc_id    TEXT    NOT NULL,
+      act       INTEGER NOT NULL,
+      damage    INTEGER,
+      survived  INTEGER NOT NULL,
+      enc_type  TEXT    DEFAULT 'monster',
+      turns     INTEGER DEFAULT 0,
+      potions   INTEGER DEFAULT 0,
+      floor_num INTEGER DEFAULT 0,
+      max_hp    INTEGER DEFAULT 80
+    );
+
+    INSERT INTO run_encounters (run_id, enc_id, act, damage, survived, enc_type, turns, potions, floor_num, max_hp)
+      SELECT run_id, enc_id, act, damage, survived, enc_type, turns, potions, floor_num, max_hp FROM run_encounters_old;
+
+    DROP TABLE run_encounters_old;
+
+    CREATE INDEX IF NOT EXISTS idx_encs_run ON run_encounters(run_id);
+  `);
+  db.pragma("foreign_keys = ON");
+}
+
+/**
+ * Run an `ALTER TABLE ... ADD COLUMN` migration, ignoring only the error SQLite
+ * raises when the column already exists. Any other error (syntax, disk, locked
+ * file) is rethrown so a real failure can't be mistaken for a no-op migration.
+ */
+function addColumnIfMissing(db: Database.Database, sql: string): void {
+  try {
+    db.exec(sql);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    if (!/duplicate column name/i.test(message)) {
+      throw err;
+    }
+  }
 }
 
 /**
@@ -187,12 +249,12 @@ export function insertRun(db: Database.Database, run: ExtractedRun): void {
     }
 
     for (const enc of run.encs) {
-      insertEnc.run(run.id, enc.id, enc.a, enc.d, enc.s ? 1 : 0, enc.tp, enc.tu, enc.po, enc.fn, enc.mx);
+      insertEnc.run(run.id, enc.id, enc.a, null, enc.s ? 1 : 0, null, null, null, null, null);
     }
 
     for (const pot of run.potions) {
       try {
-        insertPotion.run(run.id, pot.id, pot.o, pot.pk ? 1 : 0, pot.b ? 1 : 0, pot.u ? 1 : 0, pot.d ? 1 : 0, pot.fo ?? null, pot.fu ?? null, pot.a ?? null);
+        insertPotion.run(run.id, pot.id, pot.o, pot.pk ? 1 : 0, pot.b ? 1 : 0, pot.u ? 1 : 0, pot.d ? 1 : 0, null, null, null);
       } catch { /* ignore duplicate potion rows */ }
     }
   });
@@ -268,13 +330,13 @@ export function insertAllRuns(db: Database.Database, runs: ExtractedRun[]): numb
           insertRelic.run(run.id, relicId);
         }
         for (const enc of run.encs) {
-          insertEnc.run(run.id, enc.id, enc.a, enc.d, enc.s ? 1 : 0, enc.tp, enc.tu, enc.po, enc.fn, enc.mx);
+          insertEnc.run(run.id, enc.id, enc.a, null, enc.s ? 1 : 0, null, null, null, null, null);
         }
       }
       // Always insert potions (even for re-extracted runs with new act data)
       for (const pot of run.potions) {
         try {
-          insertPotion.run(run.id, pot.id, pot.o, pot.pk, pot.b, pot.u, pot.d, pot.fo ?? null, pot.fu ?? null, pot.a ?? null);
+          insertPotion.run(run.id, pot.id, pot.o, pot.pk, pot.b, pot.u, pot.d, null, null, null);
         } catch {
           // Ignore duplicate inserts for same potion
         }

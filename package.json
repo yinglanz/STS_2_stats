@@ -9,14 +9,28 @@
     "reports": "npx ts-node src/analyze/reports.ts",
     "dashboard": "npx ts-node src/analyze/generateDashboard_v2.ts",
     "server": "npx ts-node src/server/index.ts",
-    "watch": "npx ts-node src/server/watcher.ts"
+    "watch": "npx ts-node src/server/watcher.ts",
+    "dev:web": "vite",
+    "build:web": "vite build",
+    "preview:web": "vite preview"
   },
-  "keywords": ["slay-the-spire", "analytics", "data-analysis"],
+  "keywords": [
+    "slay-the-spire",
+    "analytics",
+    "data-analysis"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.6",
     "@types/node": "^20.10.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
-    "ts-node": "^10.9.2"
+    "vite": "^5.4.21"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1",
+    "express": "^5.2.1"
   }
 }

@@ -70,7 +70,7 @@ See `.github/instructions/api.instructions.md`:
 
 1. Add route to `src/server/index.ts`
 2. `openDb()` → query → `db.close()` within handler
-3. Return `{count, data}` or `{error}` with appropriate HTTP status
+3. Return `{count, data}` (or the endpoint's documented shape) or `{error}` with appropriate HTTP status
 
 ### Data Extraction Changes
 
@@ -80,251 +80,78 @@ See `.github/instructions/api.instructions.md`:
 4. Update `loadAllRunsFromDb()` to map the new column
 5. Run `npm run analyze`
 
-### Adding a New Chart
+### ELO / Analytics Changes
 
-1. Add a `<div class="chart" id="chartMyName">` in the tab HTML
-2. Write `function drawMyChart()` using `safePlot('chartMyName', …, darkLayout({…}), {responsive:true})`
-3. Call it from the tab's case in `updateDashboard()`
-4. Use `filteredRuns` not `DATA.runs`
+- Card ELO: `eloCalculator.ts` (basic) and `elo.ts` (advanced Glicko-2 model — act-weighted, synergy matrix)
+- Relic ELO: `relicEloCalculator.ts`
+- Floor stats: `floorAnalytics.ts` → `floor_analytics.json`
+- Ancient blessing stats: `ancientAnalytics.ts` → `ancient_analytics.json`
+- All four run inside `src/analyze/index.ts`'s Phase 2; outputs land in `output/*.json`
 
 ## Quick Reference
 
 ```bash
 npm run analyze        # Full pipeline — use after data/DB changes
 npm run dashboard      # Dashboard only — use after UI/chart changes
+npm run extract        # Extraction only — output/extracted_runs.json
+npm run reports        # CSV reports only (requires extracted_runs.json)
 npm run server         # Express API on :3000
 npm run watch          # File watcher for auto-ingestion
 npx tsc --noEmit       # Type check only (zero output = no errors)
 ```
 
-
-## Standard Process
-
-### 1. Understand
-- Restate the problem in STS2 context
-- Identify affected modules (extract/database/dashboard/api)
-- Check if multiplayer/character extraction is involved (CRITICAL)
-- Identify database impacts
-
-### 2. Plan
-- Reference `.github/instructions/` for module-specific patterns
-- Break into steps
-- Highlight risks (especially database schema changes)
-- Choose approach (prefer minimal edits)
-
-### 3. Implement
-- Execute step-by-step
-- Keep changes scoped and minimal
-- Use transaction patterns from database.instructions.md
-- Update database schema if needed
-
-### 4. Validate
-- Run `npm run analyze` to verify full pipeline
-- Check TypeScript compilation (strict mode)
-- Verify database operations complete
-- For UI only: `npm run dashboard` to regenerate
-
-## Rules
-- ❌ NEVER jump straight to code for complex changes
-- ✅ ALWAYS reference `.github/instructions/` for module patterns
-- ✅ ALWAYS use transactions for multi-table database operations
-- ✅ ALWAYS close database connections immediately after queries
-- ❌ NEVER use `run.players[0]` for character extraction
-- ✅ ALWAYS use Steam ID matching for multiplayer character extraction
-- ❌ NEVER use `INSERT` (always use `INSERT OR IGNORE`)
-- ✅ ALWAYS include explicit return types on all functions
-
-## Module-Specific Workflows
-
-### Database Operations
-See `.github/instructions/database.instructions.md`:
-1. Write SQL with prepared statements
-2. Wrap multi-table ops in `db.transaction()`
-3. Use `INSERT OR IGNORE` to prevent overwrites
-4. Parse JSON fields at query time
-5. Close database immediately
-
-### Dashboard Changes
-See `.github/instructions/dashboard.instructions.md`:
-1. Modify generateDashboard_v2.ts
-2. Add tab button in navigation with `onclick="switchTab('tabId')"`
-3. Add tab content div with `id="tabId" class="tab-content"`
-4. Add data loading function (e.g., `drawPotionsTable()` for Potions tab)
-5. Update `switchTab()` function to call your rendering function
-6. Run `npm run dashboard` to regenerate
-
-### API Endpoints
-See `.github/instructions/api.instructions.md`:
-1. Add route to src/server/index.ts
-2. Query database with prepared statements
-3. Close database before returning
-4. Return {count, data} format or {error}
-
-### Data Extraction
-1. Update src/analyze/extractRunData.ts for parsing logic
-2. Update src/analyze/types.ts for new fields
-3. Add database migrations to database.ts
-4. Update loadAllRunsFromDb() for new fields
-
-## Quick Start
-
-```bash
-# Install dependencies
-npm install
-
-# Run full pipeline (extract → db → ELO → reports → dashboard)
-npm run analyze
-
-# Regenerate dashboard only (UI changes)
-npm run dashboard
-
-# Start development server
-npm run server    # API on port 3000
-
-# Watch for new .run files
-npm run watch
-
-# Check TypeScript
-npm run build
-```
-
 ## Full Pipeline Flow
 
-```
+```text
 Phase 1: Extract (extractRunData.ts)
-  ↓ loadAllRuns() → extractAllRuns()
-  ↓ output/extracted_runs.json
-  ↓ Insert to runs.db (SQLite)
-  
-Phase 2: Calculate ELO (eloCalculator.ts)
-  ↓ calculateELOFromRuns()
-  ↓ output/elo_ratings.json
-  
-Phase 3: Generate Reports (reports.ts)
-  ↓ generateAllReports()
-  ↓ output/reports/*.csv (11 CSV files)
-  
-Phase 4: Generate Dashboard (generateDashboard_v2.ts)
-  ↓ generateDashboardHtml()
-  ↓ output/dashboard.html (10 interactive tabs)
+  loadAllRuns() → extractAllRuns() → output/extracted_runs.json
+  → insertAllRuns() into output/runs.db (SQLite)
+
+Phase 2: Analytics
+  eloCalculator.ts          → output/elo_ratings.json (basic card ELO)
+  elo.ts                    → output/elo_ratings_advanced.json (Glicko-2 card ELO)
+  relicEloCalculator.ts     → output/relic_elo_ratings.json
+  floorAnalytics.ts         → output/floor_analytics.json
+  ancientAnalytics.ts       → output/ancient_analytics.json
+
+Phase 3: Reports (reports.ts)
+  generateAllReports() → output/reports/*.csv (13 files)
+
+Phase 4: Dashboard (generateDashboard_v2.ts)
+  generateDashboardHtml() → output/dashboard.html (15 tabs across 6 groups)
 ```
 
 ## File Locations
 
 **Analysis Pipeline:**
+
 - `src/analyze/types.ts` — Type definitions for ExtractedRun and analytics
 - `src/analyze/extractRunData.ts` — Parse .run files, extract with Steam ID lookup
 - `src/analyze/database.ts` — SQLite schema and operations
-- `src/analyze/eloCalculator.ts` — Card/relic ELO ratings per character/ascension
-- `src/analyze/reports.ts` — CSV report generation (11 reports)
-- `src/analyze/generateDashboard_v2.ts` — HTML dashboard generation (10 tabs)
+- `src/analyze/eloCalculator.ts` — Card ELO ratings (dynamic K-factor: 48/32/24)
+- `src/analyze/elo.ts` — Advanced card ELO (Glicko-2, act-weighting, synergy matrix)
+- `src/analyze/relicEloCalculator.ts` — Relic ELO ratings (per-character, no ascension split)
+- `src/analyze/nameMapper.ts` — Maps raw IDs (e.g. `CARD.BIG_BANG`) to display names
+- `src/analyze/floorAnalytics.ts` — Per-floor stats
+- `src/analyze/ancientAnalytics.ts` — Ancient blessing ELO/pick/win rates
+- `src/analyze/reports.ts` — CSV report generation (13 reports)
+- `src/analyze/generateDashboard_v2.ts` — HTML dashboard generation (15 tabs)
 - `src/analyze/index.ts` — Pipeline orchestrator
+- `validate_dashboard.ts` (project root) — Checks brace/paren/bracket balance in generated dashboard JS
 
 **API Server:**
+
 - `src/server/index.ts` — Express API endpoints
 - `src/server/watcher.ts` — fs.watch auto-ingester
 
 **Data Locations:**
+
 - Input: `history/*.run` (raw STS2 save files)
 - Database: `output/runs.db` (SQLite)
 - Reports: `output/reports/*.csv` (13 analysis reports)
-- Dashboard: `output/dashboard.html` (interactive 10-tab dashboard)
+- Dashboard: `output/dashboard.html` (interactive 15-tab dashboard)
 - Extracted: `output/extracted_runs.json` (normalized data)
-- ELO: `output/elo_ratings.json` (card ratings)
-
-## Common Tasks
-
-### Run Complete Analysis Pipeline
-
-```bash
-npm run analyze
-```
-
-This executes all phases in sequence:
-
-1. **Phase 1**: Loads all run files, extracts and normalizes data
-   - Parses ~200 run JSON files from `history/`
-   - Extracts cards, relics, encounters, build metrics per run
-   - Calculates global statistics
-   - Outputs: `output/extracted_runs.json`
-
-2. **Phase 2**: Generates CSV reports
-   - `cards.csv` — Card pick rates, win rates, upgrade frequency
-   - `encounters.csv` — Encounter survival rates, deadliest encounters
-   - `relics.csv` — Relic pick rates, win rates, frequency in winning builds
-   - `builds.csv` — Build archetypes by character/ascension with top cards/relics
-   - `ascension.csv` — Win rates and metrics per ascension level
-   - `cardSynergies.csv` — Top 50 card pairs by win rate (min 3 co-occurrences)
-   - `relicSynergies.csv` — Top 50 relic pairs by win rate (min 2 co-occurrences)
-   - `characterAscensionHeatmap.csv` — Win rate grid by character × ascension
-   - `encountersByAct.csv` — Per-act encounter survival rates
-   - `deckSizeTargets.csv` — Optimal deck size targets per ascension level
-
-3. **Phase 3**: Generates interactive dashboard
-   - `output/dashboard.html` — Single-file HTML dashboard with Plotly.js charts
-   - Built by `generateDashboard_v2.ts` with enhanced filtering and visualizations
-   - Open in browser to explore
-
-### View Interactive Dashboard
-
-After running analysis, open `output/dashboard.html` in any web browser:
-
-```text
-file:///C:/code/STS_2_stats/output/dashboard.html
-```
-
-**Dashboard Features:**
-
-- **Overview Tab** — Win rate by ascension & character
-- **Cards Tab** — Heat map (pick rate vs win rate), top cards
-- **Encounters Tab** — Survival rates, deadliest fights, encounters that end runs
-- **Relics Tab** — Tier list, win rates, relic frequency
-- **Builds Tab** — Archetype breakdown by character/ascension
-- **Ascension Tab** — Difficulty curve, stats by ascension level
-- **Timeline Tab** — Skill progression (rolling win rate over time)
-
-**Filtering:**
-
-- Ascension level slider (min ascension)
-- Character filter
-- Outcome filter (all/wins only/losses only)
-- Real-time chart updates
-
-### Extract Data Only
-
-```bash
-npm run extract
-```
-
-Parses all run files and outputs `output/extracted_runs.json`. This is the normalized data source for all downstream analysis.
-
-**Key Extraction Logic:**
-
-- Cards: Tracks offered → picked → upgraded lifecycle
-- Relics: Tracks offered → picked → final deck presence
-- Encounters: Classifies as Boss/Elite/Regular with act number
-- Outcomes: Win = `killed_by_encounter === "NONE.NONE"`
-
-### Generate CSV Reports Only
-
-```bash
-npm run reports
-```
-
-Requires `output/extracted_runs.json` from previous extraction. Generates all CSV files in `output/reports/`.
-
-**Export to Excel:**
-All CSV files can be imported directly into Excel/Sheets for pivot tables, manual analysis, etc.
-
-### Generate Dashboard Only
-
-```bash
-npm run dashboard
-```
-
-Requires all CSV files in `output/reports/`. Generates single interactive HTML file with embedded data and visualizations.
-
----
+- ELO: `output/elo_ratings.json`, `output/elo_ratings_advanced.json`, `output/relic_elo_ratings.json`
 
 ## Data Analysis Guide
 
@@ -435,71 +262,17 @@ Requires all CSV files in `output/reports/`. Generates single interactive HTML f
 - See if over/under-drafting is hurting win rate
 - Benchmark deck pruning decisions
 
----
+### Turn Economy (turnEconomy.csv)
 
-## Implementation Details
+Turn-efficiency metrics generated by `generateTurnEconomy()` — see `reports.ts` for the exact column set.
 
-### Phase 1: Data Extraction
+### Potions (potions.csv)
 
-**Location**: `src/analyze/extractRunData.ts`
+Offered / picked / bought / used / discarded counts per potion, generated by `generatePotionAnalytics()`.
 
-**Key Functions:**
+### ELO Rankings (elo_rankings.csv)
 
-- `loadAllRuns()` — Reads all .run files from `history/`
-- `extractRun(run, runId)` — Normalizes single run into typed structure
-- `extractAllRuns(runs)` — Batch extraction with error handling
-- `calculateGlobalStats(runs)` — Aggregates statistics across all runs
-
-**Data Flow:**
-
-1. Read JSON run files → `RunData` type
-2. Extract per-floor data → track cards/relics/encounters
-3. Normalize IDs and classifications
-4. Output `ExtractedRun[]` with clean schema
-
-### Phase 2: Report Generation
-
-**Location**: `src/analyze/reports.ts`
-
-**Functions per Report:**
-
-- `generateCardAnalytics()` — Aggregates card data across runs
-- `generateEncounterAnalytics()` — Groups encounter stats with act breakdown
-- `generateRelicAnalytics()` — Tracks relic outcomes
-- `generateBuildArchetypes()` — Character/ascension combinations
-- `generateAscensionStats()` — Per-ascension metrics
-- `generateCardSynergyPairs()` — Top 50 card co-occurrence pairs by win rate
-- `generateRelicSynergyPairs()` — Top 50 relic co-occurrence pairs by win rate
-- `generateCharacterAscensionHeatmap()` — Win rate grid by character × ascension
-- `generateEncounterByAct()` — Per-act encounter survival
-- `generateDeckSizeTargets()` — Deck size analysis per ascension
-- `generateAllReports()` — Orchestrates all reports in one call
-
-### Phase 3: Dashboard Generation
-
-**Location**: `src/analyze/generateDashboard_v2.ts`
-
-**Architecture:**
-
-- Single-file HTML with embedded CSS + JavaScript
-- Plotly.js library (CDN) for charts
-- Client-side filtering (no server needed)
-- Reads all CSV reports + `extracted_runs.json`
-- Responsive design (mobile-friendly)
-
-**Key Functions:**
-
-- `generateDashboardHtml()` — Entry point, reads CSVs and calls `generateDashboard(data)`
-- `generateDashboard(data)` — Builds the full HTML string with embedded data
-- `parseCsv(filepath)` — Internal CSV parser with quote handling
-
-**Charts:**
-
-- Bar charts: Pick rates, win rates, survival rates
-- Scatter plot: Card heat map (pick rate vs win rate)
-- Line chart: Win rate trend over time
-- Heatmap: Character × ascension win rates
-- Tables: Detailed breakdowns with synergy data
+Card/character ELO rankings, generated by `generateELORankings()` only when ELO state is passed into `generateAllReports()`.
 
 ---
 
@@ -507,14 +280,14 @@ Requires all CSV files in `output/reports/`. Generates single interactive HTML f
 
 ### "Cannot find module" errors
 
-Run `npm install` to install TypeScript dependencies.
+Run `npm install` to install dependencies.
 
 ### Dashboard doesn't load
 
 1. Check that all CSV files exist in `output/reports/`
-2. Verify `output/extracted_runs.json` exists
+2. Verify `output/extracted_runs.json` and `output/elo_ratings.json` exist
 3. Open browser console (F12) for JavaScript errors
-4. Ensure you're opening as `file:///` URL, not `http://`
+4. If served via `npm run server`, check `http://localhost:3000`; if opened directly, ensure you're opening as `file:///` URL
 
 ### Empty charts in dashboard
 
@@ -541,91 +314,56 @@ Run `npm install` to install TypeScript dependencies.
 For adding new features:
 
 - Keep extraction logic in Phase 1 (single pass)
-- Add new reports in Phase 2 (additive)
-- Add new visualizations in Phase 3 (modular)
+- Add new reports in Phase 3 (additive)
+- Add new visualizations in Phase 4 (modular)
 
 ## Critical Concepts
 
 ### Multiplayer Character Extraction
+
 ```typescript
 // ❌ WRONG - assumes you're first
 const character = run.players[0]?.character;
 
 // ✅ CORRECT - find by Steam ID
-const yourPlayer = run.players.find(p => p.id === 0000000000000000);
+const yourPlayer = run.players.find(p => p.id === YOUR_STEAM_ID);
 const character = yourPlayer?.character;
 ```
 
 ### Allies Tracking
+
 ```typescript
 // Extract all other players
 const allies = run.players
-  .filter(p => p.id !== 0000000000000000)
+  .filter(p => p.id !== YOUR_STEAM_ID)
   .map(p => ({id: p.id, c: p.character}));
 ```
 
 ### Database Transactions
+
 ```typescript
 const txn = db.transaction(() => {
   insertRunStmt.run(...);
   insertCard.run(...);
   insertRelic.run(...);
 });
-txn([...]);  // Execute
+txn();
 db.close();  // Always close
-```
-
-### TypeScript Strict Mode
-```typescript
-// ❌ WRONG
-function getValue(item) {
-  return item.value;
-}
-
-// ✅ CORRECT
-function getValue(item: {value: number}): number {
-  return item.value;
-}
 ```
 
 ## Dashboard Features
 
-### Current Tabs (10 Total)
-1. **Overview** - Global statistics, win rates by ascension
-2. **Cards** - Card analytics, pick rates, ELO, win rates
-3. **Encounters** - Encounter survival rates, damage analysis
-4. **Relics** - Relic analytics, pick rates, ELO
-5. **Synergies** - Card and relic pairing analysis
-6. **Heatmap** - Card picks per act with color gradient (Red → Character Color → Green)
-7. **Builds** - Build archetypes and patterns
-8. **Ascension** - Difficulty progression statistics
-9. **Potions** - Potion usage statistics and frequency (NEW)
-10. **Help** - Comprehensive user guide with 15+ sections
+15 tabs across 6 groups — see `.ai/architecture.md` for the full list (kept canonical there to avoid drift) and `.github/instructions/dashboard.instructions.md` for chart/filter conventions.
 
 ### Global Filters (apply across all tabs)
+
 - **Character**: Single character select (Ironclad, Silent, Defect, Necrobinder, Regent)
 - **Min Ascension**: Slider (0-10, minimum difficulty threshold)
 - **Outcome**: Filter by Wins, Losses, or All runs
-- **Mode**: Filter by multiplayer count (1P/2P/3P/4P/All)
-
-### CSV Reports Generated
-
-All 13 reports are generated and loaded by the dashboard:
-- `cards.csv` - Pick rate, ELO, win %, deck %
-- `encounters.csv` - Survivor rate, damage, turns
-- `relics.csv` - Pick rate, ELO, win %
-- `builds.csv` - Build archetypes
-- `ascension.csv` - Win rates by difficulty
-- `cardSynergies.csv` - Top card pairings
-- `relicSynergies.csv` - Top relic pairings
-- `characterAscensionHeatmap.csv` - Win rate grid
-- `encountersByAct.csv` - Per-act encounter stats
-- `deckSizeTargets.csv` - Optimal deck sizes
-- `elo_rankings.csv` - Card/relic ELO rankings
-- `turnEconomy.csv` - Turn-based metrics
-- `potions.csv` - Potion usage statistics
+- **Mode**: 1P/2P/3P/4P/Any Multiplayer/All
 
 ## See Also
+
 - `.github/copilot-instructions.md` - Project-specific AI guidelines
 - `.github/instructions/` - Technical specifications by module
 - `.ai/architecture.md` - System architecture

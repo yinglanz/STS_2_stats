@@ -227,7 +227,7 @@ Context: Dashboard generation
 
 Remember:
 - Single HTML file, no build needed
-- 10 tabs: Overview, Cards, Encounters, Relics, Synergies, Heatmap, Builds, Ascension, Potions, Help
+- 15 tabs across 6 groups: Run, Deck, Combat, Map, Analysis, Utility (full list in .ai/architecture.md)
 - 13 CSV reports: cards, encounters, relics, builds, ascension, cardSynergies, relicSynergies, characterAscensionHeatmap, encountersByAct, deckSizeTargets, elo_rankings, turnEconomy, potions
 - Global filters: Character, Min Ascension, Outcome, Mode
 - Uses Plotly.js for all charts

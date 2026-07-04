@@ -7,18 +7,23 @@ applyTo: "src/server/**"
 
 ## Endpoint Conventions
 
-- `GET /api/runs` — filtered list, query params: `character`, `ascension`, `outcome`, `mode`
+- `GET /` — serves `dashboard.html`
+- `GET /api/runs` — filtered list, query params: `character`, `ascension`, `outcome` (`won`/`lost`), `mode` (see Mode Filter Values below)
 - `GET /api/stats` — aggregated global stats
+- `GET /api/dashboard-data` — full analytics payload for the live dashboard (calls `loadDashboardData()` from `generateDashboard_v2.ts`)
 - `POST /api/ingest` — re-scan history/ and insert new runs
 
 ## Response Shape
 
 ```typescript
-// List endpoints
-{ count: number, data: ExtractedRun[] }
+// GET /api/runs
+{ count: number, runs: ExtractedRun[] }
 
-// Stats endpoint
+// GET /api/stats
 { totalRuns, wins, winRate, avgDeckSize, avgRelics, byCharacter, byAscension }
+
+// GET /api/dashboard-data
+// Same shape returned by loadDashboardData() — see dashboard.instructions.md
 
 // Error responses
 { error: string }  // with appropriate HTTP status code
@@ -60,8 +65,10 @@ Apply in this order to reduce dataset early:
 
 ## Mode Filter Values
 
-The `mode` query param matches `run.m` (integer player count):
-- `"1"` → solo only
+`GET /api/runs`'s `mode` query param (`src/server/index.ts`) matches `run.m` (integer player count):
+- `"1"` or `"single"` → `r.m === 1` (both accepted; `"single"` is a backward-compatible alias)
 - `"2"` / `"3"` / `"4"` → exact multiplayer count
-- `"multi"` → any run where `m > 1`
-- omitted / `""` → all runs
+- `"multi"` → any run where `r.m > 1`
+- omitted / anything else → all runs
+
+This now matches the dashboard's own client-side mode filter (in `generateDashboard_v2.ts`, see `dashboard.instructions.md`) — both implementations accept the same exact-count values, so a query string built for one works against the other.

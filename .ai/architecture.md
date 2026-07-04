@@ -13,9 +13,13 @@ extractRunData.ts (Parse + normalize + extract character by Steam ID)
     ↓
 runs.db (SQLite database with better-sqlite3)
     ↓
+ELO calculators (eloCalculator.ts, elo.ts, relicEloCalculator.ts) + floor/ancient analytics
+    ↓
+reports.ts (13 CSV reports → output/reports/)
+    ↓
 generateDashboard_v2.ts (Generate single-file HTML dashboard)
     ↓
-output/dashboard.html (13-tab interactive dashboard with Plotly.js)
+output/dashboard.html (15-tab interactive dashboard with Plotly.js)
 ```
 
 ## Core Modules
@@ -29,14 +33,17 @@ output/dashboard.html (13-tab interactive dashboard with Plotly.js)
 
 **Analytics:**
 
-- `eloCalculator.ts` — Card ELO ratings per character×ascension, dynamic K-factor, ascension scaling
-- `reports.ts` — Generates CSV reports from extracted runs (includes skippedCount per card)
+- `eloCalculator.ts` — Basic card ELO ratings per character×ascension, dynamic K-factor (48→32→24), ascension scaling → `elo_ratings.json`
+- `elo.ts` — Advanced card ELO (Glicko-2 rating + deviation/volatility, act-weighted scoring, acquisition-floor weighting, pairwise synergy matrix) → `elo_ratings_advanced.json`
+- `relicEloCalculator.ts` — Relic ELO per character (no ascension split — relics persist across acts) → `relic_elo_ratings.json`
+- `nameMapper.ts` — Maps raw STS2 IDs (e.g. `CARD.BIG_BANG`) to friendly display names
+- `reports.ts` — Generates 13 CSV reports from extracted runs (includes skippedCount per card)
 - `floorAnalytics.ts` — Per-floor stats grouped by floorType×actName×actIndex×version → `floor_analytics.json`
 - `ancientAnalytics.ts` — Ancient blessing ELO + pick/win rates across all 3 acts → `ancient_analytics.json`
 
 **API / Interface:**
 
-- `generateDashboard_v2.ts` — Single-file HTML dashboard, 13 tabs, Plotly.js charts, dark theme, `safePlot()` wrapper, `DARK` layout constant
+- `generateDashboard_v2.ts` — Single-file HTML dashboard, 15 tabs, Plotly.js charts, dark theme, `safePlot()` wrapper, `DARK` layout constant
 - `server/index.ts` — Express API endpoints
 - `server/watcher.ts` — `fs.watch` auto-ingester for new .run files
 
@@ -156,7 +163,10 @@ src/
 │   ├── types.ts                     # ExtractedRun, RunData, ELOState interfaces
 │   ├── extractRunData.ts            # Parse .run → ExtractedRun
 │   ├── database.ts                  # SQLite operations
-│   ├── eloCalculator.ts             # Card ELO ratings
+│   ├── eloCalculator.ts             # Basic card ELO ratings
+│   ├── elo.ts                       # Advanced card ELO (Glicko-2)
+│   ├── relicEloCalculator.ts        # Relic ELO ratings
+│   ├── nameMapper.ts                # Raw ID → display name mapping
 │   ├── floorAnalytics.ts            # Floor stats → floor_analytics.json
 │   ├── ancientAnalytics.ts          # Ancient blessing ELO → ancient_analytics.json
 │   ├── reports.ts                   # CSV report generation
@@ -166,14 +176,18 @@ src/
     ├── index.ts                     # Express API
     └── watcher.ts                   # File watcher
 
+validate_dashboard.ts                # Brace/paren/bracket balance check on generated dashboard JS
+
 output/ (auto-generated)
 ├── runs.db                          # SQLite database
 ├── extracted_runs.json              # Normalized run array
-├── elo_ratings.json                 # ELO state by char/asc/card
+├── elo_ratings.json                 # Basic ELO state by char/asc/card
+├── elo_ratings_advanced.json        # Glicko-2 ELO state
+├── relic_elo_ratings.json           # Relic ELO state by char/relic
 ├── floor_analytics.json             # Floor stats
 ├── ancient_analytics.json           # Ancient blessing stats
 ├── dashboard.html                   # Interactive dashboard
-└── reports/*.csv                    # Analytics CSVs
+└── reports/*.csv                    # 13 analytics CSVs
 
 .github/
 ├── copilot-instructions.md          # AI development guidelines
@@ -204,7 +218,8 @@ output/ (auto-generated)
 | `encountersByAct.csv` | Per-act encounter survival stats |
 | `deckSizeTargets.csv` | Optimal deck sizes per ascension |
 | `potions.csv` | Offered / picked / used per potion |
-| `elo_rankings.csv` | ELO rankings by card / character |
+| `turnEconomy.csv` | Turn-efficiency metrics |
+| `elo_rankings.csv` | ELO rankings by card / character (only written when ELO state is passed to `generateAllReports`) |
 
 ## See Also
 

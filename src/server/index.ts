@@ -6,6 +6,7 @@
  * Endpoints:
  *   GET  /                        → dashboard.html
  *   GET  /api/runs                → filtered runs (query: character, ascension, outcome, mode)
+ *                                    mode: "1"/"2"/"3"/"4" (exact player count), "single" (alias for "1"), "multi" (any m>1)
  *   GET  /api/stats               → aggregated global stats
  *   POST /api/ingest              → parse + insert new .run files from history/
  */
@@ -65,8 +66,10 @@ app.get("/api/runs", (req: Request, res: Response) => {
       filtered = filtered.filter((r) => !r.w);
     }
 
-    if (mode === "single") {
+    if (mode === "single" || mode === "1") {
       filtered = filtered.filter((r) => r.m === 1);
+    } else if (mode === "2" || mode === "3" || mode === "4") {
+      filtered = filtered.filter((r) => r.m === Number(mode));
     } else if (mode === "multi") {
       filtered = filtered.filter((r) => r.m > 1);
     }

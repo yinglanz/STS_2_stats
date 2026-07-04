@@ -4,7 +4,7 @@
 
 import fs from "fs";
 import path from "path";
-import {
+import type {
   ExtractedRun,
   CardAnalytics,
   EncounterAnalytics,
@@ -201,7 +201,7 @@ export function generateEncounterAnalytics(runs: ExtractedRun[]): string {
       const stats = encounterMap.get(key);
       stats.foughtCount++;
       if (enc.s) stats.survivedCount++;
-      stats.totalDamageTaken += enc.d;
+      // damage field removed from encs to optimize extracted_runs.json size
 
       // Track if this encounter ended the run (last encounter not survived)
       if (!enc.s && enc === run.encs[run.encs.length - 1]) {
@@ -215,7 +215,7 @@ export function generateEncounterAnalytics(runs: ExtractedRun[]): string {
       const actStats = stats.byAct.get(enc.a);
       actStats.count++;
       if (enc.s) actStats.survived++;
-      actStats.damageTaken += enc.d;
+      // damage field removed from encs to optimize extracted_runs.json size
     });
   });
 
@@ -562,7 +562,7 @@ export function generateTurnEconomy(runs: ExtractedRun[]): string {
 
       const stats = encounterMap.get(key);
       stats.totalFights++;
-      stats.totalDamage += enc.d;
+      stats.totalDamage += run.dmg || 0;  // Use run-level damage instead of per-encounter
 
       if (enc.s) {
         stats.winCount++;
@@ -897,7 +897,7 @@ export function generateAllReports(runs: ExtractedRun[], eloState?: ELOState) {
 }
 
 // Main execution
-if (require.main === module) {
+if (typeof require !== "undefined" && typeof module !== "undefined" && require.main === module) {
   try {
     const data = fs.readFileSync(
       path.join(__dirname, "../../output/extracted_runs.json"),

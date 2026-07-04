@@ -4,12 +4,12 @@
 
 import fs from "fs";
 import path from "path";
-import { ExtractedRun } from "./types";
+import type { ExtractedRun } from "./types";
 
 const OUTPUT_PATH = path.join(__dirname, "../../output");
 const REPORTS_PATH = path.join(OUTPUT_PATH, "reports");
 
-interface DashboardData {
+export interface DashboardData {
   globalStats: any;
   cards: any[];
   encounters: any[];
@@ -34,7 +34,13 @@ interface DashboardData {
  * Parse CSV file
  */
 function parseCsv(filepath: string): any[] {
-  const content = fs.readFileSync(filepath, "utf-8");
+  return parseCsvContent(fs.readFileSync(filepath, "utf-8"));
+}
+
+/**
+ * Parse CSV from an in-memory string (browser-safe, no fs).
+ */
+export function parseCsvContent(content: string): any[] {
   const lines = content.split("\n").filter((l) => l.trim());
   if (lines.length < 2) return [];
 
@@ -156,7 +162,7 @@ export function loadDashboardData(): DashboardData {
 /**
  * Generate enhanced dashboard HTML
  */
-function generateDashboard(data: DashboardData): string {
+export function generateDashboard(data: DashboardData): string {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -3331,7 +3337,7 @@ export function generateDashboardHtml() {
   return outputPath;
 }
 
-if (require.main === module) {
+if (typeof require !== "undefined" && typeof module !== "undefined" && require.main === module) {
   try {
     generateDashboardHtml();
   } catch (error) {

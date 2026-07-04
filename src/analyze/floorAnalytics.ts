@@ -16,7 +16,7 @@
  * actIndex is the 1-based act position in the run (1/2/3).
  */
 
-import { RunData, Room } from "./types";
+import type { RunData, Room } from "./types";
 import { YOUR_STEAM_ID } from "../config";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

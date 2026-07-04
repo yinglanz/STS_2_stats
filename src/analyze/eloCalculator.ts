@@ -28,7 +28,7 @@
  *    On a loss: ELO delta × 0.90  (protected slightly)
  */
 
-import { ExtractedRun, ELORecord, ELOState } from "./types";
+import type { ExtractedRun, ELORecord, ELOState } from "./types";
 
 const DEFAULT_RATING = 1500;
 

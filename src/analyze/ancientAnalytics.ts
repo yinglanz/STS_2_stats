@@ -8,7 +8,7 @@
  *  - ELO rating (baseline-comparison model, same K/ascension logic as relic ELO)
  */
 
-import { RunData, ELORecord } from "./types";
+import type { RunData, ELORecord } from "./types";
 import { YOUR_STEAM_ID } from "../config";
 
 // ─── Constants ────────────────────────────────────────────────────────────────

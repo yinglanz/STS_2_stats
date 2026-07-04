@@ -51,7 +51,7 @@ Use plain JS alternatives: `[].concat(...Object.values(obj))` instead of `(Objec
 4. Implement `drawMyChart()` using `safePlot()` and `darkLayout()`, reading `filteredRuns`
 5. Run `npm run dashboard` to regenerate
 
-## Tab Groups (13 Tabs)
+## Tab Groups (15 Tabs)
 
 ```
 Run:      overview, ascension, runs

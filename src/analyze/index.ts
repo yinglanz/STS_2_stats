@@ -13,7 +13,7 @@ import { calculateELOFromRuns as calculateAdvancedELOFromRuns } from "./elo";
 import { generateFloorAnalytics } from "./floorAnalytics";
 import { generateAncientAnalytics } from "./ancientAnalytics";
 import { openDb, insertAllRuns, getRunCount } from "./database";
-import { ExtractedRun as PipelineRun } from "./types";
+import type { ExtractedRun as PipelineRun } from "./types";
 import type { ExtractedRun as AdvancedRun } from "./elo";
 import fs from "fs";
 import path from "path";
@@ -105,8 +105,8 @@ async function runPipeline() {
       encs: r.encs.map(e => ({
         id: e.id,
         act: e.a,
-        floor: e.fn,
-        type: e.tp === 3 ? 'boss' : e.tp === 2 ? 'elite' : 'monster' as 'boss' | 'elite' | 'monster',
+        floor: 0,  // Stripped from extracted data to reduce file size
+        type: 'monster' as 'boss' | 'elite' | 'monster',  // Stripped; default to monster
       })),
       relics: r.relics,
     }));

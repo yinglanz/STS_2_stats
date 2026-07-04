@@ -1,0 +1,16 @@
+{
+  // Type-checking config for the browser build (src/browser). The Node tsconfig
+  // excludes this folder because it needs the DOM lib and ESM module resolution.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client", "node"],
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false
+  },
+  "include": ["src/browser"],
+  "exclude": ["node_modules"]
+}

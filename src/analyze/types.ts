@@ -139,11 +139,10 @@ export interface ExtractedRun {
   relics: string[];     // final relic IDs
   potions: Array<{
     id: string; o: number; pk: boolean; b: boolean;
-    u: boolean; d: boolean; fo: number; fu: number; a: number;
+    u: boolean; d: boolean;
   }>;
   encs: Array<{
-    id: string; a: number; d: number; s: boolean;
-    tp: number; tu: number; po: number; fn: number; mx: number;
+    id: string; a: number; s: boolean;
   }>;
 }
 

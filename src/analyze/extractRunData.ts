@@ -4,7 +4,7 @@
 
 import fs from "fs";
 import path from "path";
-import {
+import type {
   RunData,
   ExtractedRun,
   ExtractedCardData,
@@ -221,7 +221,7 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
   }
 
   // Extract potions
-  const potionMap = new Map<string, { o: number; pk: boolean; b: boolean; u: boolean; d: boolean; fo: number; fu: number; a: number }>();
+  const potionMap = new Map<string, { o: number; pk: boolean; b: boolean; u: boolean; d: boolean }>();
 
   for (let floorIdx = 0; floorIdx < run.map_point_history.length; floorIdx++) {
     const floor = run.map_point_history[floorIdx];
@@ -234,7 +234,7 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
             const potionId = choice.choice;
 
             if (!potionMap.has(potionId)) {
-              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false, fo: floorIdx, fu: 0, a: 0 });
+              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false });
             }
 
             const stats = potionMap.get(potionId)!;
@@ -249,7 +249,7 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
         if (playerStat.bought_potions) {
           for (const potionId of playerStat.bought_potions) {
             if (!potionMap.has(potionId)) {
-              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false, fo: floorIdx, fu: 0, a: 0 });
+              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false });
             }
             potionMap.get(potionId)!.b = true;  // bought
           }
@@ -259,10 +259,9 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
         if (playerStat.potion_used) {
           for (const potionId of playerStat.potion_used) {
             if (!potionMap.has(potionId)) {
-              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false, fo: 0, fu: floorIdx, a: 0 });
+              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false });
             }
             potionMap.get(potionId)!.u = true;  // used
-            potionMap.get(potionId)!.fu = floorIdx;  // floor used
           }
         }
 
@@ -270,7 +269,7 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
         if (playerStat.potion_discarded) {
           for (const potionId of playerStat.potion_discarded) {
             if (!potionMap.has(potionId)) {
-              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false, fo: 0, fu: 0, a: 0 });
+              potionMap.set(potionId, { o: 0, pk: false, b: false, u: false, d: false });
             }
             potionMap.get(potionId)!.d = true;  // discarded
           }
@@ -410,13 +409,7 @@ export function extractRun(run: RunData, runId: string): ExtractedRun {
     encs: encounters.map(e => ({
       id: e.encounterId,
       a: e.act,
-      d: e.damageTaken,
       s: e.survived,
-      tp: e.type === 'boss' ? 3 : e.type === 'elite' ? 2 : 1,
-      tu: e.turnsTaken,
-      po: 0,
-      fn: e.floor,
-      mx: 0,
     })),
   };
 }
@@ -502,7 +495,7 @@ export function calculateGlobalStats(extractedRuns: ExtractedRun[]): GlobalStats
 }
 
 // Main execution
-if (require.main === module) {
+if (typeof require !== "undefined" && typeof module !== "undefined" && require.main === module) {
   try {
     const runs = loadAllRuns();
     console.log(`Loaded ${runs.length} runs`);

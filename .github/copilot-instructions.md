@@ -6,9 +6,10 @@
 
 ### Data Pipeline
 
-```
+```text
 history/*.run (raw JSON) → extractRunData.ts → runs.db (SQLite)
-→ analytics (CSV reports) → generateDashboard_v2.ts → dashboard.html
+→ ELO calculators (cards/relics/advanced) + floor/ancient analytics
+→ reports.ts (CSV reports) → generateDashboard_v2.ts → dashboard.html
 ```
 
 ---
@@ -55,11 +56,18 @@ history/*.run (raw JSON) → extractRunData.ts → runs.db (SQLite)
 | `src/config.ts` | `YOUR_STEAM_ID`, `HISTORY_PATH` (single source of truth) |
 | `src/analyze/extractRunData.ts` | Parse .run files → ExtractedRun, Steam ID character extraction |
 | `src/analyze/database.ts` | SQLite schema, `insertRun`/`insertAllRuns`, migrations |
-| `src/analyze/generateDashboard_v2.ts` | Single-file HTML dashboard, 13 tabs, dark theme |
-| `src/analyze/eloCalculator.ts` | ELO card ratings per character |
-| `src/analyze/types.ts` | TypeScript interfaces |
+| `src/analyze/eloCalculator.ts` | Basic card ELO ratings per character (dynamic K-factor 48/32/24) |
+| `src/analyze/elo.ts` | Advanced card ELO (Glicko-2, act-weighting, synergy matrix) → `elo_ratings_advanced.json` |
+| `src/analyze/relicEloCalculator.ts` | Relic ELO ratings per character (no ascension split) → `relic_elo_ratings.json` |
+| `src/analyze/nameMapper.ts` | Maps raw IDs (e.g. `CARD.BIG_BANG`) to friendly display names |
+| `src/analyze/floorAnalytics.ts` | Per-floor stats → `floor_analytics.json` |
+| `src/analyze/ancientAnalytics.ts` | Ancient blessing ELO across all 3 acts → `ancient_analytics.json` |
+| `src/analyze/reports.ts` | CSV report generation (13 reports) |
+| `src/analyze/generateDashboard_v2.ts` | Single-file HTML dashboard, 15 tabs, dark theme |
+| `src/analyze/index.ts` | Pipeline orchestrator |
 | `src/server/index.ts` | Express API endpoints |
 | `src/server/watcher.ts` | `fs.watch` auto-ingester |
+| `validate_dashboard.ts` (project root) | Checks brace/paren/bracket balance in generated dashboard JS |
 
 ---
 
@@ -79,10 +87,13 @@ history/*.run (raw JSON) → extractRunData.ts → runs.db (SQLite)
   a1c: string[];                         // cards picked in act 1
   a2c: string[];                         // cards picked in act 2
   a3c: string[];                         // cards picked in act 3
+  a1sk: number; a2sk: number; a3sk: number; // card reward screens skipped per act
+  skippedCards: string[];                // card IDs offered but not taken
   cards: string[];                       // final deck card IDs
+  cardsMeta: Array<{id: string, floor: number, upgraded: boolean}>;
   relics: string[];                      // final relic IDs
-  potions: Array<{id, o, pk, b, u, d, fo, fu, a}>;
-  encs: Array<{id, a, d, s, tp, tu, po, fn, mx}>;
+  potions: Array<{id, o, pk, b, u, d}>;
+  encs: Array<{id, a, s}>;
   // + dmg, sz, rc, fl, seed, dur, acts, cp, v, k
 }
 ```
@@ -91,7 +102,7 @@ history/*.run (raw JSON) → extractRunData.ts → runs.db (SQLite)
 
 ### Database Schema
 
-- `runs` — one row per run, JSON columns: `a1c`, `a2c`, `a3c`, `alc`
+- `runs` — one row per run, JSON columns: `a1c`, `a2c`, `a3c`, `alc`, `skippedCards`
 - `run_cards` — final deck (run_id, card_id, upgraded)
 - `run_relics` — final relics (run_id, relic_id)
 - `run_encounters` — per encounter (run_id, enc_id, act, damage, survived, enc_type, turns, …)
@@ -112,19 +123,21 @@ Starter cards, Curse cards (`CARD.CURSE_`), and Status cards are excluded.
 
 ---
 
-## Dashboard Features (13 Tabs)
+## Dashboard Features (15 Tabs, 6 Groups)
 
-**Overview group:** 📊 Overview, 📈 Ascension
+**Run:** 📊 Overview, 📈 Ascension, 📋 Runs
 
-**Deck group:** 🃏 Cards (+ per-act win rate), ✨ Relics, 🧪 Potions, 🔗 Synergies (bubble chart)
+**Deck:** 🃏 Cards, ✨ Relics, 🧪 Potions, 🔗 Synergies
 
-**Combat group:** ⚔️ Encounters (type labels), 🔥 Heatmap (Plotly + numbers), 🎭 Builds (bar chart)
+**Combat:** ⚔️ Encounters, 🔥 Heatmap, 🎭 Builds
 
-**Trends group:** 📋 Runs (table + cumulative win rate / Kalman), 🏆 ELO (scatter + per-act win% table)
+**Map:** 🗺️ Floors, 🌟 Ancients
 
-**Utility group:** 📥 Export, ❓ Help
+**Analysis:** 🏆 ELO
 
-**Global Filters:** Character, Min Ascension (slider 0-10), Outcome (Win/Loss/All), Mode (1P/2P/3P/4P/All)
+**Utility:** 📥 Export, ❓ Help
+
+**Global Filters:** Character, Min Ascension (slider 0-10), Outcome (Win/Loss/All), Mode (1P/2P/3P/4P/Any Multiplayer/All)
 
 ### Dark Theme Palette
 
@@ -150,13 +163,21 @@ function darkLayout(extra) { return Object.assign({}, DARK, extra); }
 
 ## API Patterns
 
-**Endpoints:** `GET /runs`, `GET /stats`, `POST /ingest`
+**Endpoints (`src/server/index.ts`):**
+
+- `GET /` — serves `dashboard.html`
+- `GET /api/runs` — filtered runs; query params `character`, `ascension`, `outcome` (`won`/`lost`), `mode`
+- `GET /api/stats` — aggregated global stats
+- `GET /api/dashboard-data` — full analytics payload consumed by the live dashboard (runs, ELO, reports)
+- `POST /api/ingest` — re-scan `history/` and insert new runs
+
+**`mode` query param on `/api/runs`** accepts `"1"`/`"2"`/`"3"`/`"4"` (exact player count), `"single"` (alias for `"1"`), or `"multi"` (any `m > 1`) — same value set as the dashboard's client-side filter JS (`generateDashboard_v2.ts`).
 
 **Response Format:**
 
 ```typescript
-{ count: number; data: any[] }   // list endpoints
-{ error: string }                 // errors with HTTP status
+{ count: number; runs: ExtractedRun[] }   // /api/runs (field is `runs`, not `data`)
+{ error: string }                          // errors with HTTP status
 ```
 
 Always close DB after every request handler.
@@ -168,49 +189,24 @@ Always close DB after every request handler.
 | Script | Purpose |
 |---|---|
 | `npm run analyze` | Full pipeline: extract → DB → ELO → reports → dashboard |
+| `npm run extract` | Extraction only → `output/extracted_runs.json` |
+| `npm run reports` | CSV reports only (requires `extracted_runs.json`) |
 | `npm run dashboard` | Regenerate dashboard.html only (UI changes, no re-extract) |
 | `npm run server` | Express API on port 3000 |
 | `npm run watch` | File watcher for auto-ingestion |
 
+There is no `npm run build` script — use `npx tsc --noEmit` for type checking.
+
 ---
 
-## Recent Major Changes (May 2026)
+## Recent Major Changes
 
-### ✅ Robustness Hardening
+See `CHANGELOG.md` for the full history. Highlights:
 
-- `extractRun`: throws clearly if `run.players` or `run.map_point_history` missing
-- `loadAllRuns`: checks `HISTORY_PATH` exists, validates run structure before returning
-- `loadDashboardData`: checks both output files exist before reading, guards division by run count
-- `insertRun` (watcher/server path): now inserts potions (was silently dropping them)
-- `safePlot()`: all 19 Plotly chart calls go through element-existence check + error catch
-- `window.resize`: debounced handler calls `Plotly.Plots.resize` on all visible charts
-
-### ✅ ELO Tab Improvements
-
-- ELO scatter chart: ELO rating vs win rate, bubble size = games played, color by character
-- ELO table: aggregated across all ascensions (one row per card per character), per-act win% columns (Act 1/2/3), color-coded win rates
-
-### ✅ Heatmap Numbers
-
-- Character × Ascension Plotly heatmap now shows win rate % as text overlaid on each cell
-
-### ✅ Dashboard UI Redesign (April 2026)
-
-- Full dark theme across all charts using shared `DARK` constant + `darkLayout()`
-- 13 tabs in 5 labelled groups with dividers
-- Tab Win Rate Trend removed; cumulative win rate chart merged into Runs tab
-- New charts: Potions grouped bar, Synergies bubble, Builds bar, Heatmap Plotly
-
-### ✅ Per-Act Card Win Rate
-
-- `a1c`/`a2c`/`a3c` arrays track cards first picked per act
-- Cards tab shows per-act win rate chart
-- ELO tab table shows Act 1/2/3 win% columns
-
-### 🔴 CRITICAL FIX: Multiplayer Character Extraction
-
-- Character now extracted by Steam ID match, not array position
-- Regenerate DB with `npm run analyze` to fix past multiplayer runs
+- **Floors & Ancients tabs** (May 2026) — per-floor stats and ancient blessing ELO across all 3 acts
+- **Card skip tracking** — `a1sk`/`a2sk`/`a3sk`/`skippedCards` columns, surfaced in Cards and ELO tabs
+- **ELO tab** — scatter chart (ELO vs win rate, bubble = games played) + per-act win% table
+- **🔴 Critical fix**: multiplayer character extraction now uses Steam ID match, not array position — regenerate DB with `npm run analyze` if upgrading from an old database
 
 ---
 
@@ -232,228 +228,11 @@ Always close DB after every request handler.
 4. **Implement** — scoped edits, no TypeScript in template strings
 5. **Validate** — `npm run analyze` for data changes, `npm run dashboard` for UI only, `npx tsc --noEmit` for type safety
 
-
-## Project Overview
-**Slay the Spire 2 Run Analytics** - A Node.js/TypeScript analytics pipeline that ingests run JSON files, analyzes gameplay data, and generates an interactive dashboard with card/relic ratings, encounter stats, and ELO rankings.
-
-### Data Pipeline
-```
-history/*.run (raw JSON) → extractRunData.ts → runs.db (SQLite) 
-→ analytics (CSV/reports) → generateDashboard_v2.ts → dashboard.html
-```
-
----
-
-## Core Directives
-
-### When Working on This Project
-1. **Always check instruction files first**: `.github/instructions/{api|dashboard|database}.instructions.md`
-2. **Verify database operations**: Use `better-sqlite3` patterns from `database.instructions.md`
-3. **Use TypeScript strictly**: No `implicit any`, explicit return types everywhere
-4. **No classes**: Use functions and interfaces only
-5. **Database safety**: Always use transactions for multi-table inserts, never leave DB connections open
-
-### Code Standards
-
-**TypeScript Requirements:**
-- Strict mode enabled in `tsconfig.json`
-- Explicit return types on all functions
-- No implicit any types
-- Type all function parameters
-
-**Database Operations:**
-- Use `INSERT OR IGNORE` for duplicates (never overwrite)
-- Always wrap multi-table ops in transactions
-- Close database immediately after use
-- Use prepared statements for SQL queries
-
-**Analytics Logic:**
-- Use `better-sqlite3` for queries (faster than in-memory arrays for aggregations)
-- ELO calculations: Cards rated by win/loss outcomes per character×ascension
-- Starter exclusions: Apply to both cards AND relics per character
-- Comments required for complex calculations
-
-### Project Structure
-
-| File | Purpose |
-|------|---------|
-| `src/analyze/extractRunData.ts` | Parse .run files → ExtractedRun format, starter filtering, character extraction from YOUR_STEAM_ID |
-| `src/analyze/database.ts` | SQLite schema, insert/query helpers, transactions |
-| `src/analyze/generateDashboard_v2.ts` | Generate single-file HTML dashboard, 13 interactive tabs |
-| `src/analyze/eloCalculator.ts` | ELO card ratings with per-character/ascension calculations |
-| `src/analyze/types.ts` | TypeScript interfaces (ExtractedRun with allies field) |
-| `src/server/index.ts` | Express API endpoints (runs, stats, ingest) |
-| `src/server/watcher.ts` | fs.watch auto-ingester for new .run files |
-
----
-
-## Key Concepts
-
-### ExtractedRun Format
-Compact normalized format (~70% smaller than raw RunData):
-```typescript
-{
-  id: string;              // runId
-  t: number;               // startTime (chronological ELO ordering)
-  c: string;               // character (IRONCLAD, SILENT, DEFECT, NECROBINDER, REGENT)
-  a: number;               // ascension (0-10)
-  w: boolean;              // won
-  m: number;               // multiplayer count (1 = solo, 2+ = multiplayer)
-  alc?: Array<{id: number, c: string}>; // allies in multiplayer (all other players except you)
-  // ... plus cards, relics, encounters, metrics
-}
-```
-
-**Critical**: Character must be extracted from `run.players.find(p => p.id === YOUR_STEAM_ID)`, NOT from `run.players[0]`
-
-### Database Schema
-- `runs` table: One row per run with final stats + JSON fields (a1c/a2c/a3c for act cards, alc for allies)
-- `run_cards`: Final deck cards with upgrade status
-- `run_relics`: Final relics in deck
-- `run_encounters`: Encounter data per run
-- Foreign key constraints enabled, WAL mode for concurrency
-- All JSON fields stored as TEXT (parse with JSON.parse in code)
-
-### Allies Tracking
-- **Field**: `alc` in ExtractedRun (optional, only for multiplayer)
-- **Format**: Array of `{id: steamId, c: character}` 
-- **Storage**: JSON string in `runs.alc` column
-- **Extraction**: All players in `run.players` except YOUR_STEAM_ID (0000000000000000)
-- **Display**: "Allies" column in Runs tab + Export tab shows ally characters
-
-### Starter Exclusions (per character)
-| Character | Starting Relic | Starting Cards |
-|---|---|---|
-| Ironclad | Burning Blood | Bash, Strike, Defend |
-| Silent | Ring of the Snake | Neutralize, Strike, Defend |
-| Defect | Cracked Core | Zap, Strike, Defend |
-| Necrobinder | Bound Phylactery | Necrotic Bolt, Strike, Defend |
-| Regent | Divine Right | Swordburst, Strike, Defend |
-
-**Starter cards are excluded** (not player choice), Curse cards and Status cards excluded (involuntary additions)
-
----
-
-## Dashboard Features (13 Tabs)
-
-1. **Overview** - Win rate by ascension + global stats
-2. **Cards** - Pick rate, ELO, win %, deck %
-3. **Encounters** - Survivor rate, damage, turns by enemy
-4. **Relics** - Pick rate, ELO, win % by relic
-5. **Synergies** - Card/relic pairing analysis
-6. **Heatmap** - Card picks per act (Red → Character Color → Green), colorscale adapts per character
-7. **Builds** - Build archetypes and frequency
-8. **Ascension** - Difficulty progression stats
-9. **ELO Ratings** - Card strength rankings by character/ascension
-10. **Runs** - Individual run details with allies column (multiplayer), expandable rows show ally Steam IDs
-11. **Win Rate Trend** - Timeline analysis over time
-12. **Export** - CSV download with allies column (respects filters)
-13. **Help** - Comprehensive definitions and usage guide (15+ sections on all metrics)
-
-**Dashboard Filters:**
-- Character: Single character select (filters analysis)
-- Min Ascension: Slider (0-10, minimum difficulty)
-- Outcome: Wins/Losses/All
-- Mode: 1P/2P/3P/4P/All
-
----
-
-## API Patterns
-
-**Endpoints:**
-- `GET /runs` - Query with params: `?character=IRONCLAD&ascension=5&outcome=win&mode=1P`
-- `GET /stats` - Aggregated analytics (cards, relics, encounters)
-- `POST /ingest` - Manually ingest run files
-
-**Response Format:**
-```typescript
-{ count: number; data: any[] }  // for list endpoints
-{ error: string }                // errors with appropriate HTTP status
-```
-
-**Important:** Close database after EVERY request handler - no persistent connections.
-
----
-
-## npm Scripts
-
-| Script | Purpose |
-|---|---|
-| `npm run analyze` | Full pipeline: extract → DB → ELO → reports → dashboard (191 runs) |
-| `npm run dashboard` | Regenerate dashboard.html only (useful for UI changes without re-extracting) |
-| `npm run server` | Start Express API on port 3000 |
-| `npm run watch` | Start file watcher for auto-ingestion of new .run files |
-
----
-
-## Recent Major Changes
-
-### ✅ Repo-Wide Markdown Lint Fix (April 30, 2026)
-- **Scope**: Full audit of all `.md` files — zero linting errors remain
-- **Files**: CHANGELOG.md, README_AI.md, SETUP.md, .ai/architecture.md, .ai/rules.md, .ai/prompts.md
-- **Rules fixed**: MD022, MD024, MD031, MD032, MD036, MD040, MD060
-- **Key changes**: Replaced `**bold**` headings with `####`, added blank lines around fences/lists/headings, added language specifiers to all bare code fences
-
-### 🔴 CRITICAL: Multiplayer Character Fix
-- **Problem**: In multiplayer runs, character was extracted from `run.players[0]` assuming you were always first player
-- **Solution**: Extract character by matching YOUR_STEAM_ID (0000000000000000) instead of position
-- **Impact**: All multiplayer runs now show YOUR correct character, not first player's character
-- **Files Modified**: extractRunData.ts, database.ts
-- **Data Impact**: Database must be regenerated to fix past multiplayer runs
-
-### ✅ Allies Tracking System
-- **Added**: `alc` field to ExtractedRun interface (Array<{id, c}>)
-- **Storage**: JSON field in runs.alc TEXT column
-- **Display**: "Allies" column in Runs tab shows ally characters, expandable rows show Steam IDs
-- **Export**: CSV includes Allies column with character names
-- **Database**: Migration: `ALTER TABLE runs ADD COLUMN alc TEXT`
-
-### ✅ Dashboard Help Tab
-- **Added**: New Help (❓) tab as 13th tab
-- **Content**: 15+ sections covering all metrics, filters, tabs, and definitions
-- **Sections**: ELO, Pick Rate, Deck %, Win %, Synergies, Multiplayer modes, Tips
-- **Styling**: STS2 themed with gold (#c9a84c) left borders, dark backgrounds
-- **Purpose**: User reference guide for understanding all dashboard features
-
-### ✅ Ascension Filter Upgrade
-- Changed from dropdown (exact match) to slider (minimum value)
-- Range: 0-10, shows "Min Ascension: X" label
-- Benefit: Can now see aggregated data for "Asc 5+" instead of just "Asc 5" only
-- Files: generateDashboard_v2.ts
-
-### ✅ Card Heatmap STS2 Theming
-- Custom colorscale: Red (#e05252) → Character Color → Green (#4db87a)
-- Mid-color adapts: Uses character's primary color when single character filtered, gold (#c9a84c) otherwise
-- Files: generateDashboard_v2.ts
-
----
-
-## When to Reference Specific Instructions
-
-| Task | Read File |
-|------|-----------|
-| Adding API endpoints | `.github/instructions/api.instructions.md` |
-| Dashboard modifications | `.github/instructions/dashboard.instructions.md` |
-| Database queries/schema | `.github/instructions/database.instructions.md` |
-
----
-
-## Workflow for Changes
-
-**ALWAYS before coding:**
-1. **Understand** - Restate problem, identify constraints
-2. **Check** - Reference relevant instruction file from `.github/instructions/`
-3. **Plan** - Break into steps, identify database impacts
-4. **Implement** - Execute step-by-step, keep changes scoped
-5. **Validate** - Run `npm run analyze` to verify full pipeline
-
----
-
 ## Communication
+
 - Be concise and fact-based
 - Show plan before major changes (especially database schema changes)
 - Reference relevant .run file structures when debugging extraction
 - Always validate with `npm run analyze` after code changes
 - For UI updates only: run `npm run dashboard` to regenerate dashboard.html without full pipeline
-- Document changes in this file's "Recent Major Changes" section for future reference
-
+- Document changes in `CHANGELOG.md` for future reference
