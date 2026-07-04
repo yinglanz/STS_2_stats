@@ -10,12 +10,16 @@ import path from "node:path";
 export default defineConfig({
   base: process.env.VITE_BASE ?? "/STS_2_stats/",
   resolve: {
-    alias: {
+    alias: [
       // The shared analysis modules import Node built-ins they never actually
       // call in the browser path — stub them so the bundle resolves.
-      fs: path.resolve(__dirname, "src/browser/shims/fs.ts"),
-      path: path.resolve(__dirname, "src/browser/shims/path.ts"),
-    },
+      { find: "fs", replacement: path.resolve(__dirname, "src/browser/shims/fs.ts") },
+      { find: "path", replacement: path.resolve(__dirname, "src/browser/shims/path.ts") },
+      // `src/config.ts` is gitignored (personal Steam ID); the analyze modules
+      // in src/analyze/ import it as "../config". Point that at a safe stub so
+      // the hosted build never needs the private file.
+      { find: /^\.\.\/config$/, replacement: path.resolve(__dirname, "src/browser/shims/config.ts") },
+    ],
   },
   define: {
     // reports.ts computes a path.join(__dirname, ...) constant at import time.
