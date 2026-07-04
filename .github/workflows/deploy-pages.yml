@@ -23,10 +23,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
       # base must match the repo name for project Pages (https://<user>.github.io/<repo>/).
@@ -47,3 +47,5 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        # Latest majors of checkout/setup-node run natively on Node 24.
+        # upload-pages-artifact@v3 / deploy-pages@v4 are the current Pages actions.
